@@ -12,12 +12,24 @@
     text-align: right;
     font-weight: normal;
   }
+  paper-spinner-lite {
+    --paper-spinner-color: white;
+    width: 0;
+    height: 0;
+    transition: width 0.2s, height 0.2s,margin-left 0.2s;
+  }
+  paper-spinner-lite[active] {
+    width: 28px;
+    height: 28px;
+    margin-left: 1em;
+  }
 </style>
 <paper-button on-tap="sendFeedback">
   <div>
     Send Feedback
     <small>by FeedLight</small>
   </div>
+  <paper-spinner-lite active$="[[loading]]"></paper-spinner-light>
 </paper-button>
 
 <feedlight-form id="form">

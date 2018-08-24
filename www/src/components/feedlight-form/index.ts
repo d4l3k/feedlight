@@ -3,6 +3,8 @@ import '@polymer/paper-button/paper-button.js';
 import '@polymer/paper-dialog/paper-dialog.js';
 import '@polymer/paper-input/paper-textarea.js';
 import '@polymer/paper-checkbox/paper-checkbox.js';
+import '@polymer/iron-icons/iron-icons.js';
+import '../toggle-button'
 import {PaperDialog} from '@polymer/paper-dialog/paper-dialog.js';
 
 import {html} from '../../html'

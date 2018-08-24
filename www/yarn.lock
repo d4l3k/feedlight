@@ -60,6 +60,29 @@
   dependencies:
     "@polymer/polymer" "^3.0.0"
 
+"@polymer/iron-icon@^3.0.0-pre.21":
+  version "3.0.0-pre.21"
+  resolved "https://registry.yarnpkg.com/@polymer/iron-icon/-/iron-icon-3.0.0-pre.21.tgz#5ef3e483f02823778e99c1b5e16ddac472b5dce5"
+  dependencies:
+    "@polymer/iron-flex-layout" "^3.0.0-pre.21"
+    "@polymer/iron-meta" "^3.0.0-pre.21"
+    "@polymer/polymer" "^3.0.0"
+
+"@polymer/iron-icons@^3.0.0-pre.21":
+  version "3.0.0-pre.21"
+  resolved "https://registry.yarnpkg.com/@polymer/iron-icons/-/iron-icons-3.0.0-pre.21.tgz#71cfd157b21f55a931bcc101650aab15825010e4"
+  dependencies:
+    "@polymer/iron-icon" "^3.0.0-pre.21"
+    "@polymer/iron-iconset-svg" "^3.0.0-pre.21"
+    "@polymer/polymer" "^3.0.0"
+
+"@polymer/iron-iconset-svg@^3.0.0-pre.21":
+  version "3.0.0-pre.21"
+  resolved "https://registry.yarnpkg.com/@polymer/iron-iconset-svg/-/iron-iconset-svg-3.0.0-pre.21.tgz#1248f341837789801a9000cdd3b3453b59f91021"
+  dependencies:
+    "@polymer/iron-meta" "^3.0.0-pre.21"
+    "@polymer/polymer" "^3.0.0"
+
 "@polymer/iron-input@^3.0.0-pre.21":
   version "3.0.0-pre.21"
   resolved "https://registry.yarnpkg.com/@polymer/iron-input/-/iron-input-3.0.0-pre.21.tgz#181f823406e71134c6ed42dd19094d1cb194329a"
@@ -182,6 +205,13 @@
   resolved "https://registry.yarnpkg.com/@polymer/paper-ripple/-/paper-ripple-3.0.0-pre.21.tgz#9375760af161c142591b3a0a1d4db299fb174067"
   dependencies:
     "@polymer/iron-a11y-keys-behavior" "^3.0.0-pre.21"
+    "@polymer/polymer" "^3.0.0"
+
+"@polymer/paper-spinner@^3.0.0-pre.21":
+  version "3.0.0-pre.21"
+  resolved "https://registry.yarnpkg.com/@polymer/paper-spinner/-/paper-spinner-3.0.0-pre.21.tgz#64e3d3426378d522b48ddf8f653d3ae2375a9a76"
+  dependencies:
+    "@polymer/paper-styles" "^3.0.0-pre.21"
     "@polymer/polymer" "^3.0.0"
 
 "@polymer/paper-styles@^3.0.0-pre.21":

@@ -31,6 +31,31 @@
     margin-top: 1em;
     margin-bottom: 0.5em;
   }
+
+  .check {
+    --primary-color: green;
+  }
+  .clear {
+    --primary-color: red;
+  }
+  .feedback {
+    display: flex;
+    justify-content: stretch;
+    align-items: center;
+
+    padding: 12px;
+    margin: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  .feedback-body {
+    flex-grow: 1;
+  }
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
 </style>
 
 <paper-dialog id="dialog" modal>
@@ -44,13 +69,20 @@
     <template is="dom-if" if="[[similarFeedback]]">
       <h3>We've found similar feedback. Are these about the same issue?</h3>
       <template is="dom-repeat" items="[[similarFeedback]]">
-        <li>
-          [[item.feedback]] ([[item.similar]]) ✔️ / ❌
-          <template is="dom-if" if="[[item.response]]">
-              <label>Company Response</label>
-              <blockquote> [[item.response]]</blockquote>
-          </template>
-        </li>
+        <div class="feedback">
+          <div class="feedback-body">
+            [[item.feedback]]
+            <template is="dom-if" if="[[item.response]]">
+                <label>Company Response</label>
+                <blockquote> [[item.response]]</blockquote>
+            </template>
+          </div>
+          <div class="buttons">
+            [[item.similar]]
+            <toggle-button class="check"><iron-icon icon="check"></iron-icon></toggle-button>
+            <toggle-button class="clear"><iron-icon icon="clear"></iron-icon></toggle-button>
+          </div>
+        </div>
       </template>
     </template>
   </div>
