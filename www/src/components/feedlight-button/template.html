@@ -1,0 +1,23 @@
+<style>
+  paper-button {
+    font-family: sans-serif;
+    background-color: #263238;
+    color: #ffffff;
+    text-transform: none;
+    padding: 12px 24px;
+    font-weight: bold;
+  }
+  small {
+    display: block;
+    text-align: right;
+    font-weight: initial;
+  }
+</style>
+<paper-button on-tap="sendFeedback">
+  <div>
+    Send Feedback
+    <small>by FeedLight</small>
+  </div>
+</paper-button>
+
+<feedlight-form id="form">

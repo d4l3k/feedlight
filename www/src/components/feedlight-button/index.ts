@@ -1,23 +1,28 @@
 import {PolymerElement} from '@polymer/polymer/polymer-element.js'
+import '@polymer/paper-button/paper-button.js';
+
+import {html} from '../../html'
 
 import * as view from './template.html'
 
 class FeedlightButton extends PolymerElement {
   connectedCallback () {
     super.connectedCallback()
-    this.textContent = 'I\'m a custom element!'
-    console.log('my-element created!')
   }
 
   ready () {
     super.ready()
-    console.log('my-element is ready!')
   }
 
   static get template () {
-    return view
+    return html(view)
+  }
+
+  sendFeedback () {
+    import(/* webpackChunkName: "feedlightForm" */ '../feedlight-form').then(() => {
+      (this.$.form as any).open()
+    })
   }
 }
 
-// Associate the new class with an element name
 customElements.define('feedlight-button', FeedlightButton)
