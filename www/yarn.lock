@@ -106,6 +106,12 @@
     "@polymer/iron-resizable-behavior" "^3.0.0-pre.21"
     "@polymer/polymer" "^3.0.0"
 
+"@polymer/iron-range-behavior@^3.0.0-pre.21":
+  version "3.0.0-pre.21"
+  resolved "https://registry.yarnpkg.com/@polymer/iron-range-behavior/-/iron-range-behavior-3.0.0-pre.21.tgz#fe4af6cfbc7b7bfa3958ff5135c3ce2eefa76935"
+  dependencies:
+    "@polymer/polymer" "^3.0.0"
+
 "@polymer/iron-resizable-behavior@^3.0.0-pre.21":
   version "3.0.0-pre.21"
   resolved "https://registry.yarnpkg.com/@polymer/iron-resizable-behavior/-/iron-resizable-behavior-3.0.0-pre.21.tgz#839ab0f194fd85921146d80970afe29ba835b7d7"
@@ -200,6 +206,15 @@
     "@polymer/paper-styles" "^3.0.0-pre.21"
     "@polymer/polymer" "^3.0.0"
 
+"@polymer/paper-progress@^3.0.0-pre.21":
+  version "3.0.0-pre.21"
+  resolved "https://registry.yarnpkg.com/@polymer/paper-progress/-/paper-progress-3.0.0-pre.21.tgz#8170a34dafa56d5a9a227954563d95fdf445e97c"
+  dependencies:
+    "@polymer/iron-flex-layout" "^3.0.0-pre.21"
+    "@polymer/iron-range-behavior" "^3.0.0-pre.21"
+    "@polymer/paper-styles" "^3.0.0-pre.21"
+    "@polymer/polymer" "^3.0.0"
+
 "@polymer/paper-ripple@^3.0.0-pre.21":
   version "3.0.0-pre.21"
   resolved "https://registry.yarnpkg.com/@polymer/paper-ripple/-/paper-ripple-3.0.0-pre.21.tgz#9375760af161c142591b3a0a1d4db299fb174067"
@@ -227,6 +242,57 @@
   resolved "https://registry.yarnpkg.com/@polymer/polymer/-/polymer-3.0.5.tgz#eaa42e70df7de818b5e1839452c82a5f83e39929"
   dependencies:
     "@webcomponents/shadycss" "^1.2.0"
+
+"@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@protobufjs/aspromise/-/aspromise-1.1.2.tgz#9b8b0cc663d669a7d8f6f5d0893a14d348f30fbf"
+
+"@protobufjs/base64@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@protobufjs/base64/-/base64-1.1.2.tgz#4c85730e59b9a1f1f349047dbf24296034bb2735"
+
+"@protobufjs/codegen@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@protobufjs/codegen/-/codegen-2.0.4.tgz#7ef37f0d010fb028ad1ad59722e506d9262815cb"
+
+"@protobufjs/eventemitter@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@protobufjs/eventemitter/-/eventemitter-1.1.0.tgz#355cbc98bafad5978f9ed095f397621f1d066b70"
+
+"@protobufjs/fetch@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@protobufjs/fetch/-/fetch-1.1.0.tgz#ba99fb598614af65700c1619ff06d454b0d84c45"
+  dependencies:
+    "@protobufjs/aspromise" "^1.1.1"
+    "@protobufjs/inquire" "^1.1.0"
+
+"@protobufjs/float@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@protobufjs/float/-/float-1.0.2.tgz#5e9e1abdcb73fc0a7cb8b291df78c8cbd97b87d1"
+
+"@protobufjs/inquire@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@protobufjs/inquire/-/inquire-1.1.0.tgz#ff200e3e7cf2429e2dcafc1140828e8cc638f089"
+
+"@protobufjs/path@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@protobufjs/path/-/path-1.1.2.tgz#6cc2b20c5c9ad6ad0dccfd21ca7673d8d7fbf68d"
+
+"@protobufjs/pool@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@protobufjs/pool/-/pool-1.1.0.tgz#09fd15f2d6d3abfa9b65bc366506d6ad7846ff54"
+
+"@protobufjs/utf8@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
+
+"@types/long@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/long/-/long-4.0.0.tgz#719551d2352d301ac8b81db732acb6bdc28dbdef"
+
+"@types/node@^10.1.0":
+  version "10.9.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.9.2.tgz#f0ab8dced5cd6c56b26765e1c0d9e4fdcc9f2a00"
 
 "@webassemblyjs/ast@1.5.13":
   version "1.5.13"
@@ -1156,6 +1222,10 @@ d@1:
 date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
+
+debounce@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.2.0.tgz#44a540abc0ea9943018dc0eaa95cce87f65cd131"
 
 debug-log@^1.0.0:
   version "1.0.1"
@@ -2743,7 +2813,7 @@ loglevelnext@^1.0.1:
     es6-symbol "^3.1.1"
     object.assign "^4.1.0"
 
-long@4.0.0:
+long@4.0.0, long@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/long/-/long-4.0.0.tgz#9a7b71cfb7d361a194ea555241c92f7468d5bf28"
 
@@ -3524,6 +3594,24 @@ prop-types@^15.6.0:
   dependencies:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
+
+protobufjs@^6.8.8:
+  version "6.8.8"
+  resolved "https://registry.yarnpkg.com/protobufjs/-/protobufjs-6.8.8.tgz#c8b4f1282fd7a90e6f5b109ed11c84af82908e7c"
+  dependencies:
+    "@protobufjs/aspromise" "^1.1.2"
+    "@protobufjs/base64" "^1.1.2"
+    "@protobufjs/codegen" "^2.0.4"
+    "@protobufjs/eventemitter" "^1.1.0"
+    "@protobufjs/fetch" "^1.1.0"
+    "@protobufjs/float" "^1.0.2"
+    "@protobufjs/inquire" "^1.1.0"
+    "@protobufjs/path" "^1.1.2"
+    "@protobufjs/pool" "^1.1.0"
+    "@protobufjs/utf8" "^1.1.0"
+    "@types/long" "^4.0.0"
+    "@types/node" "^10.1.0"
+    long "^4.0.0"
 
 proxy-addr@~2.0.3:
   version "2.0.4"

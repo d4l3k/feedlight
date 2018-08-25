@@ -28,15 +28,11 @@ var _ status.Status
 var _ = runtime.String
 var _ = utilities.NewDoubleArray
 
-var (
-	filter_FeedbackService_SimilarFeedback_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
-
 func request_FeedbackService_SimilarFeedback_0(ctx context.Context, marshaler runtime.Marshaler, client FeedbackServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq SimilarFeedbackRequest
 	var metadata runtime.ServerMetadata
 
-	if err := runtime.PopulateQueryParameters(&protoReq, req.URL.Query(), filter_FeedbackService_SimilarFeedback_0); err != nil {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -96,7 +92,7 @@ func RegisterFeedbackServiceHandler(ctx context.Context, mux *runtime.ServeMux, 
 // "FeedbackServiceClient" to call the correct interceptors.
 func RegisterFeedbackServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client FeedbackServiceClient) error {
 
-	mux.Handle("GET", pattern_FeedbackService_SimilarFeedback_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_FeedbackService_SimilarFeedback_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		if cn, ok := w.(http.CloseNotifier); ok {

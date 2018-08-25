@@ -9,12 +9,15 @@ import * as view from './template.html'
 class FeedlightButton extends PolymerElement {
   loading = false
 
-  connectedCallback () {
-    super.connectedCallback()
-  }
-
-  ready () {
-    super.ready()
+  static get properties () {
+    return {
+      email: {
+        type: String
+      },
+      domain: {
+        type: String
+      },
+    }
   }
 
   static get template () {

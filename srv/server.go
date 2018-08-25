@@ -44,7 +44,9 @@ func (s *server) Listen(addr string) error {
 	grpcS := grpc.NewServer()
 	feedlightpb.RegisterFeedbackServiceServer(grpcS, s)
 
-	apiMux := runtime.NewServeMux()
+	apiMux := runtime.NewServeMux(
+		runtime.WithMarshalerOption("*", &runtime.JSONPb{}),
+	)
 	opts := []grpc.DialOption{grpc.WithInsecure()}
 	if err := feedlightpb.RegisterFeedbackServiceHandlerFromEndpoint(ctx, apiMux, "localhost"+*bind, opts); err != nil {
 		return err

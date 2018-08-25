@@ -7,6 +7,10 @@ import (
 )
 
 func (s *server) SimilarFeedback(ctx context.Context, req *feedlightpb.SimilarFeedbackRequest) (*feedlightpb.SimilarFeedbackResponse, error) {
+	if req.GetFeedback().GetFeedback() == "" {
+		return &feedlightpb.SimilarFeedbackResponse{}, nil
+	}
+
 	return &feedlightpb.SimilarFeedbackResponse{
 		Feedback: []*feedlightpb.Feedback{
 			{

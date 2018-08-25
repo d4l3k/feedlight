@@ -6,13 +6,17 @@ package feedlightpb;
 
 message Feedback {
   string feedback = 1;
-  int64 num_similar = 2;
+  int32 num_similar = 2;
   bool similar = 3;
   bool dissimilar = 4;
   string response = 5;
+  bool share_publicly = 6;
+  int64 created = 7;
 }
 
 message SimilarFeedbackRequest {
+  string domain = 2;
+
   Feedback feedback = 1;
 }
 
@@ -21,8 +25,11 @@ message SimilarFeedbackResponse {
 }
 
 message SubmitFeedbackRequest {
+  string domain = 4;
+
   string email = 1;
   Feedback feedback = 2;
+  repeated Feedback similar = 3;
 }
 
 message SubmitFeedbackResponse {}
@@ -30,7 +37,8 @@ message SubmitFeedbackResponse {}
 service FeedbackService {
   rpc SimilarFeedback(SimilarFeedbackRequest) returns (SimilarFeedbackResponse) {
     option (google.api.http) = {
-      get: "/api/v1/feedback/similar"
+      post: "/api/v1/feedback/similar"
+      body: "*"
     };
   }
   rpc SubmitFeedback(SubmitFeedbackRequest) returns (SubmitFeedbackResponse) {

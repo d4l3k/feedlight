@@ -31,10 +31,12 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Feedback struct {
 	Feedback             string   `protobuf:"bytes,1,opt,name=feedback,proto3" json:"feedback,omitempty"`
-	NumSimilar           int64    `protobuf:"varint,2,opt,name=num_similar,json=numSimilar,proto3" json:"num_similar,omitempty"`
+	NumSimilar           int32    `protobuf:"varint,2,opt,name=num_similar,json=numSimilar,proto3" json:"num_similar,omitempty"`
 	Similar              bool     `protobuf:"varint,3,opt,name=similar,proto3" json:"similar,omitempty"`
 	Dissimilar           bool     `protobuf:"varint,4,opt,name=dissimilar,proto3" json:"dissimilar,omitempty"`
 	Response             string   `protobuf:"bytes,5,opt,name=response,proto3" json:"response,omitempty"`
+	SharePublicly        bool     `protobuf:"varint,6,opt,name=share_publicly,json=sharePublicly,proto3" json:"share_publicly,omitempty"`
+	Created              int64    `protobuf:"varint,7,opt,name=created,proto3" json:"created,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
@@ -42,7 +44,7 @@ type Feedback struct {
 func (m *Feedback) Reset()      { *m = Feedback{} }
 func (*Feedback) ProtoMessage() {}
 func (*Feedback) Descriptor() ([]byte, []int) {
-	return fileDescriptor_feedlight_02cde0f9b850478d, []int{0}
+	return fileDescriptor_feedlight_3b9c5752ffe879c3, []int{0}
 }
 func (m *Feedback) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -78,7 +80,7 @@ func (m *Feedback) GetFeedback() string {
 	return ""
 }
 
-func (m *Feedback) GetNumSimilar() int64 {
+func (m *Feedback) GetNumSimilar() int32 {
 	if m != nil {
 		return m.NumSimilar
 	}
@@ -106,7 +108,22 @@ func (m *Feedback) GetResponse() string {
 	return ""
 }
 
+func (m *Feedback) GetSharePublicly() bool {
+	if m != nil {
+		return m.SharePublicly
+	}
+	return false
+}
+
+func (m *Feedback) GetCreated() int64 {
+	if m != nil {
+		return m.Created
+	}
+	return 0
+}
+
 type SimilarFeedbackRequest struct {
+	Domain               string    `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
 	Feedback             *Feedback `protobuf:"bytes,1,opt,name=feedback" json:"feedback,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_sizecache        int32     `json:"-"`
@@ -115,7 +132,7 @@ type SimilarFeedbackRequest struct {
 func (m *SimilarFeedbackRequest) Reset()      { *m = SimilarFeedbackRequest{} }
 func (*SimilarFeedbackRequest) ProtoMessage() {}
 func (*SimilarFeedbackRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_feedlight_02cde0f9b850478d, []int{1}
+	return fileDescriptor_feedlight_3b9c5752ffe879c3, []int{1}
 }
 func (m *SimilarFeedbackRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -144,6 +161,13 @@ func (m *SimilarFeedbackRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_SimilarFeedbackRequest proto.InternalMessageInfo
 
+func (m *SimilarFeedbackRequest) GetDomain() string {
+	if m != nil {
+		return m.Domain
+	}
+	return ""
+}
+
 func (m *SimilarFeedbackRequest) GetFeedback() *Feedback {
 	if m != nil {
 		return m.Feedback
@@ -160,7 +184,7 @@ type SimilarFeedbackResponse struct {
 func (m *SimilarFeedbackResponse) Reset()      { *m = SimilarFeedbackResponse{} }
 func (*SimilarFeedbackResponse) ProtoMessage() {}
 func (*SimilarFeedbackResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_feedlight_02cde0f9b850478d, []int{2}
+	return fileDescriptor_feedlight_3b9c5752ffe879c3, []int{2}
 }
 func (m *SimilarFeedbackResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -197,16 +221,18 @@ func (m *SimilarFeedbackResponse) GetFeedback() []*Feedback {
 }
 
 type SubmitFeedbackRequest struct {
-	Email                string    `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
-	Feedback             *Feedback `protobuf:"bytes,2,opt,name=feedback" json:"feedback,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
-	XXX_sizecache        int32     `json:"-"`
+	Domain               string      `protobuf:"bytes,4,opt,name=domain,proto3" json:"domain,omitempty"`
+	Email                string      `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	Feedback             *Feedback   `protobuf:"bytes,2,opt,name=feedback" json:"feedback,omitempty"`
+	Similar              []*Feedback `protobuf:"bytes,3,rep,name=similar" json:"similar,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
 func (m *SubmitFeedbackRequest) Reset()      { *m = SubmitFeedbackRequest{} }
 func (*SubmitFeedbackRequest) ProtoMessage() {}
 func (*SubmitFeedbackRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_feedlight_02cde0f9b850478d, []int{3}
+	return fileDescriptor_feedlight_3b9c5752ffe879c3, []int{3}
 }
 func (m *SubmitFeedbackRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -235,6 +261,13 @@ func (m *SubmitFeedbackRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_SubmitFeedbackRequest proto.InternalMessageInfo
 
+func (m *SubmitFeedbackRequest) GetDomain() string {
+	if m != nil {
+		return m.Domain
+	}
+	return ""
+}
+
 func (m *SubmitFeedbackRequest) GetEmail() string {
 	if m != nil {
 		return m.Email
@@ -249,6 +282,13 @@ func (m *SubmitFeedbackRequest) GetFeedback() *Feedback {
 	return nil
 }
 
+func (m *SubmitFeedbackRequest) GetSimilar() []*Feedback {
+	if m != nil {
+		return m.Similar
+	}
+	return nil
+}
+
 type SubmitFeedbackResponse struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -257,7 +297,7 @@ type SubmitFeedbackResponse struct {
 func (m *SubmitFeedbackResponse) Reset()      { *m = SubmitFeedbackResponse{} }
 func (*SubmitFeedbackResponse) ProtoMessage() {}
 func (*SubmitFeedbackResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_feedlight_02cde0f9b850478d, []int{4}
+	return fileDescriptor_feedlight_3b9c5752ffe879c3, []int{4}
 }
 func (m *SubmitFeedbackResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -327,6 +367,12 @@ func (this *Feedback) Equal(that interface{}) bool {
 	if this.Response != that1.Response {
 		return false
 	}
+	if this.SharePublicly != that1.SharePublicly {
+		return false
+	}
+	if this.Created != that1.Created {
+		return false
+	}
 	return true
 }
 func (this *SimilarFeedbackRequest) Equal(that interface{}) bool {
@@ -346,6 +392,9 @@ func (this *SimilarFeedbackRequest) Equal(that interface{}) bool {
 	if that1 == nil {
 		return this == nil
 	} else if this == nil {
+		return false
+	}
+	if this.Domain != that1.Domain {
 		return false
 	}
 	if !this.Feedback.Equal(that1.Feedback) {
@@ -401,11 +450,22 @@ func (this *SubmitFeedbackRequest) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
+	if this.Domain != that1.Domain {
+		return false
+	}
 	if this.Email != that1.Email {
 		return false
 	}
 	if !this.Feedback.Equal(that1.Feedback) {
 		return false
+	}
+	if len(this.Similar) != len(that1.Similar) {
+		return false
+	}
+	for i := range this.Similar {
+		if !this.Similar[i].Equal(that1.Similar[i]) {
+			return false
+		}
 	}
 	return true
 }
@@ -434,13 +494,15 @@ func (this *Feedback) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 9)
+	s := make([]string, 0, 11)
 	s = append(s, "&feedlightpb.Feedback{")
 	s = append(s, "Feedback: "+fmt.Sprintf("%#v", this.Feedback)+",\n")
 	s = append(s, "NumSimilar: "+fmt.Sprintf("%#v", this.NumSimilar)+",\n")
 	s = append(s, "Similar: "+fmt.Sprintf("%#v", this.Similar)+",\n")
 	s = append(s, "Dissimilar: "+fmt.Sprintf("%#v", this.Dissimilar)+",\n")
 	s = append(s, "Response: "+fmt.Sprintf("%#v", this.Response)+",\n")
+	s = append(s, "SharePublicly: "+fmt.Sprintf("%#v", this.SharePublicly)+",\n")
+	s = append(s, "Created: "+fmt.Sprintf("%#v", this.Created)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -448,8 +510,9 @@ func (this *SimilarFeedbackRequest) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 5)
+	s := make([]string, 0, 6)
 	s = append(s, "&feedlightpb.SimilarFeedbackRequest{")
+	s = append(s, "Domain: "+fmt.Sprintf("%#v", this.Domain)+",\n")
 	if this.Feedback != nil {
 		s = append(s, "Feedback: "+fmt.Sprintf("%#v", this.Feedback)+",\n")
 	}
@@ -472,11 +535,15 @@ func (this *SubmitFeedbackRequest) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 6)
+	s := make([]string, 0, 8)
 	s = append(s, "&feedlightpb.SubmitFeedbackRequest{")
+	s = append(s, "Domain: "+fmt.Sprintf("%#v", this.Domain)+",\n")
 	s = append(s, "Email: "+fmt.Sprintf("%#v", this.Email)+",\n")
 	if this.Feedback != nil {
 		s = append(s, "Feedback: "+fmt.Sprintf("%#v", this.Feedback)+",\n")
+	}
+	if this.Similar != nil {
+		s = append(s, "Similar: "+fmt.Sprintf("%#v", this.Similar)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
@@ -656,6 +723,21 @@ func (m *Feedback) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintFeedlight(dAtA, i, uint64(len(m.Response)))
 		i += copy(dAtA[i:], m.Response)
 	}
+	if m.SharePublicly {
+		dAtA[i] = 0x30
+		i++
+		if m.SharePublicly {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if m.Created != 0 {
+		dAtA[i] = 0x38
+		i++
+		i = encodeVarintFeedlight(dAtA, i, uint64(m.Created))
+	}
 	return i, nil
 }
 
@@ -683,6 +765,12 @@ func (m *SimilarFeedbackRequest) MarshalTo(dAtA []byte) (int, error) {
 			return 0, err
 		}
 		i += n1
+	}
+	if len(m.Domain) > 0 {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintFeedlight(dAtA, i, uint64(len(m.Domain)))
+		i += copy(dAtA[i:], m.Domain)
 	}
 	return i, nil
 }
@@ -748,6 +836,24 @@ func (m *SubmitFeedbackRequest) MarshalTo(dAtA []byte) (int, error) {
 		}
 		i += n2
 	}
+	if len(m.Similar) > 0 {
+		for _, msg := range m.Similar {
+			dAtA[i] = 0x1a
+			i++
+			i = encodeVarintFeedlight(dAtA, i, uint64(msg.Size()))
+			n, err := msg.MarshalTo(dAtA[i:])
+			if err != nil {
+				return 0, err
+			}
+			i += n
+		}
+	}
+	if len(m.Domain) > 0 {
+		dAtA[i] = 0x22
+		i++
+		i = encodeVarintFeedlight(dAtA, i, uint64(len(m.Domain)))
+		i += copy(dAtA[i:], m.Domain)
+	}
 	return i, nil
 }
 
@@ -798,6 +904,12 @@ func (m *Feedback) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovFeedlight(uint64(l))
 	}
+	if m.SharePublicly {
+		n += 2
+	}
+	if m.Created != 0 {
+		n += 1 + sovFeedlight(uint64(m.Created))
+	}
 	return n
 }
 
@@ -806,6 +918,10 @@ func (m *SimilarFeedbackRequest) Size() (n int) {
 	_ = l
 	if m.Feedback != nil {
 		l = m.Feedback.Size()
+		n += 1 + l + sovFeedlight(uint64(l))
+	}
+	l = len(m.Domain)
+	if l > 0 {
 		n += 1 + l + sovFeedlight(uint64(l))
 	}
 	return n
@@ -832,6 +948,16 @@ func (m *SubmitFeedbackRequest) Size() (n int) {
 	}
 	if m.Feedback != nil {
 		l = m.Feedback.Size()
+		n += 1 + l + sovFeedlight(uint64(l))
+	}
+	if len(m.Similar) > 0 {
+		for _, e := range m.Similar {
+			l = e.Size()
+			n += 1 + l + sovFeedlight(uint64(l))
+		}
+	}
+	l = len(m.Domain)
+	if l > 0 {
 		n += 1 + l + sovFeedlight(uint64(l))
 	}
 	return n
@@ -866,6 +992,8 @@ func (this *Feedback) String() string {
 		`Similar:` + fmt.Sprintf("%v", this.Similar) + `,`,
 		`Dissimilar:` + fmt.Sprintf("%v", this.Dissimilar) + `,`,
 		`Response:` + fmt.Sprintf("%v", this.Response) + `,`,
+		`SharePublicly:` + fmt.Sprintf("%v", this.SharePublicly) + `,`,
+		`Created:` + fmt.Sprintf("%v", this.Created) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -876,6 +1004,7 @@ func (this *SimilarFeedbackRequest) String() string {
 	}
 	s := strings.Join([]string{`&SimilarFeedbackRequest{`,
 		`Feedback:` + strings.Replace(fmt.Sprintf("%v", this.Feedback), "Feedback", "Feedback", 1) + `,`,
+		`Domain:` + fmt.Sprintf("%v", this.Domain) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -897,6 +1026,8 @@ func (this *SubmitFeedbackRequest) String() string {
 	s := strings.Join([]string{`&SubmitFeedbackRequest{`,
 		`Email:` + fmt.Sprintf("%v", this.Email) + `,`,
 		`Feedback:` + strings.Replace(fmt.Sprintf("%v", this.Feedback), "Feedback", "Feedback", 1) + `,`,
+		`Similar:` + strings.Replace(fmt.Sprintf("%v", this.Similar), "Feedback", "Feedback", 1) + `,`,
+		`Domain:` + fmt.Sprintf("%v", this.Domain) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -990,7 +1121,7 @@ func (m *Feedback) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.NumSimilar |= (int64(b) & 0x7F) << shift
+				m.NumSimilar |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1064,6 +1195,45 @@ func (m *Feedback) Unmarshal(dAtA []byte) error {
 			}
 			m.Response = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SharePublicly", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowFeedlight
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.SharePublicly = bool(v != 0)
+		case 7:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Created", wireType)
+			}
+			m.Created = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowFeedlight
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Created |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipFeedlight(dAtA[iNdEx:])
@@ -1146,6 +1316,35 @@ func (m *SimilarFeedbackRequest) Unmarshal(dAtA []byte) error {
 			if err := m.Feedback.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Domain", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowFeedlight
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthFeedlight
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Domain = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -1340,6 +1539,66 @@ func (m *SubmitFeedbackRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Similar", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowFeedlight
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthFeedlight
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Similar = append(m.Similar, &Feedback{})
+			if err := m.Similar[len(m.Similar)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Domain", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowFeedlight
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthFeedlight
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Domain = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipFeedlight(dAtA[iNdEx:])
@@ -1517,34 +1776,39 @@ var (
 )
 
 func init() {
-	proto.RegisterFile("feedlightpb/feedlight.proto", fileDescriptor_feedlight_02cde0f9b850478d)
+	proto.RegisterFile("feedlightpb/feedlight.proto", fileDescriptor_feedlight_3b9c5752ffe879c3)
 }
 
-var fileDescriptor_feedlight_02cde0f9b850478d = []byte{
-	// 399 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4e, 0x4b, 0x4d, 0x4d,
-	0xc9, 0xc9, 0x4c, 0xcf, 0x28, 0x29, 0x48, 0xd2, 0x87, 0xb3, 0xf5, 0x0a, 0x8a, 0xf2, 0x4b, 0xf2,
-	0x85, 0xb8, 0x91, 0x24, 0xa5, 0x64, 0xd2, 0xf3, 0xf3, 0xd3, 0x73, 0x52, 0xf5, 0x13, 0x0b, 0x32,
-	0xf5, 0x13, 0xf3, 0xf2, 0xf2, 0x4b, 0x12, 0x4b, 0x32, 0xf3, 0xf3, 0x8a, 0x21, 0x4a, 0x95, 0xe6,
-	0x32, 0x72, 0x71, 0xb8, 0xa5, 0xa6, 0xa6, 0x24, 0x25, 0x26, 0x67, 0x0b, 0x49, 0x71, 0x71, 0xa4,
-	0x41, 0xd9, 0x12, 0x8c, 0x0a, 0x8c, 0x1a, 0x9c, 0x41, 0x70, 0xbe, 0x90, 0x3c, 0x17, 0x77, 0x5e,
-	0x69, 0x6e, 0x7c, 0x71, 0x66, 0x6e, 0x66, 0x4e, 0x62, 0x91, 0x04, 0x93, 0x02, 0xa3, 0x06, 0x73,
-	0x10, 0x57, 0x5e, 0x69, 0x6e, 0x30, 0x44, 0x44, 0x48, 0x82, 0x8b, 0x1d, 0x26, 0xc9, 0xac, 0xc0,
-	0xa8, 0xc1, 0x11, 0x04, 0xe3, 0x0a, 0xc9, 0x71, 0x71, 0xa5, 0x64, 0x16, 0xc3, 0x24, 0x59, 0xc0,
-	0x92, 0x48, 0x22, 0x20, 0x6b, 0x8b, 0x52, 0x8b, 0x0b, 0xf2, 0xf3, 0x8a, 0x53, 0x25, 0x58, 0x21,
-	0xd6, 0xc2, 0xf8, 0x4a, 0xde, 0x5c, 0x62, 0x50, 0x0b, 0x60, 0xae, 0x0c, 0x4a, 0x2d, 0x2c, 0x4d,
-	0x2d, 0x2e, 0x11, 0x32, 0x44, 0x73, 0x2c, 0xb7, 0x91, 0xa8, 0x1e, 0x92, 0xbf, 0xf5, 0xe0, 0xea,
-	0xe1, 0xca, 0x94, 0x7c, 0xb8, 0xc4, 0x31, 0x0c, 0x83, 0xd8, 0x83, 0x66, 0x1a, 0x33, 0x31, 0xa6,
-	0x25, 0x70, 0x89, 0x06, 0x97, 0x26, 0xe5, 0x66, 0x96, 0xa0, 0xbb, 0x4c, 0x84, 0x8b, 0x35, 0x35,
-	0x37, 0x31, 0x33, 0x07, 0x1a, 0x86, 0x10, 0x0e, 0x8a, 0x0d, 0x4c, 0xc4, 0xb9, 0x57, 0x82, 0x4b,
-	0x0c, 0xdd, 0x06, 0x88, 0x73, 0x8d, 0x26, 0x30, 0x71, 0xf1, 0xc3, 0x04, 0x83, 0x53, 0x8b, 0xca,
-	0x32, 0x93, 0x53, 0x85, 0xea, 0xb8, 0xf8, 0xd1, 0x7c, 0x27, 0xa4, 0x8c, 0x62, 0x03, 0xf6, 0x80,
-	0x94, 0x52, 0xc1, 0xaf, 0x08, 0x1a, 0x11, 0x0a, 0x4d, 0x97, 0x9f, 0x4c, 0x66, 0x92, 0x12, 0x92,
-	0x00, 0x27, 0xa4, 0x32, 0x43, 0x7d, 0x98, 0x2b, 0xf5, 0x61, 0xd1, 0x58, 0xcb, 0xc5, 0x87, 0xea,
-	0x5a, 0x21, 0x25, 0x54, 0x93, 0xb1, 0x05, 0x96, 0x94, 0x32, 0x5e, 0x35, 0x50, 0xcb, 0x95, 0xc0,
-	0x96, 0xcb, 0x28, 0x89, 0x63, 0x5a, 0x0e, 0xd6, 0x60, 0xc5, 0xa8, 0xe5, 0xa4, 0x73, 0xe1, 0xa1,
-	0x1c, 0xc3, 0x8d, 0x87, 0x72, 0x0c, 0x1f, 0x1e, 0xca, 0x31, 0x36, 0x3c, 0x92, 0x63, 0x5c, 0xf1,
-	0x48, 0x8e, 0xf1, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4, 0x18, 0x1f, 0x3c, 0x92, 0x63, 0x7c,
-	0xf1, 0x48, 0x8e, 0xe1, 0xc3, 0x23, 0x39, 0xc6, 0x09, 0x8f, 0xe5, 0x18, 0x92, 0xd8, 0xc0, 0xc9,
-	0xdf, 0x18, 0x10, 0x00, 0x00, 0xff, 0xff, 0x37, 0xa6, 0x7c, 0xab, 0x48, 0x03, 0x00, 0x00,
+var fileDescriptor_feedlight_3b9c5752ffe879c3 = []byte{
+	// 472 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x93, 0xcd, 0x6e, 0xd3, 0x40,
+	0x10, 0xc7, 0x33, 0x49, 0x93, 0xa6, 0x13, 0xd1, 0x4a, 0x2b, 0x9a, 0x5a, 0xa1, 0x2c, 0xd1, 0x06,
+	0xa4, 0xa8, 0x42, 0xb1, 0x5a, 0x6e, 0x3d, 0x72, 0xe0, 0xc4, 0x01, 0x39, 0x0f, 0x50, 0xad, 0xed,
+	0x6d, 0xba, 0xc2, 0x5f, 0xf8, 0xa3, 0x12, 0x07, 0x24, 0xe0, 0x09, 0x90, 0xe0, 0x21, 0xe0, 0x4d,
+	0x38, 0x56, 0xe2, 0xc2, 0x09, 0x11, 0xc3, 0x81, 0x63, 0x1f, 0x01, 0x75, 0xbd, 0x9b, 0xc6, 0x69,
+	0x15, 0xf5, 0xb6, 0xff, 0x99, 0x59, 0xff, 0xe6, 0x3f, 0xe3, 0xc5, 0x07, 0xa7, 0x42, 0xf8, 0x81,
+	0x9c, 0x9d, 0xe5, 0x89, 0x6b, 0x2f, 0xce, 0x93, 0x24, 0x8d, 0xf3, 0x98, 0xf4, 0x96, 0x92, 0x83,
+	0xfd, 0x59, 0x1c, 0xcf, 0x02, 0x61, 0xf3, 0x44, 0xda, 0x3c, 0x8a, 0xe2, 0x9c, 0xe7, 0x32, 0x8e,
+	0xb2, 0xaa, 0x94, 0xfd, 0x02, 0xec, 0xbe, 0x10, 0xc2, 0x77, 0xb9, 0xf7, 0x9a, 0x0c, 0xb0, 0x7b,
+	0xaa, 0xcf, 0x16, 0x0c, 0x61, 0xbc, 0xe5, 0x2c, 0x34, 0x79, 0x84, 0xbd, 0xa8, 0x08, 0x4f, 0x32,
+	0x19, 0xca, 0x80, 0xa7, 0x56, 0x73, 0x08, 0xe3, 0xb6, 0x83, 0x51, 0x11, 0x4e, 0xab, 0x08, 0xb1,
+	0x70, 0xd3, 0x24, 0x5b, 0x43, 0x18, 0x77, 0x1d, 0x23, 0x09, 0x45, 0xf4, 0x65, 0x66, 0x92, 0x1b,
+	0x2a, 0xb9, 0x14, 0xb9, 0xc2, 0xa6, 0x22, 0x4b, 0xe2, 0x28, 0x13, 0x56, 0xbb, 0xc2, 0x1a, 0x4d,
+	0x9e, 0xe0, 0x76, 0x76, 0xc6, 0x53, 0x71, 0x92, 0x14, 0x6e, 0x20, 0xbd, 0xe0, 0xad, 0xd5, 0x51,
+	0xf7, 0xef, 0xa9, 0xe8, 0x2b, 0x1d, 0xbc, 0x82, 0x7b, 0xa9, 0xe0, 0xb9, 0xf0, 0xad, 0xcd, 0x21,
+	0x8c, 0x5b, 0x8e, 0x91, 0xcc, 0xc3, 0xbe, 0xee, 0xd0, 0xd8, 0x74, 0xc4, 0x9b, 0x42, 0x64, 0x39,
+	0x39, 0x5c, 0x71, 0xdb, 0x3b, 0xda, 0x9d, 0x2c, 0x0d, 0x6e, 0xb2, 0xa8, 0xbf, 0x1e, 0x42, 0x1f,
+	0x3b, 0x7e, 0x1c, 0x72, 0x19, 0x29, 0xff, 0x5b, 0x8e, 0x56, 0xec, 0x25, 0xee, 0xdd, 0x80, 0x68,
+	0x03, 0x75, 0x4a, 0xeb, 0x0e, 0x14, 0xf6, 0x0d, 0x70, 0x77, 0x5a, 0xb8, 0xa1, 0xcc, 0x57, 0x5b,
+	0xbe, 0x8f, 0x6d, 0x11, 0x72, 0x19, 0xe8, 0xed, 0x54, 0xa2, 0x86, 0x68, 0xde, 0xcd, 0x88, 0xbd,
+	0xbc, 0xac, 0x35, 0x4d, 0x2d, 0x76, 0x78, 0xed, 0x7c, 0xa3, 0xe6, 0xdc, 0xc2, 0xfe, 0x6a, 0xab,
+	0x95, 0xf1, 0xa3, 0x2f, 0x4d, 0xdc, 0x31, 0xc1, 0xa9, 0x48, 0xcf, 0xa5, 0x27, 0xc8, 0x07, 0xc0,
+	0x9d, 0x95, 0x41, 0x91, 0x51, 0x8d, 0x7c, 0xfb, 0xae, 0x06, 0x8f, 0xd7, 0x17, 0x55, 0x48, 0x36,
+	0xfa, 0xf8, 0xe3, 0xef, 0xe7, 0xe6, 0x43, 0x66, 0xa9, 0x9f, 0xfd, 0xfc, 0xd0, 0x36, 0x7e, 0x6d,
+	0x6d, 0xe3, 0x18, 0x0e, 0xc8, 0x3b, 0xdc, 0xae, 0x77, 0x4c, 0x58, 0xfd, 0xe3, 0xb7, 0x4d, 0x7e,
+	0x30, 0x5a, 0x5b, 0xa3, 0xf9, 0x4c, 0xf1, 0xf7, 0xd9, 0xde, 0x4d, 0xbe, 0xba, 0x70, 0x0c, 0x07,
+	0xcf, 0x9f, 0x5e, 0xcc, 0x69, 0xe3, 0xe7, 0x9c, 0x36, 0x2e, 0xe7, 0x14, 0xde, 0x97, 0x14, 0xbe,
+	0x96, 0x14, 0xbe, 0x97, 0x14, 0x2e, 0x4a, 0x0a, 0xbf, 0x4b, 0x0a, 0xff, 0x4a, 0xda, 0xb8, 0x2c,
+	0x29, 0x7c, 0xfa, 0x43, 0x1b, 0x6e, 0x47, 0xbd, 0xd2, 0x67, 0xff, 0x03, 0x00, 0x00, 0xff, 0xff,
+	0x45, 0x2e, 0x23, 0xc4, 0xef, 0x03, 0x00, 0x00,
 }
