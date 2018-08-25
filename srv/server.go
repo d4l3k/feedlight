@@ -11,6 +11,7 @@ import (
 	"github.com/d4l3k/feedlight/srv/feedlightpb"
 	"github.com/gorilla/handlers"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+	"github.com/rs/cors"
 	"github.com/soheilhy/cmux"
 	"google.golang.org/grpc"
 )
@@ -48,9 +49,10 @@ func (s *server) Listen(addr string) error {
 	if err := feedlightpb.RegisterFeedbackServiceHandlerFromEndpoint(ctx, apiMux, "localhost"+*bind, opts); err != nil {
 		return err
 	}
+	apiCors := cors.Default().Handler(apiMux)
 
 	mux := http.NewServeMux()
-	mux.Handle("/api/", apiMux)
+	mux.Handle("/api/", apiCors)
 	mux.Handle("/", http.FileServer(http.Dir("../www/dist/")))
 
 	withGz := gziphandler.GzipHandler(mux)
