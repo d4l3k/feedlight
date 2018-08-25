@@ -2,14 +2,11 @@ package main
 
 import (
 	"context"
-	"log"
 	"net"
 	"net/http"
-	"os"
 
 	"github.com/NYTimes/gziphandler"
 	"github.com/d4l3k/feedlight/srv/feedlightpb"
-	"github.com/gorilla/handlers"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/rs/cors"
 	"github.com/soheilhy/cmux"
@@ -24,6 +21,10 @@ func (s *server) Listen(addr string) error {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
+	if err := setupDB(); err != nil {
+		return err
+	}
+
 	// Create the main listener.
 	l, err := net.Listen("tcp", addr)
 	if err != nil {
@@ -31,7 +32,7 @@ func (s *server) Listen(addr string) error {
 	}
 	defer l.Close()
 
-	log.Printf("Listening %s...", l.Addr())
+	log.Infof("Listening %s...", l.Addr())
 
 	m := cmux.New(l)
 
@@ -58,7 +59,7 @@ func (s *server) Listen(addr string) error {
 	mux.Handle("/", http.FileServer(http.Dir("../www/dist/")))
 
 	withGz := gziphandler.GzipHandler(mux)
-	withLog := handlers.CombinedLoggingHandler(os.Stderr, withGz)
+	withLog := requestLogger{Handler: withGz}
 
 	httpS := &http.Server{
 		Handler: withLog,

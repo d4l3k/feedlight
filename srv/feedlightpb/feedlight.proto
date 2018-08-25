@@ -12,6 +12,7 @@ message Feedback {
   string response = 5;
   bool share_publicly = 6;
   int64 created = 7;
+  int64 id = 8;
 }
 
 message SimilarFeedbackRequest {

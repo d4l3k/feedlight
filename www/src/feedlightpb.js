@@ -29,6 +29,7 @@ export const feedlightpb = $root.feedlightpb = (() => {
          * @property {string|null} [response] Feedback response
          * @property {boolean|null} [sharePublicly] Feedback sharePublicly
          * @property {number|Long|null} [created] Feedback created
+         * @property {number|Long|null} [id] Feedback id
          */
 
         /**
@@ -103,6 +104,14 @@ export const feedlightpb = $root.feedlightpb = (() => {
         Feedback.prototype.created = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
+         * Feedback id.
+         * @member {number|Long} id
+         * @memberof feedlightpb.Feedback
+         * @instance
+         */
+        Feedback.prototype.id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
          * Creates a new Feedback instance using the specified properties.
          * @function create
          * @memberof feedlightpb.Feedback
@@ -140,6 +149,8 @@ export const feedlightpb = $root.feedlightpb = (() => {
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.sharePublicly);
             if (message.created != null && message.hasOwnProperty("created"))
                 writer.uint32(/* id 7, wireType 0 =*/56).int64(message.created);
+            if (message.id != null && message.hasOwnProperty("id"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.id);
             return writer;
         };
 
@@ -194,6 +205,9 @@ export const feedlightpb = $root.feedlightpb = (() => {
                     break;
                 case 7:
                     message.created = reader.int64();
+                    break;
+                case 8:
+                    message.id = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -251,6 +265,9 @@ export const feedlightpb = $root.feedlightpb = (() => {
             if (message.created != null && message.hasOwnProperty("created"))
                 if (!$util.isInteger(message.created) && !(message.created && $util.isInteger(message.created.low) && $util.isInteger(message.created.high)))
                     return "created: integer|Long expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id) && !(message.id && $util.isInteger(message.id.low) && $util.isInteger(message.id.high)))
+                    return "id: integer|Long expected";
             return null;
         };
 
@@ -287,6 +304,15 @@ export const feedlightpb = $root.feedlightpb = (() => {
                     message.created = object.created;
                 else if (typeof object.created === "object")
                     message.created = new $util.LongBits(object.created.low >>> 0, object.created.high >>> 0).toNumber();
+            if (object.id != null)
+                if ($util.Long)
+                    (message.id = $util.Long.fromValue(object.id)).unsigned = false;
+                else if (typeof object.id === "string")
+                    message.id = parseInt(object.id, 10);
+                else if (typeof object.id === "number")
+                    message.id = object.id;
+                else if (typeof object.id === "object")
+                    message.id = new $util.LongBits(object.id.low >>> 0, object.id.high >>> 0).toNumber();
             return message;
         };
 
@@ -315,6 +341,11 @@ export const feedlightpb = $root.feedlightpb = (() => {
                     object.created = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.created = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    let long = new $util.Long(0, 0, false);
+                    object.id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.id = options.longs === String ? "0" : 0;
             }
             if (message.feedback != null && message.hasOwnProperty("feedback"))
                 object.feedback = message.feedback;
@@ -333,6 +364,11 @@ export const feedlightpb = $root.feedlightpb = (() => {
                     object.created = options.longs === String ? String(message.created) : message.created;
                 else
                     object.created = options.longs === String ? $util.Long.prototype.toString.call(message.created) : options.longs === Number ? new $util.LongBits(message.created.low >>> 0, message.created.high >>> 0).toNumber() : message.created;
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (typeof message.id === "number")
+                    object.id = options.longs === String ? String(message.id) : message.id;
+                else
+                    object.id = options.longs === String ? $util.Long.prototype.toString.call(message.id) : options.longs === Number ? new $util.LongBits(message.id.low >>> 0, message.id.high >>> 0).toNumber() : message.id;
             return object;
         };
 

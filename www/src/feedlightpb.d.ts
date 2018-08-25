@@ -25,6 +25,9 @@ export namespace feedlightpb {
 
         /** Feedback created */
         created?: (number|Long|null);
+
+        /** Feedback id */
+        id?: (number|Long|null);
     }
 
     /** Represents a Feedback. */
@@ -56,6 +59,9 @@ export namespace feedlightpb {
 
         /** Feedback created. */
         public created: (number|Long);
+
+        /** Feedback id. */
+        public id: (number|Long);
 
         /**
          * Creates a new Feedback instance using the specified properties.

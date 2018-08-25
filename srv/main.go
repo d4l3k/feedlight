@@ -3,21 +3,28 @@ package main
 import (
 	"flag"
 
-	"github.com/golang/glog"
+	"go.uber.org/zap"
 )
 
 var bind = flag.String("bind", ":8081", "address to bind server to")
+var log *zap.SugaredLogger
 
 func run() error {
+	flag.Parse()
+	logger, err := zap.NewDevelopment()
+	if err != nil {
+		return err
+	}
+	log = logger.Sugar()
+	defer log.Sync()
+
 	s := &server{}
 	return s.Listen(*bind)
 }
 
 func main() {
-	flag.Parse()
-	defer glog.Flush()
 
 	if err := run(); err != nil {
-		glog.Fatal(err)
+		log.Fatal(err)
 	}
 }
