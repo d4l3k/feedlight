@@ -66,7 +66,7 @@
     <paper-checkbox checked="{{sharePublicly}}">
       Share publicly so others can collaborate?
     </paper-checkbox>
-    <template is="dom-if" if="[[similarFeedback]]">
+    <template is="dom-if" if="[[similarFeedback.length]]">
       <h3>We've found similar feedback. Are these about the same issue?</h3>
       <template is="dom-repeat" items="[[similarFeedback]]">
         <div class="feedback">
@@ -78,9 +78,13 @@
             </template>
           </div>
           <div class="buttons">
-            [[item.similar]]
-            <toggle-button class="check"><iron-icon icon="check"></iron-icon></toggle-button>
-            <toggle-button class="clear"><iron-icon icon="clear"></iron-icon></toggle-button>
+            [[similarityScore(item, item.similar, item.numSimilar)]]
+            <toggle-button class="check" value="{{item.similar}}" on-tap="updateSimilar">
+              <iron-icon icon="check"></iron-icon>
+            </toggle-button>
+            <toggle-button class="clear" value="{{item.dissimilar}}" on-tap="updateDissimilar">
+              <iron-icon icon="clear"></iron-icon>
+            </toggle-button>
           </div>
         </div>
       </template>

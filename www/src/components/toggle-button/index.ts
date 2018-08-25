@@ -1,5 +1,5 @@
 import {PolymerElement} from '@polymer/polymer/polymer-element.js'
-import '@polymer/paper-button/paper-button.js';
+import '@polymer/paper-button/paper-button.js'
 
 import {html} from '../../html'
 

@@ -1,11 +1,11 @@
 import {PolymerElement} from '@polymer/polymer/polymer-element.js'
-import '@polymer/paper-button/paper-button.js';
-import '@polymer/paper-dialog/paper-dialog.js';
-import '@polymer/paper-input/paper-textarea.js';
-import '@polymer/paper-checkbox/paper-checkbox.js';
-import '@polymer/iron-icons/iron-icons.js';
+import '@polymer/paper-button/paper-button.js'
+import '@polymer/paper-dialog/paper-dialog.js'
+import '@polymer/paper-input/paper-textarea.js'
+import '@polymer/paper-checkbox/paper-checkbox.js'
+import '@polymer/iron-icons/iron-icons.js'
 import '../toggle-button'
-import {PaperDialog} from '@polymer/paper-dialog/paper-dialog.js';
+import {PaperDialog} from '@polymer/paper-dialog/paper-dialog.js'
 
 import {html} from '../../html'
 
@@ -13,22 +13,30 @@ import * as view from './template.html'
 
 interface Feedback {
   feedback: string
-  similar: number
+  numSimilar: number
   response?: string
+  similar?: boolean
+  dissimilar?: boolean
 }
 
 export class FeedlightForm extends PolymerElement {
   similarFeedback?: Feedback[]
+  sharePublicly?: boolean
+  feedback?: string
+
+  constructor () {
+    super()
+    this.init()
+  }
 
   static get properties () {
     return {
       sharePublicly: {
-        type: Boolean,
-        value: true,
+        type: Boolean
       },
       feedback: {
-        type: String,
-      },
+        type: String
+      }
     }
   }
 
@@ -42,30 +50,48 @@ export class FeedlightForm extends PolymerElement {
     ]
   }
 
-  connectedCallback () {
-    super.connectedCallback()
-  }
-
-  ready () {
-    super.ready()
-  }
-
   findSimilar (feedback: string) {
-    this.similarFeedback = [
-      {
-        feedback: "The app crashes when I try to post.",
-        similar: 10,
-        response: "We're aware of the issue and a fix should be rolling out soon!",
-      },
-      {
-        feedback: "It'd be nice to be able to insert emoji in our statuses.",
-        similar: 1,
-      },
-    ]
+    if (!feedback) {
+      this.similarFeedback = []
+    } else {
+      this.similarFeedback = [
+        {
+          feedback: 'The app crashes when I try to post.',
+          numSimilar: 10,
+          response: "We're aware of the issue and a fix should be rolling out soon!"
+        },
+        {
+          feedback: "It'd be nice to be able to insert emoji in our statuses.",
+          numSimilar: 1
+        }
+      ]
+    }
+  }
+
+  init () {
+    this.feedback = ''
+    this.sharePublicly = true
   }
 
   open () {
-    (this.$.dialog as PaperDialog).open()
+    this.init()
+    ;(this.$.dialog as PaperDialog).open()
+  }
+
+  similarityScore (f: Feedback): number {
+    let score = f.numSimilar
+    if (f.similar) {
+      score += 1
+    }
+    return score
+  }
+
+  updateSimilar (e) {
+    e.model.set('item.dissimilar', false)
+  }
+
+  updateDissimilar (e) {
+    e.model.set('item.similar', false)
   }
 }
 
