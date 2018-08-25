@@ -61,7 +61,11 @@
 <paper-dialog id="dialog" modal>
   <h2>Submit Feedback <small>by FeedLight</small></h2>
   <div>
-    <paper-textarea label="What's your feedback?" rows="4" value="{{feedback}}">
+    <paper-textarea
+        label="What's your feedback?"
+        rows="4"
+        value="{{feedback}}"
+        on-blur="resize">
     </paper-textarea>
     <paper-checkbox checked="{{sharePublicly}}">
       Share publicly so others can collaborate?

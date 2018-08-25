@@ -68,6 +68,10 @@ export class FeedlightForm extends PolymerElement {
     }
   }
 
+  resize () {
+    ;(this.$.dialog as PaperDialog).notifyResize()
+  }
+
   init () {
     this.feedback = ''
     this.sharePublicly = true
