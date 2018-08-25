@@ -23,6 +23,7 @@ export class FeedlightForm extends PolymerElement {
   similarFeedback?: Feedback[]
   sharePublicly?: boolean
   feedback?: string
+  backendAddr = config.BACKEND_ADDR
 
   constructor () {
     super()

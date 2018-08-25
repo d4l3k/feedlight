@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package feedlightpb;
+
+message Feedback {
+  string feedback = 1;
+  int64 num_similar = 2;
+  bool similar = 3;
+  bool dissimilar = 4;
+  string response = 5;
+}
+
+message SimilarFeedbackRequest {
+  Feedback feedback = 1;
+}
+
+message SimilarFeedbackResponse {
+  repeated Feedback feedback = 1;
+}
+
+message SubmitFeedbackRequest {
+  string email = 1;
+  Feedback feedback = 2;
+}
+
+message SubmitFeedbackResponse {}
+
+service FeedbackService {
+  rpc SimilarFeedback(SimilarFeedbackRequest) returns (SimilarFeedbackResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/feedback/similar"
+    };
+  }
+  rpc SubmitFeedback(SubmitFeedbackRequest) returns (SubmitFeedbackResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/feedback/submit"
+      body: "*"
+    };
+  }
+}

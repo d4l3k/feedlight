@@ -53,6 +53,9 @@ module.exports = {
       }
     ]),
     new webpack.IgnorePlugin(/vertx/),
+    new webpack.DefinePlugin({
+      'config.BACKEND_ADDR': JSON.stringify('https://prod'),
+    })
   ],
   optimization: {
     splitChunks: {

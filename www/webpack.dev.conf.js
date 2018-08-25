@@ -25,6 +25,9 @@ module.exports = {
   module: prod.module,
   resolve: prod.resolve,
   plugins: [
+    new webpack.DefinePlugin({
+      'config.BACKEND_ADDR': JSON.stringify('http://localhost:8081'),
+    }),
     ...prod.plugins,
     new webpack.HotModuleReplacementPlugin(),
   ],
