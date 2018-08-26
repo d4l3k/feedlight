@@ -16,7 +16,7 @@ class FeedlightButton extends PolymerElement {
       },
       domain: {
         type: String
-      },
+      }
     }
   }
 

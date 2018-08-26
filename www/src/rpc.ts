@@ -5,37 +5,36 @@ import * as Long from 'long'
 protobuf.util.Long = Long
 protobuf.configure()
 
-
 const backendAddr = config.BACKEND_ADDR
 
-function postData(url: string, body: Uint8Array): Promise<Uint8Array> {
+function postData (url: string, body: Uint8Array): Promise<Uint8Array> {
   // Default options are marked with *
   return fetch(url, {
-    method: "POST",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
     headers: {
-      "Content-Type": "application/octet-stream",
-      "Accept": "application/octet-stream",
+      'Content-Type': 'application/octet-stream',
+      'Accept': 'application/octet-stream'
     },
-    redirect: "follow",
-    referrer: "no-referrer",
-    body,
+    redirect: 'follow',
+    referrer: 'no-referrer',
+    body
   })
-  .then(response => {
-    return response.arrayBuffer().then(buf => {
-      const arr = new Uint8Array(buf)
-      if (response.status != 200) {
-        const msg = feedlightpb.Status.decode(arr)
-        throw new Error(
-          `Error: ${response.status} - ${response.statusText}: ${msg.message}`,
-        )
-      }
+    .then(response => {
+      return response.arrayBuffer().then(buf => {
+        const arr = new Uint8Array(buf)
+        if (response.status !== 200) {
+          const msg = feedlightpb.Status.decode(arr)
+          throw new Error(
+            `Error: ${response.status} - ${response.statusText}: ${msg.message}`
+          )
+        }
 
-      return arr
+        return arr
+      })
     })
-  })
 }
 
 class RPCImpl {
@@ -63,4 +62,4 @@ const rpcService = (name: string) => {
   return impl.rpcImpl.bind(impl)
 }
 
-export const FeedbackService = new feedlightpb.FeedbackService(rpcService("FeedbackService"))
+export const FeedbackService = new feedlightpb.FeedbackService(rpcService('FeedbackService'))

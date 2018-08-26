@@ -2,7 +2,7 @@
   "name": "feedlight",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "None",
+  "license": "UNLICENSED",
   "dependencies": {
     "@polymer/iron-icons": "^3.0.0-pre.21",
     "@polymer/paper-button": "^3.0.0-pre.21",
@@ -19,13 +19,13 @@
     "protobufjs": "^6.8.8"
   },
   "scripts": {
-    "lint": "standard --fix src/**/*.ts",
+    "lint": "make lint",
     "test": "yarn lint && yarn build",
     "start": "webpack-dev-server --open --config ./webpack.dev.conf.js",
     "build": "yarn protobuf && webpack --config ./webpack.prod.conf.js",
     "protobuf": "pbjs --force-long -t static-module -w es6 -o src/feedlightpb.js -p /usr/include/ ../srv/feedlightpb/feedlight.proto google/protobuf/any.proto google/api/annotations.proto && pbts -o src/feedlightpb.d.ts src/feedlightpb.js"
   },
-  "standard": {
+  "standardx": {
     "parser": "typescript-eslint-parser",
     "plugins": [
       "typescript"
@@ -33,8 +33,14 @@
     "globals": [
       "window",
       "customElements",
-      "config"
+      "config",
+      "fetch"
     ]
+  },
+  "eslintConfig": {
+    "rules": {
+      "no-undef": "off"
+    }
   },
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.19",
@@ -42,7 +48,7 @@
     "eslint-plugin-typescript": "^0.12.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
-    "standard": "^11.0.1",
+    "standardx": "^2.1.0",
     "ts-loader": "^4.5.0",
     "typescript": "^3.0.1",
     "typescript-eslint-parser": "^18.0.0",

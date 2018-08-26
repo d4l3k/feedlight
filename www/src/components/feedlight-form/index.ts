@@ -1,11 +1,11 @@
 import {PolymerElement} from '@polymer/polymer/polymer-element.js'
 import '@polymer/paper-button/paper-button.js'
-import '@polymer/paper-dialog/paper-dialog.js'
 import '@polymer/paper-input/paper-textarea.js'
 import '@polymer/paper-checkbox/paper-checkbox.js'
 import '@polymer/iron-icons/iron-icons.js'
 import '@polymer/paper-progress/paper-progress.js'
-import {PaperDialog} from '@polymer/paper-dialog/paper-dialog.js'
+
+import * as paperDialog from '@polymer/paper-dialog/paper-dialog.js'
 import {debounce} from 'debounce'
 
 import {FeedbackService} from '../../rpc'
@@ -63,8 +63,8 @@ export class FeedlightForm extends PolymerElement {
     FeedbackService.similarFeedback(
       new feedlightpb.SimilarFeedbackRequest({
         domain: this.domain,
-        feedback: this.curFeedback(),
-      }),
+        feedback: this.curFeedback()
+      })
     ).then((resp: feedlightpb.SimilarFeedbackResponse) => {
       this.similarFeedback = resp.feedback
       this.loading -= 1
@@ -81,10 +81,10 @@ export class FeedlightForm extends PolymerElement {
         email: this.email,
         domain: this.domain,
         feedback: this.curFeedback(),
-        similar: this.similarFeedback,
-      }),
+        similar: this.similarFeedback
+      })
     ).then((resp: feedlightpb.SubmitFeedbackResponse) => {
-      ;(this.$.dialog as PaperDialog).close()
+      ;(this.$.dialog as paperDialog.PaperDialog).close()
       this.loading -= 1
     }).catch((err) => {
       this.loading -= 1
@@ -92,15 +92,15 @@ export class FeedlightForm extends PolymerElement {
     })
   }
 
-  curFeedback(): feedlightpb.Feedback {
+  curFeedback (): feedlightpb.Feedback {
     return new feedlightpb.Feedback({
       feedback: this.feedback,
-      sharePublicly: this.sharePublicly,
+      sharePublicly: this.sharePublicly
     })
   }
 
   resize () {
-    ;(this.$.dialog as PaperDialog).notifyResize()
+    ;(this.$.dialog as paperDialog.PaperDialog).notifyResize()
   }
 
   init () {
@@ -110,7 +110,7 @@ export class FeedlightForm extends PolymerElement {
 
   open () {
     this.init()
-    ;(this.$.dialog as PaperDialog).open()
+    ;(this.$.dialog as paperDialog.PaperDialog).open()
   }
 
   similarityScore (f: feedlightpb.IFeedback): number {
