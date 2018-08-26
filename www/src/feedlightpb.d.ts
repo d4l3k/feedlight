@@ -592,9 +592,6 @@ export namespace feedlightpb {
 
         /** Status message */
         message?: (string|null);
-
-        /** Status details */
-        details?: (google.protobuf.IAny[]|null);
     }
 
     /** Represents a Status. */
@@ -611,9 +608,6 @@ export namespace feedlightpb {
 
         /** Status message. */
         public message: string;
-
-        /** Status details. */
-        public details: google.protobuf.IAny[];
 
         /**
          * Creates a new Status instance using the specified properties.

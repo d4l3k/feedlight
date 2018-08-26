@@ -1400,7 +1400,6 @@ export const feedlightpb = $root.feedlightpb = (() => {
          * @interface IStatus
          * @property {number|null} [code] Status code
          * @property {string|null} [message] Status message
-         * @property {Array.<google.protobuf.IAny>|null} [details] Status details
          */
 
         /**
@@ -1412,7 +1411,6 @@ export const feedlightpb = $root.feedlightpb = (() => {
          * @param {feedlightpb.IStatus=} [properties] Properties to set
          */
         function Status(properties) {
-            this.details = [];
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1434,14 +1432,6 @@ export const feedlightpb = $root.feedlightpb = (() => {
          * @instance
          */
         Status.prototype.message = "";
-
-        /**
-         * Status details.
-         * @member {Array.<google.protobuf.IAny>} details
-         * @memberof feedlightpb.Status
-         * @instance
-         */
-        Status.prototype.details = $util.emptyArray;
 
         /**
          * Creates a new Status instance using the specified properties.
@@ -1467,13 +1457,10 @@ export const feedlightpb = $root.feedlightpb = (() => {
         Status.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.code != null && message.hasOwnProperty("code"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
             if (message.message != null && message.hasOwnProperty("message"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
-            if (message.details != null && message.details.length)
-                for (let i = 0; i < message.details.length; ++i)
-                    $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.message);
+            if (message.code != null && message.hasOwnProperty("code"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.code);
             return writer;
         };
 
@@ -1508,16 +1495,11 @@ export const feedlightpb = $root.feedlightpb = (() => {
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
+                case 2:
                     message.code = reader.int32();
                     break;
-                case 2:
+                case 1:
                     message.message = reader.string();
-                    break;
-                case 3:
-                    if (!(message.details && message.details.length))
-                        message.details = [];
-                    message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1560,15 +1542,6 @@ export const feedlightpb = $root.feedlightpb = (() => {
             if (message.message != null && message.hasOwnProperty("message"))
                 if (!$util.isString(message.message))
                     return "message: string expected";
-            if (message.details != null && message.hasOwnProperty("details")) {
-                if (!Array.isArray(message.details))
-                    return "details: array expected";
-                for (let i = 0; i < message.details.length; ++i) {
-                    let error = $root.google.protobuf.Any.verify(message.details[i]);
-                    if (error)
-                        return "details." + error;
-                }
-            }
             return null;
         };
 
@@ -1588,16 +1561,6 @@ export const feedlightpb = $root.feedlightpb = (() => {
                 message.code = object.code | 0;
             if (object.message != null)
                 message.message = String(object.message);
-            if (object.details) {
-                if (!Array.isArray(object.details))
-                    throw TypeError(".feedlightpb.Status.details: array expected");
-                message.details = [];
-                for (let i = 0; i < object.details.length; ++i) {
-                    if (typeof object.details[i] !== "object")
-                        throw TypeError(".feedlightpb.Status.details: object expected");
-                    message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
-                }
-            }
             return message;
         };
 
@@ -1614,21 +1577,14 @@ export const feedlightpb = $root.feedlightpb = (() => {
             if (!options)
                 options = {};
             let object = {};
-            if (options.arrays || options.defaults)
-                object.details = [];
             if (options.defaults) {
-                object.code = 0;
                 object.message = "";
+                object.code = 0;
             }
-            if (message.code != null && message.hasOwnProperty("code"))
-                object.code = message.code;
             if (message.message != null && message.hasOwnProperty("message"))
                 object.message = message.message;
-            if (message.details && message.details.length) {
-                object.details = [];
-                for (let j = 0; j < message.details.length; ++j)
-                    object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
-            }
+            if (message.code != null && message.hasOwnProperty("code"))
+                object.code = message.code;
             return object;
         };
 
