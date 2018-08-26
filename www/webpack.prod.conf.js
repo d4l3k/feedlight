@@ -1,17 +1,18 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const webpack = require('webpack');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
   mode: 'production',
   entry: {
-    app: './src/index',
-    //feedlightForm: './src/components/feedlight-form',
+    button: './src/button',
+    app: './src/app'
   },
   output: {
-    filename: '[name].[chunkhash].js',
+    filename: '[name].js',
+    chunkFilename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {
@@ -23,7 +24,7 @@ module.exports = {
       {
         test: /\.ts?$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules/
       }
     ]
   },
@@ -37,7 +38,13 @@ module.exports = {
       'environment.prod.ts'
     ),
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './src/index.html',
+      chunks: ['button']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'app.html',
+      template: './src/app.html',
+      chunks: ['app']
     }),
     new CopyWebpackPlugin([
       {
@@ -49,17 +56,17 @@ module.exports = {
         from: path.join(
           path.resolve(__dirname, './node_modules/@webcomponents/webcomponentsjs/')
         ),
-        to: './webcomponentsjs',
+        to: './webcomponentsjs'
       }
     ]),
     new webpack.IgnorePlugin(/vertx/),
     new webpack.DefinePlugin({
-      'config.BACKEND_ADDR': JSON.stringify('http://localhost:8081'),
+      'config.BACKEND_ADDR': JSON.stringify('http://localhost:8081')
     })
   ],
   optimization: {
     splitChunks: {
-      chunks: 'all'
+      chunks: 'async'
     }
   }
-};
+}

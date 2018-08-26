@@ -88,7 +88,7 @@ export class FeedlightForm extends PolymerElement {
         similar: this.similarFeedback
       })
     ).then((resp: feedlightpb.SubmitFeedbackResponse) => {
-      ;(this.$.dialog as paperDialog.PaperDialog).close()
+      ;(this.$.dialog as PaperDialog).close()
       this.loading -= 1
     }).catch((err) => {
       this.loading -= 1
