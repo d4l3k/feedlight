@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/api/annotations.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "google/protobuf/any.proto";
+//import "google/protobuf/any.proto";
 
 package feedlightpb;
 
@@ -65,5 +65,5 @@ message Status {
 
   // A list of messages that carry the error details.  There will be a
   // common set of message types for APIs to use.
-  repeated google.protobuf.Any details = 3;
+  //repeated google.protobuf.Any details = 3;
 }
