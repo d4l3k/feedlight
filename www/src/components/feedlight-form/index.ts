@@ -8,13 +8,19 @@ import '@polymer/paper-progress/paper-progress.js'
 import {PaperDialog} from '@polymer/paper-dialog/paper-dialog.js'
 import {debounce} from 'debounce'
 
+import * as Long from 'long'
+import * as protobuf from 'protobufjs/minimal'
+
+protobuf.util.Long = Long
+protobuf.configure()
+
 import {html} from '../../html'
 import {feedlightpb} from '../../feedlightpb'
 import '../toggle-button'
 
 import * as view from './template.html'
 
-function postData(url: string, data: any): Promise<any> {
+function postData<T>(url: string, data: any, ret: {fromObject (...args: any[]): T}): Promise<T> {
   // Default options are marked with *
     return fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -29,7 +35,16 @@ function postData(url: string, data: any): Promise<any> {
         referrer: "no-referrer", // no-referrer, *client
         body: JSON.stringify(data), // body data type must match "Content-Type" header
     })
-    .then(response => response.json()); // parses response to JSON
+    .then(response => {
+      return response.json().then((json: any) => {
+        if (response.status != 200) {
+          throw new Error(
+            `Error: ${response.status} - ${response.statusText}: ${json.message}`,
+          )
+        }
+        return ret.fromObject(json)
+      })
+    }) // parses response to JSON
 }
 
 export class FeedlightForm extends PolymerElement {
@@ -84,6 +99,7 @@ export class FeedlightForm extends PolymerElement {
         domain: this.domain,
         feedback: this.curFeedback(),
       }),
+      feedlightpb.SimilarFeedbackResponse,
     ).then((resp: feedlightpb.SimilarFeedbackResponse) => {
       this.similarFeedback = resp.feedback
       this.loading -= 1
@@ -103,6 +119,7 @@ export class FeedlightForm extends PolymerElement {
         feedback: this.curFeedback(),
         similar: this.similarFeedback,
       }),
+      feedlightpb.SubmitFeedbackResponse,
     ).then((resp: feedlightpb.SubmitFeedbackResponse) => {
       ;(this.$.dialog as PaperDialog).close()
       this.loading -= 1
@@ -134,7 +151,7 @@ export class FeedlightForm extends PolymerElement {
   }
 
   similarityScore (f: feedlightpb.IFeedback): number {
-    let score = f.numSimilar || 0
+    let score = f.score || 0
     if (f.similar) {
       score += 1
     }

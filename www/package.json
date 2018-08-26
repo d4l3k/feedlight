@@ -15,6 +15,7 @@
     "@polymer/polymer": "^3.0.5",
     "@webcomponents/webcomponentsjs": "^2.1.0",
     "debounce": "^1.2.0",
+    "long": "^4.0.0",
     "protobufjs": "^6.8.8"
   },
   "scripts": {
@@ -22,7 +23,7 @@
     "test": "yarn lint && yarn build",
     "start": "webpack-dev-server --open --config ./webpack.dev.conf.js",
     "build": "yarn protobuf && webpack --config ./webpack.prod.conf.js",
-    "protobuf": "pbjs -t static-module -w es6 -o src/feedlightpb.js ../srv/feedlightpb/feedlight.proto && pbts -o src/feedlightpb.d.ts src/feedlightpb.js"
+    "protobuf": "pbjs --force-long -t static-module -w es6 -o src/feedlightpb.js ../srv/feedlightpb/feedlight.proto && pbts -o src/feedlightpb.d.ts src/feedlightpb.js"
   },
   "standard": {
     "parser": "typescript-eslint-parser",

@@ -54,7 +54,7 @@ module.exports = {
     ]),
     new webpack.IgnorePlugin(/vertx/),
     new webpack.DefinePlugin({
-      'config.BACKEND_ADDR': JSON.stringify('https://prod'),
+      'config.BACKEND_ADDR': JSON.stringify('http://localhost:8081'),
     })
   ],
   optimization: {

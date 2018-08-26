@@ -2,12 +2,15 @@ package embeddings
 
 import (
 	"bufio"
-	"bytes"
+	"context"
 	"io"
 	"os"
+	"runtime"
 	"strconv"
 	"strings"
+	"sync"
 
+	"golang.org/x/sync/errgroup"
 	"gonum.org/v1/gonum/blas/blas32"
 )
 
@@ -31,21 +34,53 @@ func Load(file string) (Embeddings, error) {
 // LoadReader loads a set of word embeddings from a io.Reader.
 func LoadReader(r io.Reader) (Embeddings, error) {
 	em := map[string][]float32{}
+	var emLock sync.Mutex
 	var n int
 
-	scanner := bufio.NewScanner(r)
-	for scanner.Scan() {
-		parts := bytes.Split(scanner.Bytes(), []byte(" "))
-		word := parts[0]
-		var nums []float32
-		for _, nbytes := range parts[1:] {
-			n, err := strconv.ParseFloat(string(nbytes), 32)
-			if err != nil {
-				return Embeddings{}, err
+	wg, ctx := errgroup.WithContext(context.TODO())
+
+	workers := runtime.NumCPU()
+	lines := make(chan string, workers)
+
+	var err error
+	for i := 0; i < workers; i++ {
+		wg.Go(func() error {
+			for line := range lines {
+				parts := strings.Split(line, " ")
+				word := parts[0]
+				nums := make([]float32, len(parts)-1)
+				for i, nbytes := range parts[1:] {
+					n, err2 := strconv.ParseFloat(string(nbytes), 32)
+					if err2 != nil {
+						return err
+					}
+					nums[i] = float32(n)
+				}
+
+				emLock.Lock()
+				em[word] = nums
+				emLock.Unlock()
 			}
-			nums = append(nums, float32(n))
+
+			return nil
+		})
+	}
+
+	wg.Go(func() error {
+		scanner := bufio.NewScanner(r)
+		for scanner.Scan() {
+			select {
+			case lines <- scanner.Text():
+			case <-ctx.Done():
+				break
+			}
 		}
-		em[string(word)] = nums
+		close(lines)
+		return nil
+	})
+
+	if err := wg.Wait(); err != nil {
+		return Embeddings{}, err
 	}
 
 	for _, v := range em {
@@ -81,6 +116,9 @@ func (e Embeddings) Sentence(s string) []float32 {
 		if v != nil {
 			vecs = append(vecs, v)
 		}
+	}
+	if len(vecs) == 0 {
+		return make([]float32, e.N)
 	}
 	return Sum(vecs)
 }

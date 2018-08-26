@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+
 	"github.com/d4l3k/feedlight/srv/feedlightpb"
 	"github.com/jinzhu/gorm"
 	_ "github.com/lib/pq"
@@ -11,17 +13,34 @@ var db *gorm.DB
 
 type Feedback struct {
 	feedlightpb.Feedback `gorm:"embedded"`
-	Email                string
+	Email                string `gorm:"not null"`
+	Domain               string `gorm:"index,not null"`
 
-	To   []FeedbackLink `gorm:"foreignkey:FromID"`
-	From []FeedbackLink `gorm:"foreignkey:ToID"`
+	Embedding       []byte
+	embeddingLoaded []float32
+
+	To            []FeedbackLink `gorm:"foreignkey:FromID"`
+	From          []FeedbackLink `gorm:"foreignkey:ToID"`
+	NumSimilar    int64
+	NumDissimilar int64
+}
+
+// GetEmbedding loads the Embedding and caches it.
+func (f *Feedback) GetEmbedding() ([]float32, error) {
+	if f.embeddingLoaded == nil {
+		if err := json.Unmarshal(f.Embedding, &f.embeddingLoaded); err != nil {
+			return nil, err
+		}
+	}
+
+	return f.embeddingLoaded, nil
 }
 
 type FeedbackLink struct {
 	ID           int64
-	FromID, ToID int64
-	Email        string
-	Similar      bool
+	FromID, ToID int64  `gorm:"not null"`
+	Email        string `gorm:"not null"`
+	Similar      bool   `gorm:"not null"`
 }
 
 func setupDB() error {

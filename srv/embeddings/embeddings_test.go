@@ -3,9 +3,13 @@ package embeddings
 import (
 	"strings"
 	"testing"
+
+	"go.uber.org/goleak"
 )
 
 func TestEmbeddings(t *testing.T) {
+	defer goleak.VerifyNoLeaks(t)
+
 	f := `foo 1 2 3 4
 bar 2 3 4 5`
 
@@ -14,9 +18,18 @@ bar 2 3 4 5`
 		t.Fatal(err)
 	}
 
-	v := e.Sentence("foo bar yes. moo")
-	if len(v) != 4 {
-		t.Fatal("got unexpected length embedding")
+	{
+		v := e.Sentence("foo bar yes. moo")
+		if len(v) != 4 {
+			t.Fatal("got unexpected length embedding")
+		}
+	}
+
+	{
+		v := e.Sentence("")
+		if len(v) != 4 {
+			t.Fatal("got unexpected length embedding")
+		}
 	}
 }
 

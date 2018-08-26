@@ -6,6 +6,7 @@ package feedlightpb
 import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
+import _ "github.com/gogo/protobuf/gogoproto"
 import _ "google.golang.org/genproto/googleapis/api/annotations"
 
 import strings "strings"
@@ -31,7 +32,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type Feedback struct {
 	Feedback             string   `protobuf:"bytes,1,opt,name=feedback,proto3" json:"feedback,omitempty"`
-	NumSimilar           int32    `protobuf:"varint,2,opt,name=num_similar,json=numSimilar,proto3" json:"num_similar,omitempty"`
+	Score                int32    `protobuf:"varint,2,opt,name=score,proto3" json:"score,omitempty"`
 	Similar              bool     `protobuf:"varint,3,opt,name=similar,proto3" json:"similar,omitempty"`
 	Dissimilar           bool     `protobuf:"varint,4,opt,name=dissimilar,proto3" json:"dissimilar,omitempty"`
 	Response             string   `protobuf:"bytes,5,opt,name=response,proto3" json:"response,omitempty"`
@@ -45,7 +46,7 @@ type Feedback struct {
 func (m *Feedback) Reset()      { *m = Feedback{} }
 func (*Feedback) ProtoMessage() {}
 func (*Feedback) Descriptor() ([]byte, []int) {
-	return fileDescriptor_feedlight_3accb84dd864063c, []int{0}
+	return fileDescriptor_feedlight_45479eca94736ea7, []int{0}
 }
 func (m *Feedback) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -81,9 +82,9 @@ func (m *Feedback) GetFeedback() string {
 	return ""
 }
 
-func (m *Feedback) GetNumSimilar() int32 {
+func (m *Feedback) GetScore() int32 {
 	if m != nil {
-		return m.NumSimilar
+		return m.Score
 	}
 	return 0
 }
@@ -131,16 +132,16 @@ func (m *Feedback) GetId() int64 {
 }
 
 type SimilarFeedbackRequest struct {
-	Domain               string    `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
-	Feedback             *Feedback `protobuf:"bytes,1,opt,name=feedback" json:"feedback,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
-	XXX_sizecache        int32     `json:"-"`
+	Domain               string   `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	Feedback             Feedback `protobuf:"bytes,1,opt,name=feedback" json:"feedback"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *SimilarFeedbackRequest) Reset()      { *m = SimilarFeedbackRequest{} }
 func (*SimilarFeedbackRequest) ProtoMessage() {}
 func (*SimilarFeedbackRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_feedlight_3accb84dd864063c, []int{1}
+	return fileDescriptor_feedlight_45479eca94736ea7, []int{1}
 }
 func (m *SimilarFeedbackRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -176,23 +177,23 @@ func (m *SimilarFeedbackRequest) GetDomain() string {
 	return ""
 }
 
-func (m *SimilarFeedbackRequest) GetFeedback() *Feedback {
+func (m *SimilarFeedbackRequest) GetFeedback() Feedback {
 	if m != nil {
 		return m.Feedback
 	}
-	return nil
+	return Feedback{}
 }
 
 type SimilarFeedbackResponse struct {
-	Feedback             []*Feedback `protobuf:"bytes,1,rep,name=feedback" json:"feedback,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
-	XXX_sizecache        int32       `json:"-"`
+	Feedback             []Feedback `protobuf:"bytes,1,rep,name=feedback" json:"feedback"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
 }
 
 func (m *SimilarFeedbackResponse) Reset()      { *m = SimilarFeedbackResponse{} }
 func (*SimilarFeedbackResponse) ProtoMessage() {}
 func (*SimilarFeedbackResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_feedlight_3accb84dd864063c, []int{2}
+	return fileDescriptor_feedlight_45479eca94736ea7, []int{2}
 }
 func (m *SimilarFeedbackResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -221,7 +222,7 @@ func (m *SimilarFeedbackResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_SimilarFeedbackResponse proto.InternalMessageInfo
 
-func (m *SimilarFeedbackResponse) GetFeedback() []*Feedback {
+func (m *SimilarFeedbackResponse) GetFeedback() []Feedback {
 	if m != nil {
 		return m.Feedback
 	}
@@ -229,18 +230,18 @@ func (m *SimilarFeedbackResponse) GetFeedback() []*Feedback {
 }
 
 type SubmitFeedbackRequest struct {
-	Domain               string      `protobuf:"bytes,4,opt,name=domain,proto3" json:"domain,omitempty"`
-	Email                string      `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
-	Feedback             *Feedback   `protobuf:"bytes,2,opt,name=feedback" json:"feedback,omitempty"`
-	Similar              []*Feedback `protobuf:"bytes,3,rep,name=similar" json:"similar,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
-	XXX_sizecache        int32       `json:"-"`
+	Domain               string     `protobuf:"bytes,4,opt,name=domain,proto3" json:"domain,omitempty"`
+	Email                string     `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	Feedback             Feedback   `protobuf:"bytes,2,opt,name=feedback" json:"feedback"`
+	Similar              []Feedback `protobuf:"bytes,3,rep,name=similar" json:"similar"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
 }
 
 func (m *SubmitFeedbackRequest) Reset()      { *m = SubmitFeedbackRequest{} }
 func (*SubmitFeedbackRequest) ProtoMessage() {}
 func (*SubmitFeedbackRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_feedlight_3accb84dd864063c, []int{3}
+	return fileDescriptor_feedlight_45479eca94736ea7, []int{3}
 }
 func (m *SubmitFeedbackRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -283,14 +284,14 @@ func (m *SubmitFeedbackRequest) GetEmail() string {
 	return ""
 }
 
-func (m *SubmitFeedbackRequest) GetFeedback() *Feedback {
+func (m *SubmitFeedbackRequest) GetFeedback() Feedback {
 	if m != nil {
 		return m.Feedback
 	}
-	return nil
+	return Feedback{}
 }
 
-func (m *SubmitFeedbackRequest) GetSimilar() []*Feedback {
+func (m *SubmitFeedbackRequest) GetSimilar() []Feedback {
 	if m != nil {
 		return m.Similar
 	}
@@ -298,6 +299,7 @@ func (m *SubmitFeedbackRequest) GetSimilar() []*Feedback {
 }
 
 type SubmitFeedbackResponse struct {
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
@@ -305,7 +307,7 @@ type SubmitFeedbackResponse struct {
 func (m *SubmitFeedbackResponse) Reset()      { *m = SubmitFeedbackResponse{} }
 func (*SubmitFeedbackResponse) ProtoMessage() {}
 func (*SubmitFeedbackResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_feedlight_3accb84dd864063c, []int{4}
+	return fileDescriptor_feedlight_45479eca94736ea7, []int{4}
 }
 func (m *SubmitFeedbackResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -333,6 +335,13 @@ func (m *SubmitFeedbackResponse) XXX_DiscardUnknown() {
 }
 
 var xxx_messageInfo_SubmitFeedbackResponse proto.InternalMessageInfo
+
+func (m *SubmitFeedbackResponse) GetId() int64 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
 
 func init() {
 	proto.RegisterType((*Feedback)(nil), "feedlightpb.Feedback")
@@ -363,7 +372,7 @@ func (this *Feedback) Equal(that interface{}) bool {
 	if this.Feedback != that1.Feedback {
 		return false
 	}
-	if this.NumSimilar != that1.NumSimilar {
+	if this.Score != that1.Score {
 		return false
 	}
 	if this.Similar != that1.Similar {
@@ -408,7 +417,7 @@ func (this *SimilarFeedbackRequest) Equal(that interface{}) bool {
 	if this.Domain != that1.Domain {
 		return false
 	}
-	if !this.Feedback.Equal(that1.Feedback) {
+	if !this.Feedback.Equal(&that1.Feedback) {
 		return false
 	}
 	return true
@@ -436,7 +445,7 @@ func (this *SimilarFeedbackResponse) Equal(that interface{}) bool {
 		return false
 	}
 	for i := range this.Feedback {
-		if !this.Feedback[i].Equal(that1.Feedback[i]) {
+		if !this.Feedback[i].Equal(&that1.Feedback[i]) {
 			return false
 		}
 	}
@@ -467,14 +476,14 @@ func (this *SubmitFeedbackRequest) Equal(that interface{}) bool {
 	if this.Email != that1.Email {
 		return false
 	}
-	if !this.Feedback.Equal(that1.Feedback) {
+	if !this.Feedback.Equal(&that1.Feedback) {
 		return false
 	}
 	if len(this.Similar) != len(that1.Similar) {
 		return false
 	}
 	for i := range this.Similar {
-		if !this.Similar[i].Equal(that1.Similar[i]) {
+		if !this.Similar[i].Equal(&that1.Similar[i]) {
 			return false
 		}
 	}
@@ -499,6 +508,9 @@ func (this *SubmitFeedbackResponse) Equal(that interface{}) bool {
 	} else if this == nil {
 		return false
 	}
+	if this.Id != that1.Id {
+		return false
+	}
 	return true
 }
 func (this *Feedback) GoString() string {
@@ -508,7 +520,7 @@ func (this *Feedback) GoString() string {
 	s := make([]string, 0, 12)
 	s = append(s, "&feedlightpb.Feedback{")
 	s = append(s, "Feedback: "+fmt.Sprintf("%#v", this.Feedback)+",\n")
-	s = append(s, "NumSimilar: "+fmt.Sprintf("%#v", this.NumSimilar)+",\n")
+	s = append(s, "Score: "+fmt.Sprintf("%#v", this.Score)+",\n")
 	s = append(s, "Similar: "+fmt.Sprintf("%#v", this.Similar)+",\n")
 	s = append(s, "Dissimilar: "+fmt.Sprintf("%#v", this.Dissimilar)+",\n")
 	s = append(s, "Response: "+fmt.Sprintf("%#v", this.Response)+",\n")
@@ -525,9 +537,7 @@ func (this *SimilarFeedbackRequest) GoString() string {
 	s := make([]string, 0, 6)
 	s = append(s, "&feedlightpb.SimilarFeedbackRequest{")
 	s = append(s, "Domain: "+fmt.Sprintf("%#v", this.Domain)+",\n")
-	if this.Feedback != nil {
-		s = append(s, "Feedback: "+fmt.Sprintf("%#v", this.Feedback)+",\n")
-	}
+	s = append(s, "Feedback: "+strings.Replace(this.Feedback.GoString(), `&`, ``, 1)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -538,7 +548,11 @@ func (this *SimilarFeedbackResponse) GoString() string {
 	s := make([]string, 0, 5)
 	s = append(s, "&feedlightpb.SimilarFeedbackResponse{")
 	if this.Feedback != nil {
-		s = append(s, "Feedback: "+fmt.Sprintf("%#v", this.Feedback)+",\n")
+		vs := make([]*Feedback, len(this.Feedback))
+		for i := range vs {
+			vs[i] = &this.Feedback[i]
+		}
+		s = append(s, "Feedback: "+fmt.Sprintf("%#v", vs)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
@@ -551,11 +565,13 @@ func (this *SubmitFeedbackRequest) GoString() string {
 	s = append(s, "&feedlightpb.SubmitFeedbackRequest{")
 	s = append(s, "Domain: "+fmt.Sprintf("%#v", this.Domain)+",\n")
 	s = append(s, "Email: "+fmt.Sprintf("%#v", this.Email)+",\n")
-	if this.Feedback != nil {
-		s = append(s, "Feedback: "+fmt.Sprintf("%#v", this.Feedback)+",\n")
-	}
+	s = append(s, "Feedback: "+strings.Replace(this.Feedback.GoString(), `&`, ``, 1)+",\n")
 	if this.Similar != nil {
-		s = append(s, "Similar: "+fmt.Sprintf("%#v", this.Similar)+",\n")
+		vs := make([]*Feedback, len(this.Similar))
+		for i := range vs {
+			vs[i] = &this.Similar[i]
+		}
+		s = append(s, "Similar: "+fmt.Sprintf("%#v", vs)+",\n")
 	}
 	s = append(s, "}")
 	return strings.Join(s, "")
@@ -564,8 +580,9 @@ func (this *SubmitFeedbackResponse) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 4)
+	s := make([]string, 0, 5)
 	s = append(s, "&feedlightpb.SubmitFeedbackResponse{")
+	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
@@ -704,10 +721,10 @@ func (m *Feedback) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintFeedlight(dAtA, i, uint64(len(m.Feedback)))
 		i += copy(dAtA[i:], m.Feedback)
 	}
-	if m.NumSimilar != 0 {
+	if m.Score != 0 {
 		dAtA[i] = 0x10
 		i++
-		i = encodeVarintFeedlight(dAtA, i, uint64(m.NumSimilar))
+		i = encodeVarintFeedlight(dAtA, i, uint64(m.Score))
 	}
 	if m.Similar {
 		dAtA[i] = 0x18
@@ -773,16 +790,14 @@ func (m *SimilarFeedbackRequest) MarshalTo(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if m.Feedback != nil {
-		dAtA[i] = 0xa
-		i++
-		i = encodeVarintFeedlight(dAtA, i, uint64(m.Feedback.Size()))
-		n1, err := m.Feedback.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n1
+	dAtA[i] = 0xa
+	i++
+	i = encodeVarintFeedlight(dAtA, i, uint64(m.Feedback.Size()))
+	n1, err := m.Feedback.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
 	}
+	i += n1
 	if len(m.Domain) > 0 {
 		dAtA[i] = 0x12
 		i++
@@ -843,16 +858,14 @@ func (m *SubmitFeedbackRequest) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintFeedlight(dAtA, i, uint64(len(m.Email)))
 		i += copy(dAtA[i:], m.Email)
 	}
-	if m.Feedback != nil {
-		dAtA[i] = 0x12
-		i++
-		i = encodeVarintFeedlight(dAtA, i, uint64(m.Feedback.Size()))
-		n2, err := m.Feedback.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
-		}
-		i += n2
+	dAtA[i] = 0x12
+	i++
+	i = encodeVarintFeedlight(dAtA, i, uint64(m.Feedback.Size()))
+	n2, err := m.Feedback.MarshalTo(dAtA[i:])
+	if err != nil {
+		return 0, err
 	}
+	i += n2
 	if len(m.Similar) > 0 {
 		for _, msg := range m.Similar {
 			dAtA[i] = 0x1a
@@ -889,6 +902,11 @@ func (m *SubmitFeedbackResponse) MarshalTo(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if m.Id != 0 {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintFeedlight(dAtA, i, uint64(m.Id))
+	}
 	return i, nil
 }
 
@@ -908,8 +926,8 @@ func (m *Feedback) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovFeedlight(uint64(l))
 	}
-	if m.NumSimilar != 0 {
-		n += 1 + sovFeedlight(uint64(m.NumSimilar))
+	if m.Score != 0 {
+		n += 1 + sovFeedlight(uint64(m.Score))
 	}
 	if m.Similar {
 		n += 2
@@ -936,10 +954,8 @@ func (m *Feedback) Size() (n int) {
 func (m *SimilarFeedbackRequest) Size() (n int) {
 	var l int
 	_ = l
-	if m.Feedback != nil {
-		l = m.Feedback.Size()
-		n += 1 + l + sovFeedlight(uint64(l))
-	}
+	l = m.Feedback.Size()
+	n += 1 + l + sovFeedlight(uint64(l))
 	l = len(m.Domain)
 	if l > 0 {
 		n += 1 + l + sovFeedlight(uint64(l))
@@ -966,10 +982,8 @@ func (m *SubmitFeedbackRequest) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovFeedlight(uint64(l))
 	}
-	if m.Feedback != nil {
-		l = m.Feedback.Size()
-		n += 1 + l + sovFeedlight(uint64(l))
-	}
+	l = m.Feedback.Size()
+	n += 1 + l + sovFeedlight(uint64(l))
 	if len(m.Similar) > 0 {
 		for _, e := range m.Similar {
 			l = e.Size()
@@ -986,6 +1000,9 @@ func (m *SubmitFeedbackRequest) Size() (n int) {
 func (m *SubmitFeedbackResponse) Size() (n int) {
 	var l int
 	_ = l
+	if m.Id != 0 {
+		n += 1 + sovFeedlight(uint64(m.Id))
+	}
 	return n
 }
 
@@ -1008,7 +1025,7 @@ func (this *Feedback) String() string {
 	}
 	s := strings.Join([]string{`&Feedback{`,
 		`Feedback:` + fmt.Sprintf("%v", this.Feedback) + `,`,
-		`NumSimilar:` + fmt.Sprintf("%v", this.NumSimilar) + `,`,
+		`Score:` + fmt.Sprintf("%v", this.Score) + `,`,
 		`Similar:` + fmt.Sprintf("%v", this.Similar) + `,`,
 		`Dissimilar:` + fmt.Sprintf("%v", this.Dissimilar) + `,`,
 		`Response:` + fmt.Sprintf("%v", this.Response) + `,`,
@@ -1024,7 +1041,7 @@ func (this *SimilarFeedbackRequest) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&SimilarFeedbackRequest{`,
-		`Feedback:` + strings.Replace(fmt.Sprintf("%v", this.Feedback), "Feedback", "Feedback", 1) + `,`,
+		`Feedback:` + strings.Replace(strings.Replace(this.Feedback.String(), "Feedback", "Feedback", 1), `&`, ``, 1) + `,`,
 		`Domain:` + fmt.Sprintf("%v", this.Domain) + `,`,
 		`}`,
 	}, "")
@@ -1035,7 +1052,7 @@ func (this *SimilarFeedbackResponse) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&SimilarFeedbackResponse{`,
-		`Feedback:` + strings.Replace(fmt.Sprintf("%v", this.Feedback), "Feedback", "Feedback", 1) + `,`,
+		`Feedback:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.Feedback), "Feedback", "Feedback", 1), `&`, ``, 1) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1046,8 +1063,8 @@ func (this *SubmitFeedbackRequest) String() string {
 	}
 	s := strings.Join([]string{`&SubmitFeedbackRequest{`,
 		`Email:` + fmt.Sprintf("%v", this.Email) + `,`,
-		`Feedback:` + strings.Replace(fmt.Sprintf("%v", this.Feedback), "Feedback", "Feedback", 1) + `,`,
-		`Similar:` + strings.Replace(fmt.Sprintf("%v", this.Similar), "Feedback", "Feedback", 1) + `,`,
+		`Feedback:` + strings.Replace(strings.Replace(this.Feedback.String(), "Feedback", "Feedback", 1), `&`, ``, 1) + `,`,
+		`Similar:` + strings.Replace(strings.Replace(fmt.Sprintf("%v", this.Similar), "Feedback", "Feedback", 1), `&`, ``, 1) + `,`,
 		`Domain:` + fmt.Sprintf("%v", this.Domain) + `,`,
 		`}`,
 	}, "")
@@ -1058,6 +1075,7 @@ func (this *SubmitFeedbackResponse) String() string {
 		return "nil"
 	}
 	s := strings.Join([]string{`&SubmitFeedbackResponse{`,
+		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
 		`}`,
 	}, "")
 	return s
@@ -1130,9 +1148,9 @@ func (m *Feedback) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field NumSimilar", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Score", wireType)
 			}
-			m.NumSimilar = 0
+			m.Score = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowFeedlight
@@ -1142,7 +1160,7 @@ func (m *Feedback) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.NumSimilar |= (int32(b) & 0x7F) << shift
+				m.Score |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1350,9 +1368,6 @@ func (m *SimilarFeedbackRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.Feedback == nil {
-				m.Feedback = &Feedback{}
-			}
 			if err := m.Feedback.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -1462,7 +1477,7 @@ func (m *SimilarFeedbackResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Feedback = append(m.Feedback, &Feedback{})
+			m.Feedback = append(m.Feedback, Feedback{})
 			if err := m.Feedback[len(m.Feedback)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -1572,9 +1587,6 @@ func (m *SubmitFeedbackRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.Feedback == nil {
-				m.Feedback = &Feedback{}
-			}
 			if err := m.Feedback.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -1605,7 +1617,7 @@ func (m *SubmitFeedbackRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Similar = append(m.Similar, &Feedback{})
+			m.Similar = append(m.Similar, Feedback{})
 			if err := m.Similar[len(m.Similar)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -1689,6 +1701,25 @@ func (m *SubmitFeedbackResponse) Unmarshal(dAtA []byte) error {
 			return fmt.Errorf("proto: SubmitFeedbackResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			m.Id = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowFeedlight
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Id |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipFeedlight(dAtA[iNdEx:])
@@ -1816,40 +1847,42 @@ var (
 )
 
 func init() {
-	proto.RegisterFile("feedlightpb/feedlight.proto", fileDescriptor_feedlight_3accb84dd864063c)
+	proto.RegisterFile("feedlightpb/feedlight.proto", fileDescriptor_feedlight_45479eca94736ea7)
 }
 
-var fileDescriptor_feedlight_3accb84dd864063c = []byte{
-	// 481 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x93, 0xcd, 0x6e, 0xd3, 0x40,
-	0x10, 0xc7, 0x33, 0x4e, 0x93, 0xa6, 0x13, 0x91, 0x4a, 0x2b, 0x9a, 0xae, 0x42, 0x59, 0xa2, 0x0d,
-	0x48, 0x51, 0x85, 0x62, 0xb5, 0xdc, 0x7a, 0xe4, 0xc0, 0x89, 0x03, 0x72, 0x1e, 0xa0, 0x5a, 0xdb,
-	0xdb, 0x74, 0x85, 0xbf, 0xf0, 0x47, 0x25, 0x0e, 0x48, 0xc0, 0x13, 0x20, 0xc1, 0x43, 0xc0, 0x9b,
-	0x70, 0xac, 0xc4, 0x85, 0x23, 0x31, 0x1c, 0x38, 0xa1, 0x3e, 0x02, 0xea, 0xda, 0x4e, 0xe3, 0xb4,
-	0x8a, 0x72, 0xdb, 0xf9, 0xcf, 0xac, 0x7f, 0xf3, 0x9f, 0xf1, 0xe2, 0x83, 0x33, 0x29, 0x5d, 0x4f,
-	0xcd, 0xce, 0xd3, 0xc8, 0x36, 0x17, 0xe7, 0x49, 0x14, 0x87, 0x69, 0x48, 0xba, 0x4b, 0xc9, 0xc1,
-	0xc1, 0x2c, 0x0c, 0x67, 0x9e, 0x34, 0x45, 0xa4, 0x4c, 0x11, 0x04, 0x61, 0x2a, 0x52, 0x15, 0x06,
-	0x49, 0x51, 0xca, 0xff, 0x01, 0x76, 0x5e, 0x48, 0xe9, 0xda, 0xc2, 0x79, 0x4d, 0x06, 0xd8, 0x39,
-	0x2b, 0xcf, 0x14, 0x86, 0x30, 0xde, 0xb1, 0x16, 0x31, 0x79, 0x84, 0xdd, 0x20, 0xf3, 0x4f, 0x13,
-	0xe5, 0x2b, 0x4f, 0xc4, 0xd4, 0x18, 0xc2, 0xb8, 0x65, 0x61, 0x90, 0xf9, 0xd3, 0x42, 0x21, 0x14,
-	0xb7, 0xab, 0x64, 0x73, 0x08, 0xe3, 0x8e, 0x55, 0x85, 0x84, 0x21, 0xba, 0x2a, 0xa9, 0x92, 0x5b,
-	0x3a, 0xb9, 0xa4, 0x5c, 0x63, 0x63, 0x99, 0x44, 0x61, 0x90, 0x48, 0xda, 0x2a, 0xb0, 0x55, 0x4c,
-	0x9e, 0x60, 0x2f, 0x39, 0x17, 0xb1, 0x3c, 0x8d, 0x32, 0xdb, 0x53, 0x8e, 0xf7, 0x96, 0xb6, 0xf5,
-	0xfd, 0x7b, 0x5a, 0x7d, 0x55, 0x8a, 0xd7, 0x70, 0x27, 0x96, 0x22, 0x95, 0x2e, 0xdd, 0x1e, 0xc2,
-	0xb8, 0x69, 0x55, 0x21, 0xe9, 0xa1, 0xa1, 0x5c, 0xda, 0xd1, 0xa2, 0xa1, 0x5c, 0xee, 0x60, 0xbf,
-	0xec, 0xb8, 0xb2, 0x6d, 0xc9, 0x37, 0x99, 0x4c, 0x52, 0x72, 0xb4, 0xe2, 0xbe, 0x7b, 0xbc, 0x37,
-	0x59, 0x1a, 0xe4, 0x64, 0x51, 0x7f, 0x33, 0x94, 0x3e, 0xb6, 0xdd, 0xd0, 0x17, 0x2a, 0xd0, 0xf3,
-	0xd8, 0xb1, 0xca, 0x88, 0xbf, 0xc4, 0xfd, 0x5b, 0x90, 0xd2, 0x50, 0x9d, 0xd2, 0xdc, 0x80, 0xc2,
-	0xbf, 0x01, 0xee, 0x4d, 0x33, 0xdb, 0x57, 0xe9, 0x6a, 0xcb, 0xf7, 0xb1, 0x25, 0x7d, 0xa1, 0xbc,
-	0x72, 0x5b, 0x45, 0x50, 0x43, 0x18, 0x9b, 0x19, 0x31, 0x97, 0x97, 0xb7, 0xa6, 0xa9, 0xc5, 0x4e,
-	0x6f, 0x9c, 0x6f, 0xd5, 0x9c, 0x53, 0xec, 0xaf, 0xb6, 0x5a, 0x18, 0x3f, 0xfe, 0x62, 0xe0, 0x6e,
-	0x25, 0x4e, 0x65, 0x7c, 0xa1, 0x1c, 0x49, 0x3e, 0x00, 0xee, 0xae, 0x0c, 0x8a, 0x8c, 0x6a, 0xe4,
-	0xbb, 0x77, 0x35, 0x78, 0xbc, 0xbe, 0xa8, 0x40, 0xf2, 0xd1, 0xc7, 0x1f, 0x7f, 0x3e, 0x1b, 0x0f,
-	0x39, 0xd5, 0x3f, 0xff, 0xc5, 0x91, 0x59, 0xf9, 0x35, 0x4b, 0x1b, 0x27, 0x70, 0x48, 0xde, 0x61,
-	0xaf, 0xde, 0x31, 0xe1, 0xf5, 0x8f, 0xdf, 0x35, 0xf9, 0xc1, 0x68, 0x6d, 0x4d, 0xc9, 0xe7, 0x9a,
-	0x7f, 0xc0, 0xf7, 0x6f, 0xf3, 0xf5, 0x85, 0x13, 0x38, 0x7c, 0xfe, 0xf4, 0x72, 0xce, 0x1a, 0x3f,
-	0xe7, 0xac, 0x71, 0x35, 0x67, 0xf0, 0x3e, 0x67, 0xf0, 0x35, 0x67, 0xf0, 0x3d, 0x67, 0x70, 0x99,
-	0x33, 0xf8, 0x95, 0x33, 0xf8, 0x9b, 0xb3, 0xc6, 0x55, 0xce, 0xe0, 0xd3, 0x6f, 0xd6, 0xb0, 0xdb,
-	0xfa, 0xd5, 0x3e, 0xfb, 0x1f, 0x00, 0x00, 0xff, 0xff, 0x41, 0xeb, 0x75, 0xab, 0xff, 0x03, 0x00,
+var fileDescriptor_feedlight_45479eca94736ea7 = []byte{
+	// 513 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x53, 0xdd, 0x6a, 0xd4, 0x40,
+	0x18, 0xcd, 0x64, 0x7f, 0xba, 0xfd, 0x8a, 0x5b, 0x18, 0xda, 0x6d, 0x88, 0x75, 0x5c, 0xb2, 0x0a,
+	0xa1, 0xe8, 0x06, 0x2b, 0x22, 0xf4, 0xb2, 0x17, 0x5e, 0x4b, 0xf6, 0x01, 0x24, 0x3f, 0xb3, 0xd9,
+	0xc1, 0x24, 0x13, 0xf3, 0x53, 0xf0, 0x42, 0x50, 0x9f, 0x40, 0xd0, 0x87, 0xf0, 0x05, 0x7c, 0x87,
+	0x5e, 0x16, 0xbc, 0xf1, 0x4a, 0xdc, 0xd4, 0x0b, 0x2f, 0xfb, 0x08, 0xd2, 0x49, 0x66, 0x4d, 0xb6,
+	0xa5, 0xea, 0xdd, 0x9c, 0x6f, 0x4e, 0x72, 0xbe, 0x73, 0x0e, 0x03, 0xb7, 0xe7, 0x94, 0xfa, 0x21,
+	0x0b, 0x16, 0x79, 0xe2, 0x5a, 0xab, 0xf3, 0x34, 0x49, 0x79, 0xce, 0xf1, 0x56, 0xe3, 0x52, 0xdf,
+	0x0f, 0x38, 0x0f, 0x42, 0x6a, 0x39, 0x09, 0xb3, 0x9c, 0x38, 0xe6, 0xb9, 0x93, 0x33, 0x1e, 0x67,
+	0x15, 0x55, 0x7f, 0x18, 0xb0, 0x7c, 0x51, 0xb8, 0x53, 0x8f, 0x47, 0x56, 0xc0, 0x03, 0x6e, 0x89,
+	0xb1, 0x5b, 0xcc, 0x05, 0x12, 0x40, 0x9c, 0x2a, 0xba, 0x71, 0x8e, 0x60, 0xf0, 0x8c, 0x52, 0xdf,
+	0x75, 0xbc, 0x97, 0x58, 0x87, 0xc1, 0xbc, 0x3e, 0x6b, 0x68, 0x8c, 0xcc, 0x4d, 0x7b, 0x85, 0xf1,
+	0x0e, 0xf4, 0x32, 0x8f, 0xa7, 0x54, 0x53, 0xc7, 0xc8, 0xec, 0xd9, 0x15, 0xc0, 0x1a, 0x6c, 0x64,
+	0x2c, 0x62, 0xa1, 0x93, 0x6a, 0x9d, 0x31, 0x32, 0x07, 0xb6, 0x84, 0x98, 0x00, 0xf8, 0x2c, 0x93,
+	0x97, 0x5d, 0x71, 0xd9, 0x98, 0x5c, 0x6a, 0xa5, 0x34, 0x4b, 0x78, 0x9c, 0x51, 0xad, 0x57, 0x69,
+	0x49, 0x8c, 0xef, 0xc3, 0x30, 0x5b, 0x38, 0x29, 0x7d, 0x91, 0x14, 0x6e, 0xc8, 0xbc, 0xf0, 0xb5,
+	0xd6, 0x17, 0xdf, 0xdf, 0x12, 0xd3, 0xe7, 0xf5, 0xf0, 0x52, 0xdc, 0x4b, 0xa9, 0x93, 0x53, 0x5f,
+	0xdb, 0x18, 0x23, 0xb3, 0x63, 0x4b, 0x88, 0x87, 0xa0, 0x32, 0x5f, 0x1b, 0x88, 0xa1, 0xca, 0x7c,
+	0x83, 0xc1, 0x68, 0x56, 0xe9, 0x4a, 0xaf, 0x36, 0x7d, 0x55, 0xd0, 0x2c, 0xc7, 0x4f, 0xd7, 0x2c,
+	0x6f, 0x1d, 0xee, 0x4e, 0x1b, 0x61, 0x4f, 0x25, 0xff, 0xb8, 0x7b, 0xfa, 0xfd, 0xae, 0xd2, 0xc8,
+	0x63, 0x04, 0x7d, 0x9f, 0x47, 0x0e, 0x8b, 0x45, 0x20, 0x9b, 0x76, 0x8d, 0x0c, 0x1b, 0xf6, 0xae,
+	0x48, 0xd5, 0xb6, 0xda, 0x5a, 0x9d, 0x7f, 0xd6, 0x32, 0xbe, 0x20, 0xd8, 0x9d, 0x15, 0x6e, 0xc4,
+	0xf2, 0xf5, 0xf5, 0x77, 0xa0, 0x47, 0x23, 0x87, 0x85, 0x75, 0x5d, 0x15, 0x68, 0x09, 0xa9, 0xff,
+	0x63, 0xea, 0x49, 0xb3, 0xce, 0xbf, 0x2e, 0xb8, 0xea, 0xfa, 0x4f, 0x16, 0xdd, 0x56, 0x16, 0x26,
+	0x8c, 0xd6, 0xd7, 0xae, 0xa3, 0xa8, 0x0a, 0x42, 0xb2, 0xa0, 0xc3, 0x4f, 0x2a, 0x6c, 0x4b, 0xd2,
+	0x8c, 0xa6, 0x27, 0xcc, 0xa3, 0xf8, 0x1d, 0x82, 0xed, 0xb5, 0x28, 0xf1, 0xa4, 0xb5, 0xcf, 0xf5,
+	0x9d, 0xea, 0xf7, 0x6e, 0x26, 0x55, 0x2b, 0x18, 0x93, 0xf7, 0x5f, 0x7f, 0x7e, 0x54, 0xef, 0x18,
+	0x9a, 0x78, 0x48, 0x27, 0x8f, 0x2c, 0x99, 0x82, 0x55, 0xdb, 0x3a, 0x42, 0x07, 0xf8, 0x0d, 0x0c,
+	0xdb, 0x0e, 0xb0, 0xd1, 0xfe, 0xf9, 0x75, 0xad, 0xe8, 0x93, 0x1b, 0x39, 0xb5, 0xbe, 0x21, 0xf4,
+	0xf7, 0x8d, 0xbd, 0xab, 0xfa, 0xe2, 0x83, 0x23, 0x74, 0x70, 0xfc, 0xe0, 0x6c, 0x49, 0x94, 0x6f,
+	0x4b, 0xa2, 0x5c, 0x2c, 0x09, 0x7a, 0x5b, 0x12, 0xf4, 0xb9, 0x24, 0xe8, 0xb4, 0x24, 0xe8, 0xac,
+	0x24, 0xe8, 0x47, 0x49, 0xd0, 0xaf, 0x92, 0x28, 0x17, 0x25, 0x41, 0x1f, 0xce, 0x89, 0xe2, 0xf6,
+	0xc5, 0x93, 0x7e, 0xfc, 0x3b, 0x00, 0x00, 0xff, 0xff, 0xb1, 0xc5, 0xc8, 0x2e, 0x4b, 0x04, 0x00,
 	0x00,
 }

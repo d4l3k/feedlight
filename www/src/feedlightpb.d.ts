@@ -8,8 +8,8 @@ export namespace feedlightpb {
         /** Feedback feedback */
         feedback?: (string|null);
 
-        /** Feedback numSimilar */
-        numSimilar?: (number|null);
+        /** Feedback score */
+        score?: (number|null);
 
         /** Feedback similar */
         similar?: (boolean|null);
@@ -24,10 +24,10 @@ export namespace feedlightpb {
         sharePublicly?: (boolean|null);
 
         /** Feedback created */
-        created?: (number|Long|null);
+        created?: (Long|null);
 
         /** Feedback id */
-        id?: (number|Long|null);
+        id?: (Long|null);
     }
 
     /** Represents a Feedback. */
@@ -42,8 +42,8 @@ export namespace feedlightpb {
         /** Feedback feedback. */
         public feedback: string;
 
-        /** Feedback numSimilar. */
-        public numSimilar: number;
+        /** Feedback score. */
+        public score: number;
 
         /** Feedback similar. */
         public similar: boolean;
@@ -58,10 +58,10 @@ export namespace feedlightpb {
         public sharePublicly: boolean;
 
         /** Feedback created. */
-        public created: (number|Long);
+        public created: Long;
 
         /** Feedback id. */
-        public id: (number|Long);
+        public id: Long;
 
         /**
          * Creates a new Feedback instance using the specified properties.
@@ -430,6 +430,9 @@ export namespace feedlightpb {
 
     /** Properties of a SubmitFeedbackResponse. */
     interface ISubmitFeedbackResponse {
+
+        /** SubmitFeedbackResponse id */
+        id?: (Long|null);
     }
 
     /** Represents a SubmitFeedbackResponse. */
@@ -440,6 +443,9 @@ export namespace feedlightpb {
          * @param [properties] Properties to set
          */
         constructor(properties?: feedlightpb.ISubmitFeedbackResponse);
+
+        /** SubmitFeedbackResponse id. */
+        public id: Long;
 
         /**
          * Creates a new SubmitFeedbackResponse instance using the specified properties.
@@ -3133,10 +3139,10 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (number|Long|null);
+            positiveIntValue?: (Long|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (number|Long|null);
+            negativeIntValue?: (Long|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
@@ -3164,10 +3170,10 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: (number|Long);
+            public positiveIntValue: Long;
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: (number|Long);
+            public negativeIntValue: Long;
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;

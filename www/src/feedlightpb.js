@@ -23,13 +23,13 @@ export const feedlightpb = $root.feedlightpb = (() => {
          * @memberof feedlightpb
          * @interface IFeedback
          * @property {string|null} [feedback] Feedback feedback
-         * @property {number|null} [numSimilar] Feedback numSimilar
+         * @property {number|null} [score] Feedback score
          * @property {boolean|null} [similar] Feedback similar
          * @property {boolean|null} [dissimilar] Feedback dissimilar
          * @property {string|null} [response] Feedback response
          * @property {boolean|null} [sharePublicly] Feedback sharePublicly
-         * @property {number|Long|null} [created] Feedback created
-         * @property {number|Long|null} [id] Feedback id
+         * @property {Long|null} [created] Feedback created
+         * @property {Long|null} [id] Feedback id
          */
 
         /**
@@ -56,12 +56,12 @@ export const feedlightpb = $root.feedlightpb = (() => {
         Feedback.prototype.feedback = "";
 
         /**
-         * Feedback numSimilar.
-         * @member {number} numSimilar
+         * Feedback score.
+         * @member {number} score
          * @memberof feedlightpb.Feedback
          * @instance
          */
-        Feedback.prototype.numSimilar = 0;
+        Feedback.prototype.score = 0;
 
         /**
          * Feedback similar.
@@ -97,7 +97,7 @@ export const feedlightpb = $root.feedlightpb = (() => {
 
         /**
          * Feedback created.
-         * @member {number|Long} created
+         * @member {Long} created
          * @memberof feedlightpb.Feedback
          * @instance
          */
@@ -105,7 +105,7 @@ export const feedlightpb = $root.feedlightpb = (() => {
 
         /**
          * Feedback id.
-         * @member {number|Long} id
+         * @member {Long} id
          * @memberof feedlightpb.Feedback
          * @instance
          */
@@ -137,8 +137,8 @@ export const feedlightpb = $root.feedlightpb = (() => {
                 writer = $Writer.create();
             if (message.feedback != null && message.hasOwnProperty("feedback"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.feedback);
-            if (message.numSimilar != null && message.hasOwnProperty("numSimilar"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.numSimilar);
+            if (message.score != null && message.hasOwnProperty("score"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.score);
             if (message.similar != null && message.hasOwnProperty("similar"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.similar);
             if (message.dissimilar != null && message.hasOwnProperty("dissimilar"))
@@ -189,7 +189,7 @@ export const feedlightpb = $root.feedlightpb = (() => {
                     message.feedback = reader.string();
                     break;
                 case 2:
-                    message.numSimilar = reader.int32();
+                    message.score = reader.int32();
                     break;
                 case 3:
                     message.similar = reader.bool();
@@ -247,9 +247,9 @@ export const feedlightpb = $root.feedlightpb = (() => {
             if (message.feedback != null && message.hasOwnProperty("feedback"))
                 if (!$util.isString(message.feedback))
                     return "feedback: string expected";
-            if (message.numSimilar != null && message.hasOwnProperty("numSimilar"))
-                if (!$util.isInteger(message.numSimilar))
-                    return "numSimilar: integer expected";
+            if (message.score != null && message.hasOwnProperty("score"))
+                if (!$util.isInteger(message.score))
+                    return "score: integer expected";
             if (message.similar != null && message.hasOwnProperty("similar"))
                 if (typeof message.similar !== "boolean")
                     return "similar: boolean expected";
@@ -285,8 +285,8 @@ export const feedlightpb = $root.feedlightpb = (() => {
             let message = new $root.feedlightpb.Feedback();
             if (object.feedback != null)
                 message.feedback = String(object.feedback);
-            if (object.numSimilar != null)
-                message.numSimilar = object.numSimilar | 0;
+            if (object.score != null)
+                message.score = object.score | 0;
             if (object.similar != null)
                 message.similar = Boolean(object.similar);
             if (object.dissimilar != null)
@@ -331,7 +331,7 @@ export const feedlightpb = $root.feedlightpb = (() => {
             let object = {};
             if (options.defaults) {
                 object.feedback = "";
-                object.numSimilar = 0;
+                object.score = 0;
                 object.similar = false;
                 object.dissimilar = false;
                 object.response = "";
@@ -349,8 +349,8 @@ export const feedlightpb = $root.feedlightpb = (() => {
             }
             if (message.feedback != null && message.hasOwnProperty("feedback"))
                 object.feedback = message.feedback;
-            if (message.numSimilar != null && message.hasOwnProperty("numSimilar"))
-                object.numSimilar = message.numSimilar;
+            if (message.score != null && message.hasOwnProperty("score"))
+                object.score = message.score;
             if (message.similar != null && message.hasOwnProperty("similar"))
                 object.similar = message.similar;
             if (message.dissimilar != null && message.hasOwnProperty("dissimilar"))
@@ -1096,6 +1096,7 @@ export const feedlightpb = $root.feedlightpb = (() => {
          * Properties of a SubmitFeedbackResponse.
          * @memberof feedlightpb
          * @interface ISubmitFeedbackResponse
+         * @property {Long|null} [id] SubmitFeedbackResponse id
          */
 
         /**
@@ -1112,6 +1113,14 @@ export const feedlightpb = $root.feedlightpb = (() => {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+
+        /**
+         * SubmitFeedbackResponse id.
+         * @member {Long} id
+         * @memberof feedlightpb.SubmitFeedbackResponse
+         * @instance
+         */
+        SubmitFeedbackResponse.prototype.id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new SubmitFeedbackResponse instance using the specified properties.
@@ -1137,6 +1146,8 @@ export const feedlightpb = $root.feedlightpb = (() => {
         SubmitFeedbackResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.id != null && message.hasOwnProperty("id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.id);
             return writer;
         };
 
@@ -1171,6 +1182,9 @@ export const feedlightpb = $root.feedlightpb = (() => {
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
+                case 1:
+                    message.id = reader.int64();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -1206,6 +1220,9 @@ export const feedlightpb = $root.feedlightpb = (() => {
         SubmitFeedbackResponse.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id) && !(message.id && $util.isInteger(message.id.low) && $util.isInteger(message.id.high)))
+                    return "id: integer|Long expected";
             return null;
         };
 
@@ -1220,7 +1237,17 @@ export const feedlightpb = $root.feedlightpb = (() => {
         SubmitFeedbackResponse.fromObject = function fromObject(object) {
             if (object instanceof $root.feedlightpb.SubmitFeedbackResponse)
                 return object;
-            return new $root.feedlightpb.SubmitFeedbackResponse();
+            let message = new $root.feedlightpb.SubmitFeedbackResponse();
+            if (object.id != null)
+                if ($util.Long)
+                    (message.id = $util.Long.fromValue(object.id)).unsigned = false;
+                else if (typeof object.id === "string")
+                    message.id = parseInt(object.id, 10);
+                else if (typeof object.id === "number")
+                    message.id = object.id;
+                else if (typeof object.id === "object")
+                    message.id = new $util.LongBits(object.id.low >>> 0, object.id.high >>> 0).toNumber();
+            return message;
         };
 
         /**
@@ -1232,8 +1259,22 @@ export const feedlightpb = $root.feedlightpb = (() => {
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        SubmitFeedbackResponse.toObject = function toObject() {
-            return {};
+        SubmitFeedbackResponse.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    let long = new $util.Long(0, 0, false);
+                    object.id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.id = options.longs === String ? "0" : 0;
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (typeof message.id === "number")
+                    object.id = options.longs === String ? String(message.id) : message.id;
+                else
+                    object.id = options.longs === String ? $util.Long.prototype.toString.call(message.id) : options.longs === Number ? new $util.LongBits(message.id.low >>> 0, message.id.high >>> 0).toNumber() : message.id;
+            return object;
         };
 
         /**
@@ -8299,8 +8340,8 @@ export const google = $root.google = (() => {
              * @interface IUninterpretedOption
              * @property {Array.<google.protobuf.UninterpretedOption.INamePart>|null} [name] UninterpretedOption name
              * @property {string|null} [identifierValue] UninterpretedOption identifierValue
-             * @property {number|Long|null} [positiveIntValue] UninterpretedOption positiveIntValue
-             * @property {number|Long|null} [negativeIntValue] UninterpretedOption negativeIntValue
+             * @property {Long|null} [positiveIntValue] UninterpretedOption positiveIntValue
+             * @property {Long|null} [negativeIntValue] UninterpretedOption negativeIntValue
              * @property {number|null} [doubleValue] UninterpretedOption doubleValue
              * @property {Uint8Array|null} [stringValue] UninterpretedOption stringValue
              * @property {string|null} [aggregateValue] UninterpretedOption aggregateValue
@@ -8340,7 +8381,7 @@ export const google = $root.google = (() => {
 
             /**
              * UninterpretedOption positiveIntValue.
-             * @member {number|Long} positiveIntValue
+             * @member {Long} positiveIntValue
              * @memberof google.protobuf.UninterpretedOption
              * @instance
              */
@@ -8348,7 +8389,7 @@ export const google = $root.google = (() => {
 
             /**
              * UninterpretedOption negativeIntValue.
-             * @member {number|Long} negativeIntValue
+             * @member {Long} negativeIntValue
              * @memberof google.protobuf.UninterpretedOption
              * @instance
              */

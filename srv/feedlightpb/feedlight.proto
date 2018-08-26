@@ -1,12 +1,13 @@
 syntax = "proto3";
 
 import "google/api/annotations.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 package feedlightpb;
 
 message Feedback {
   string feedback = 1;
-  int32 num_similar = 2;
+  int32 score = 2;
   bool similar = 3;
   bool dissimilar = 4;
   string response = 5;
@@ -18,22 +19,24 @@ message Feedback {
 message SimilarFeedbackRequest {
   string domain = 2;
 
-  Feedback feedback = 1;
+  Feedback feedback = 1 [(gogoproto.nullable) = false];
 }
 
 message SimilarFeedbackResponse {
-  repeated Feedback feedback = 1;
+  repeated Feedback feedback = 1 [(gogoproto.nullable) = false];
 }
 
 message SubmitFeedbackRequest {
   string domain = 4;
 
   string email = 1;
-  Feedback feedback = 2;
-  repeated Feedback similar = 3;
+  Feedback feedback = 2 [(gogoproto.nullable) = false];
+  repeated Feedback similar = 3 [(gogoproto.nullable) = false];
 }
 
-message SubmitFeedbackResponse {}
+message SubmitFeedbackResponse {
+  int64 id = 1;
+}
 
 service FeedbackService {
   rpc SimilarFeedback(SimilarFeedbackRequest) returns (SimilarFeedbackResponse) {
