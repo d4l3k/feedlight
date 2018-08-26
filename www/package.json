@@ -23,7 +23,7 @@
     "test": "yarn lint && yarn build",
     "start": "webpack-dev-server --open --config ./webpack.dev.conf.js",
     "build": "yarn protobuf && webpack --config ./webpack.prod.conf.js",
-    "protobuf": "pbjs --force-long -t static-module -w es6 -o src/feedlightpb.js ../srv/feedlightpb/feedlight.proto && pbts -o src/feedlightpb.d.ts src/feedlightpb.js"
+    "protobuf": "pbjs --force-long -t static-module -w es6 -o src/feedlightpb.js -p /usr/include/ ../srv/feedlightpb/feedlight.proto google/protobuf/any.proto google/api/annotations.proto && pbts -o src/feedlightpb.d.ts src/feedlightpb.js"
   },
   "standard": {
     "parser": "typescript-eslint-parser",

@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/api/annotations.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/any.proto";
 
 package feedlightpb;
 
@@ -41,14 +42,28 @@ message SubmitFeedbackResponse {
 service FeedbackService {
   rpc SimilarFeedback(SimilarFeedbackRequest) returns (SimilarFeedbackResponse) {
     option (google.api.http) = {
-      post: "/api/v1/feedback/similar"
+      post: "/api/v1/FeedbackService/SimilarFeedback"
       body: "*"
     };
   }
   rpc SubmitFeedback(SubmitFeedbackRequest) returns (SubmitFeedbackResponse) {
     option (google.api.http) = {
-      post: "/api/v1/feedback/submit"
+      post: "/api/v1/FeedbackService/SubmitFeedback"
       body: "*"
     };
   }
+}
+
+message Status {
+  // The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+  int32 code = 1;
+
+  // A developer-facing error message, which should be in English. Any
+  // user-facing error message should be localized and sent in the
+  // [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+  string message = 2;
+
+  // A list of messages that carry the error details.  There will be a
+  // common set of message types for APIs to use.
+  repeated google.protobuf.Any details = 3;
 }

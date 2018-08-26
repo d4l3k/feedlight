@@ -46,6 +46,7 @@ func (s *server) Listen(addr string) error {
 	feedlightpb.RegisterFeedbackServiceServer(grpcS, s)
 
 	apiMux := runtime.NewServeMux(
+		runtime.WithMarshalerOption("application/octet-stream", &runtime.ProtoMarshaller{}),
 		runtime.WithMarshalerOption("*", &runtime.JSONPb{}),
 	)
 	opts := []grpc.DialOption{grpc.WithInsecure()}

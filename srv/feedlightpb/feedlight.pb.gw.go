@@ -154,9 +154,9 @@ func RegisterFeedbackServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 }
 
 var (
-	pattern_FeedbackService_SimilarFeedback_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "feedback", "similar"}, ""))
+	pattern_FeedbackService_SimilarFeedback_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "FeedbackService", "SimilarFeedback"}, ""))
 
-	pattern_FeedbackService_SubmitFeedback_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "feedback", "submit"}, ""))
+	pattern_FeedbackService_SubmitFeedback_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "FeedbackService", "SubmitFeedback"}, ""))
 )
 
 var (

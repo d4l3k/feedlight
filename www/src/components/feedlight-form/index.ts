@@ -8,44 +8,12 @@ import '@polymer/paper-progress/paper-progress.js'
 import {PaperDialog} from '@polymer/paper-dialog/paper-dialog.js'
 import {debounce} from 'debounce'
 
-import * as Long from 'long'
-import * as protobuf from 'protobufjs/minimal'
-
-protobuf.util.Long = Long
-protobuf.configure()
-
-import {html} from '../../html'
+import {FeedbackService} from '../../rpc'
 import {feedlightpb} from '../../feedlightpb'
+import {html} from '../../html'
 import '../toggle-button'
 
 import * as view from './template.html'
-
-function postData<T>(url: string, data: any, ret: {fromObject (...args: any[]): T}): Promise<T> {
-  // Default options are marked with *
-    return fetch(url, {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, cors, *same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, same-origin, *omit
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            // "Content-Type": "application/x-www-form-urlencoded",
-        },
-        redirect: "follow", // manual, *follow, error
-        referrer: "no-referrer", // no-referrer, *client
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
-    })
-    .then(response => {
-      return response.json().then((json: any) => {
-        if (response.status != 200) {
-          throw new Error(
-            `Error: ${response.status} - ${response.statusText}: ${json.message}`,
-          )
-        }
-        return ret.fromObject(json)
-      })
-    }) // parses response to JSON
-}
 
 export class FeedlightForm extends PolymerElement {
   similarFeedback?: feedlightpb.IFeedback[]
@@ -54,7 +22,6 @@ export class FeedlightForm extends PolymerElement {
   email?: string
   domain?: string
   loading = 0
-  backendAddr = config.BACKEND_ADDR
   err: any
 
   constructor () {
@@ -93,13 +60,11 @@ export class FeedlightForm extends PolymerElement {
 
   findSimilar (feedback: string) {
     this.loading += 1
-    postData(
-      this.backendAddr + '/api/v1/feedback/similar',
+    FeedbackService.similarFeedback(
       new feedlightpb.SimilarFeedbackRequest({
         domain: this.domain,
         feedback: this.curFeedback(),
       }),
-      feedlightpb.SimilarFeedbackResponse,
     ).then((resp: feedlightpb.SimilarFeedbackResponse) => {
       this.similarFeedback = resp.feedback
       this.loading -= 1
@@ -111,15 +76,13 @@ export class FeedlightForm extends PolymerElement {
 
   submit (feedback: string) {
     this.loading += 1
-    postData(
-      this.backendAddr + '/api/v1/feedback/submit',
+    FeedbackService.submitFeedback(
       new feedlightpb.SubmitFeedbackRequest({
         email: this.email,
         domain: this.domain,
         feedback: this.curFeedback(),
         similar: this.similarFeedback,
       }),
-      feedlightpb.SubmitFeedbackResponse,
     ).then((resp: feedlightpb.SubmitFeedbackResponse) => {
       ;(this.$.dialog as PaperDialog).close()
       this.loading -= 1
