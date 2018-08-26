@@ -5,7 +5,11 @@ import '@polymer/paper-checkbox/paper-checkbox.js'
 import '@polymer/iron-icons/iron-icons.js'
 import '@polymer/paper-progress/paper-progress.js'
 
-import * as paperDialog from '@polymer/paper-dialog/paper-dialog.js'
+/* eslint-disable import/no-duplicates */
+import '@polymer/paper-dialog/paper-dialog.js'
+import {PaperDialog} from '@polymer/paper-dialog/paper-dialog.js'
+/* eslint-enable import/no-duplicates */
+
 import {debounce} from 'debounce'
 
 import {FeedbackService} from '../../rpc'
@@ -100,7 +104,7 @@ export class FeedlightForm extends PolymerElement {
   }
 
   resize () {
-    ;(this.$.dialog as paperDialog.PaperDialog).notifyResize()
+    ;(this.$.dialog as PaperDialog).notifyResize()
   }
 
   init () {
@@ -110,7 +114,7 @@ export class FeedlightForm extends PolymerElement {
 
   open () {
     this.init()
-    ;(this.$.dialog as paperDialog.PaperDialog).open()
+    ;(this.$.dialog as PaperDialog).open()
   }
 
   similarityScore (f: feedlightpb.IFeedback): number {
