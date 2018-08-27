@@ -22,14 +22,14 @@ module.exports = {
         use: 'html-loader'
       },
       {
-        test: /\.ts?$/,
+        test: /\.(ts|tsx)?$/,
         use: 'ts-loader',
         exclude: /node_modules/
       }
     ]
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js']
   },
   plugins: [
     new CleanWebpackPlugin(['dist'], { root: path.resolve(__dirname) }),
