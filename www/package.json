@@ -22,6 +22,7 @@
     "debounce": "^1.2.0",
     "highlight.js": "^9.12.0",
     "long": "^4.0.0",
+    "polymer-react": "^1.0.1",
     "protobufjs": "^6.8.8",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",

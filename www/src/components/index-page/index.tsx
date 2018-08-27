@@ -2,7 +2,7 @@ import {PolymerElement} from '@polymer/polymer/polymer-element.js'
 import React from 'react'
 
 import '../feedlight-button'
-import '../polymer-react'
+import 'polymer-react'
 import {html} from '../../html'
 
 import * as view from './template.html'
