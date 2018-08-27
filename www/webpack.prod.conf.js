@@ -38,11 +38,7 @@ module.exports = {
       'environment.prod.ts'
     ),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-      chunks: ['button']
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'app.html',
+      filename: 'index.html',
       template: './src/app.html',
       chunks: ['app']
     }),

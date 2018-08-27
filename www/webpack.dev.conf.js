@@ -7,9 +7,9 @@ module.exports = {
   mode: 'development',
   entry: {
     ...prod.entry,
-    button: [
+    app: [
       'webpack-dev-server/client?http://localhost:8080',
-      './src/button'
+      './src/app'
     ]
   },
   devtool: 'inline-source-map',

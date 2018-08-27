@@ -1,0 +1,57 @@
+<style>
+:host {
+    --primary-color: #0288d1;
+    --paper-progress-active-color: #0288d1;
+}
+app-toolbar > div {
+    max-width: 900px;
+    margin: 0 auto;
+}
+paper-icon-button {
+    --paper-icon-button-ink-color: white;
+}
+paper-icon-button + [main-title] {
+    margin-left: 24px;
+}
+paper-progress {
+    display: block;
+    width: 100%;
+}
+app-header {
+    @apply --layout-fixed-top;
+    color: #fff;
+    background-color: #263238;
+}
+paper-progress {
+    --paper-progress-indeterminate-cycle-duration: 5s;
+}
+#container {
+    padding-top: 64px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+</style>
+
+<app-header reveals>
+  <app-toolbar>
+    <div main-title>FeedLight</div>
+    <paper-progress indeterminate bottom-item disabled$="[[!loading]]"></paper-progress>
+  </app-toolbar>
+</app-header>
+
+<app-location route="{{route}}" use-hash-as-path></app-location>
+<app-route
+    route="{{route}}"
+    pattern="/:page"
+    data="{{data}}"
+    tail="{{subroute}}">
+</app-route>
+
+<div id="container">
+    <template is="dom-if" if="[[eq(element, 'index-page')]]" restamp>
+        <index-page route="{{subroute}}"></index-page>
+    </template>
+    <template is="dom-if" if="[[eq(element, 'not-found-page')]]" restamp>
+        <not-found-page route="{{subroute}}"></index-page>
+    </template>
+</div>

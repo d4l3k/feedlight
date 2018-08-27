@@ -2,6 +2,30 @@
 # yarn lockfile v1
 
 
+"@kuscamara/code-sample@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@kuscamara/code-sample/-/code-sample-3.0.0.tgz#197341c71462dd8a735cbbd4401314539656140b"
+  dependencies:
+    "@polymer/lit-element" "^0.5.1"
+    "@polymer/polymer" "^3.0.0"
+
+"@polymer/app-layout@^3.0.0-pre.23":
+  version "3.0.0-pre.23"
+  resolved "https://registry.yarnpkg.com/@polymer/app-layout/-/app-layout-3.0.0-pre.23.tgz#ef4baca0d88366bc4af2995f46c452ae35f4141a"
+  dependencies:
+    "@polymer/iron-flex-layout" "^3.0.0-pre.22"
+    "@polymer/iron-media-query" "^3.0.0-pre.22"
+    "@polymer/iron-resizable-behavior" "^3.0.0-pre.22"
+    "@polymer/iron-scroll-target-behavior" "^3.0.0-pre.22"
+    "@polymer/polymer" "^3.0.0"
+
+"@polymer/app-route@^3.0.0-pre.23":
+  version "3.0.0-pre.23"
+  resolved "https://registry.yarnpkg.com/@polymer/app-route/-/app-route-3.0.0-pre.23.tgz#149cba19ab17c6ec69539152c213137faa322941"
+  dependencies:
+    "@polymer/iron-location" "^3.0.0-pre.22"
+    "@polymer/polymer" "^3.0.0"
+
 "@polymer/font-roboto@^3.0.0-pre.21":
   version "3.0.0-pre.21"
   resolved "https://registry.yarnpkg.com/@polymer/font-roboto/-/font-roboto-3.0.0-pre.21.tgz#65674464138a51f57cfdfd043e394d8fe75990b3"
@@ -54,6 +78,12 @@
   dependencies:
     "@polymer/polymer" "^3.0.0"
 
+"@polymer/iron-flex-layout@^3.0.0-pre.22":
+  version "3.0.0-pre.23"
+  resolved "https://registry.yarnpkg.com/@polymer/iron-flex-layout/-/iron-flex-layout-3.0.0-pre.23.tgz#ec88756ab74820e6843445c635a456f82343a5ec"
+  dependencies:
+    "@polymer/polymer" "^3.0.0"
+
 "@polymer/iron-form-element-behavior@^3.0.0-pre.21":
   version "3.0.0-pre.21"
   resolved "https://registry.yarnpkg.com/@polymer/iron-form-element-behavior/-/iron-form-element-behavior-3.0.0-pre.21.tgz#47b2aa9e4c335f77264a370534e23fe6ec83457b"
@@ -91,6 +121,18 @@
     "@polymer/iron-validatable-behavior" "^3.0.0-pre.21"
     "@polymer/polymer" "^3.0.0"
 
+"@polymer/iron-location@^3.0.0-pre.22":
+  version "3.0.0-pre.23"
+  resolved "https://registry.yarnpkg.com/@polymer/iron-location/-/iron-location-3.0.0-pre.23.tgz#a5b1e6342c304fe6556c826aa02fc71e9d3cec9c"
+  dependencies:
+    "@polymer/polymer" "^3.0.0"
+
+"@polymer/iron-media-query@^3.0.0-pre.22":
+  version "3.0.0-pre.23"
+  resolved "https://registry.yarnpkg.com/@polymer/iron-media-query/-/iron-media-query-3.0.0-pre.23.tgz#c4d55df58796b327dc22bdf8f5f714e4d09f6ea3"
+  dependencies:
+    "@polymer/polymer" "^3.0.0"
+
 "@polymer/iron-meta@^3.0.0-pre.21":
   version "3.0.0-pre.21"
   resolved "https://registry.yarnpkg.com/@polymer/iron-meta/-/iron-meta-3.0.0-pre.21.tgz#e74ab386a1b490031e329f7ec032316bec24fa2a"
@@ -106,6 +148,14 @@
     "@polymer/iron-resizable-behavior" "^3.0.0-pre.21"
     "@polymer/polymer" "^3.0.0"
 
+"@polymer/iron-pages@^3.0.0-pre.23":
+  version "3.0.0-pre.23"
+  resolved "https://registry.yarnpkg.com/@polymer/iron-pages/-/iron-pages-3.0.0-pre.23.tgz#b01fa26548987e9538119df4956f687bdf8c7816"
+  dependencies:
+    "@polymer/iron-resizable-behavior" "^3.0.0-pre.22"
+    "@polymer/iron-selector" "^3.0.0-pre.22"
+    "@polymer/polymer" "^3.0.0"
+
 "@polymer/iron-range-behavior@^3.0.0-pre.21":
   version "3.0.0-pre.21"
   resolved "https://registry.yarnpkg.com/@polymer/iron-range-behavior/-/iron-range-behavior-3.0.0-pre.21.tgz#fe4af6cfbc7b7bfa3958ff5135c3ce2eefa76935"
@@ -118,9 +168,27 @@
   dependencies:
     "@polymer/polymer" "^3.0.0"
 
+"@polymer/iron-resizable-behavior@^3.0.0-pre.22":
+  version "3.0.0-pre.23"
+  resolved "https://registry.yarnpkg.com/@polymer/iron-resizable-behavior/-/iron-resizable-behavior-3.0.0-pre.23.tgz#368f2740981882028f4c75212f796c9666e2c2f5"
+  dependencies:
+    "@polymer/polymer" "^3.0.0"
+
+"@polymer/iron-scroll-target-behavior@^3.0.0-pre.22":
+  version "3.0.0-pre.23"
+  resolved "https://registry.yarnpkg.com/@polymer/iron-scroll-target-behavior/-/iron-scroll-target-behavior-3.0.0-pre.23.tgz#d94ef8f0b3adb99117dd07121132e78f9538a218"
+  dependencies:
+    "@polymer/polymer" "^3.0.0"
+
 "@polymer/iron-selector@^3.0.0-pre.21":
   version "3.0.0-pre.21"
   resolved "https://registry.yarnpkg.com/@polymer/iron-selector/-/iron-selector-3.0.0-pre.21.tgz#02532f772f5811a72bf3cb38776e3cc319288990"
+  dependencies:
+    "@polymer/polymer" "^3.0.0"
+
+"@polymer/iron-selector@^3.0.0-pre.22":
+  version "3.0.0-pre.23"
+  resolved "https://registry.yarnpkg.com/@polymer/iron-selector/-/iron-selector-3.0.0-pre.23.tgz#c170c59e09826fca2cb7bce348996c7dc7f1e1a6"
   dependencies:
     "@polymer/polymer" "^3.0.0"
 
@@ -130,6 +198,13 @@
   dependencies:
     "@polymer/iron-meta" "^3.0.0-pre.21"
     "@polymer/polymer" "^3.0.0"
+
+"@polymer/lit-element@^0.5.1":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@polymer/lit-element/-/lit-element-0.5.2.tgz#8d4e2d1ada27cf0f1a38b7b0eb9fadae92eb63df"
+  dependencies:
+    "@polymer/polymer" "^3.0.2"
+    lit-html "^0.10.0"
 
 "@polymer/neon-animation@^3.0.0-pre.21":
   version "3.0.0-pre.21"
@@ -237,7 +312,7 @@
     "@polymer/iron-flex-layout" "^3.0.0-pre.21"
     "@polymer/polymer" "^3.0.0"
 
-"@polymer/polymer@^3.0.0", "@polymer/polymer@^3.0.5":
+"@polymer/polymer@^3.0.0", "@polymer/polymer@^3.0.2", "@polymer/polymer@^3.0.5":
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/@polymer/polymer/-/polymer-3.0.5.tgz#eaa42e70df7de818b5e1839452c82a5f83e39929"
   dependencies:
@@ -2203,6 +2278,10 @@ he@1.1.x:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
+highlight.js@^9.12.0:
+  version "9.12.0"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -2720,6 +2799,10 @@ levn@^0.3.0, levn@~0.3.0:
   dependencies:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
+
+lit-html@^0.10.0:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-0.10.2.tgz#53c846afcf91bb1e6623179ef22e327ab8ac0e0e"
 
 load-json-file@^1.0.0:
   version "1.1.0"
