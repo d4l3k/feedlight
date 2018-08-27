@@ -6,22 +6,29 @@
       align-items: center;
       flex-direction: column;
     }
+    :host > * {
+      max-width: 100%;
+    }
 </style>
 <center>
   <h1>FeedLight</h1>
   <p>Have some feedback?</p>
 </center>
 <feedlight-button email="test@test.com" domain="feedlight"></feedlight-button>
-<code-sample type="html" copy-clipboard-button>
-  <template preserve-content>
-		<!-- Load webcomponents polyfills if necessary -->
-		<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/custom-elements-es5-adapter.js"></script>
-		<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-loader.js"></script>
 
-		<!-- load the button and add it -->
-		<script src="https://feedlight.fn.lc/button.js" async></script>
-		<feedlight-button email="your@user.com" domain="your-domain"></feedlight-button>
-  </template>
-</code-sample>
+<div>
+  <h2>Get Started</h2>
+
+  <code-sample type="html" copy-clipboard-button>
+    <template preserve-content>
+      <!-- Load webcomponents polyfills if necessary -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/custom-elements-es5-adapter.js"></script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-loader.js"></script>
+
+      <!-- load the button and add it -->
+      <script src="https://feedlight.fn.lc/button.js" async></script>
+      <feedlight-button email="your@user.com" domain="your-domain"></feedlight-button>
+    </template>
+  </code-sample>
+</div>
