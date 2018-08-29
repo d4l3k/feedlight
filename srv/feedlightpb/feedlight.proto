@@ -39,6 +39,17 @@ message SubmitFeedbackResponse {
   int64 id = 1;
 }
 
+message FeedbackRequest {
+  int64 id = 1;
+}
+
+message FeedbackResponse {
+  Feedback feedback = 1 [(gogoproto.nullable) = false];
+  string domain = 2;
+  repeated Feedback similar = 3 [(gogoproto.nullable) = false];
+}
+
+
 service FeedbackService {
   rpc SimilarFeedback(SimilarFeedbackRequest) returns (SimilarFeedbackResponse) {
     option (google.api.http) = {
@@ -46,14 +57,24 @@ service FeedbackService {
       body: "*"
     };
   }
+
   rpc SubmitFeedback(SubmitFeedbackRequest) returns (SubmitFeedbackResponse) {
     option (google.api.http) = {
       post: "/api/v1/FeedbackService/SubmitFeedback"
       body: "*"
     };
   }
+
+  rpc Feedback(FeedbackRequest) returns (FeedbackResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/FeedbackService/Feedback"
+      body: "*"
+    };
+  }
 }
 
+
+// Status is used for the GRPC errors sent to the UI.
 message Status {
   // The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
   int32 code = 2;

@@ -32,8 +32,10 @@ func request_FeedbackService_SimilarFeedback_0(ctx context.Context, marshaler ru
 	var protoReq SimilarFeedbackRequest
 	var metadata runtime.ServerMetadata
 
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	if req.ContentLength > 0 {
+		if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil {
+			return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+		}
 	}
 
 	msg, err := client.SimilarFeedback(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -45,11 +47,28 @@ func request_FeedbackService_SubmitFeedback_0(ctx context.Context, marshaler run
 	var protoReq SubmitFeedbackRequest
 	var metadata runtime.ServerMetadata
 
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	if req.ContentLength > 0 {
+		if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil {
+			return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+		}
 	}
 
 	msg, err := client.SubmitFeedback(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func request_FeedbackService_Feedback_0(ctx context.Context, marshaler runtime.Marshaler, client FeedbackServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq FeedbackRequest
+	var metadata runtime.ServerMetadata
+
+	if req.ContentLength > 0 {
+		if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil {
+			return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+		}
+	}
+
+	msg, err := client.Feedback(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
@@ -64,14 +83,14 @@ func RegisterFeedbackServiceHandlerFromEndpoint(ctx context.Context, mux *runtim
 	defer func() {
 		if err != nil {
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Printf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 			return
 		}
 		go func() {
 			<-ctx.Done()
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Printf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 		}()
 	}()
@@ -85,8 +104,8 @@ func RegisterFeedbackServiceHandler(ctx context.Context, mux *runtime.ServeMux, 
 	return RegisterFeedbackServiceHandlerClient(ctx, mux, NewFeedbackServiceClient(conn))
 }
 
-// RegisterFeedbackServiceHandlerClient registers the http handlers for service FeedbackService
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "FeedbackServiceClient".
+// RegisterFeedbackServiceHandler registers the http handlers for service FeedbackService to "mux".
+// The handlers forward requests to the grpc endpoint over the given implementation of "FeedbackServiceClient".
 // Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "FeedbackServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
 // "FeedbackServiceClient" to call the correct interceptors.
@@ -150,6 +169,35 @@ func RegisterFeedbackServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 
 	})
 
+	mux.Handle("POST", pattern_FeedbackService_Feedback_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		if cn, ok := w.(http.CloseNotifier); ok {
+			go func(done <-chan struct{}, closed <-chan bool) {
+				select {
+				case <-done:
+				case <-closed:
+					cancel()
+				}
+			}(ctx.Done(), cn.CloseNotify())
+		}
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_FeedbackService_Feedback_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_FeedbackService_Feedback_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -157,10 +205,14 @@ var (
 	pattern_FeedbackService_SimilarFeedback_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "FeedbackService", "SimilarFeedback"}, ""))
 
 	pattern_FeedbackService_SubmitFeedback_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "FeedbackService", "SubmitFeedback"}, ""))
+
+	pattern_FeedbackService_Feedback_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "FeedbackService", "Feedback"}, ""))
 )
 
 var (
 	forward_FeedbackService_SimilarFeedback_0 = runtime.ForwardResponseMessage
 
 	forward_FeedbackService_SubmitFeedback_0 = runtime.ForwardResponseMessage
+
+	forward_FeedbackService_Feedback_0 = runtime.ForwardResponseMessage
 )

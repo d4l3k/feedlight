@@ -8,6 +8,7 @@ import (
 
 	"github.com/d4l3k/feedlight/srv/embeddings"
 	"github.com/d4l3k/feedlight/srv/feedlightpb"
+	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 )
@@ -130,5 +131,33 @@ func (s *server) SubmitFeedback(ctx context.Context, req *feedlightpb.SubmitFeed
 
 	return &feedlightpb.SubmitFeedbackResponse{
 		Id: feedback.Feedback.Id,
+	}, nil
+}
+
+func getFeedback(id int64) (Feedback, error) {
+	if id == 0 {
+		return Feedback{}, errors.Errorf("expected non-zero ID")
+	}
+	var f Feedback
+	if err := db.Where(&Feedback{
+		Feedback: feedlightpb.Feedback{
+			Id: id,
+		},
+	}).Find(&f).Error; err != nil {
+		return Feedback{}, err
+	}
+	return f, nil
+}
+
+func (s *server) Feedback(ctx context.Context, req *feedlightpb.FeedbackRequest) (*feedlightpb.FeedbackResponse, error) {
+
+	f, err := getFeedback(req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	return &feedlightpb.FeedbackResponse{
+		Domain:   f.Domain,
+		Feedback: f.Feedback,
 	}, nil
 }

@@ -5,11 +5,14 @@ GO_FILES = $(shell find . -type f -name '*.go')
 
 .PHONY: run
 run: feedlight
-	./feedlight
+	./feedlight ${ARGS}
 
 
 feedlight: $(GO_FILES) protobuf
 	go build -v -o feedlight .
+
+test: feedlight
+	go test -v ./...
 
 
 .PHONY: protobuf

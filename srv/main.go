@@ -10,6 +10,7 @@ import (
 var (
 	bind    = flag.String("bind", ":8081", "address to bind server to")
 	embFile = flag.String("embeddings", "/home/rice/Developer/topics/wiki-news-300d-1M.vec", "file to load the embeddings from")
+	dbAddr  = flag.String("dbaddr", `postgres://root@localhost:26257/feedlight?sslcert=%2Fetc%2Fcockroachdb%2Fcerts%2Fclient.root.crt&sslkey=%2Fetc%2Fcockroachdb%2Fcerts%2Fclient.root.key&sslmode=verify-full&sslrootcert=%2Fetc%2Fcockroachdb%2Fcerts%2Fca.crt`, "address to connect to the DB at")
 )
 var log *zap.SugaredLogger
 

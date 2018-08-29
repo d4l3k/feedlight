@@ -199,7 +199,7 @@
     "@polymer/iron-meta" "^3.0.0-pre.21"
     "@polymer/polymer" "^3.0.0"
 
-"@polymer/lit-element@^0.5.1":
+"@polymer/lit-element@^0.5.1", "@polymer/lit-element@^0.5.2":
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/@polymer/lit-element/-/lit-element-0.5.2.tgz#8d4e2d1ada27cf0f1a38b7b0eb9fadae92eb63df"
   dependencies:

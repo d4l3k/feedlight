@@ -45,7 +45,7 @@ type FeedbackLink struct {
 
 func setupDB() error {
 	var err error
-	db, err = gorm.Open("postgres", "postgres://root@localhost:26257/feedlight?sslmode=disable")
+	db, err = gorm.Open("postgres", *dbAddr)
 	if err != nil {
 		return err
 	}
