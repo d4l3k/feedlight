@@ -9,8 +9,6 @@ import '@polymer/paper-progress/paper-progress.js'
 import '@polymer/paper-dialog/paper-dialog.js'
 /* eslint-enable import/no-duplicates */
 
-const debounce = require('lodash.debounce')
-
 import {FeedbackService} from '../../rpc'
 import {feedlightpb} from '../../feedlightpb'
 import {html} from '../../html'
@@ -18,6 +16,8 @@ import '../toggle-button'
 import '../feedlight-blockquote'
 
 import * as view from './template.html'
+
+const debounce = require('lodash.debounce')
 
 export class FeedlightForm extends PolymerElement {
   similarFeedback?: feedlightpb.IFeedback[]

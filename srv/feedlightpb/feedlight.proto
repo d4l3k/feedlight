@@ -13,8 +13,10 @@ message Feedback {
   bool dissimilar = 4;
   string response = 5;
   bool share_publicly = 6;
-  int64 created = 7;
   int64 id = 8;
+
+  int64 created_at = 7;
+  int64 updated_at = 9;
 }
 
 message SimilarFeedbackRequest {

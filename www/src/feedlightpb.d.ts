@@ -23,11 +23,14 @@ export namespace feedlightpb {
         /** Feedback sharePublicly */
         sharePublicly?: (boolean|null);
 
-        /** Feedback created */
-        created?: (number|Long|null);
-
         /** Feedback id */
         id?: (number|Long|null);
+
+        /** Feedback createdAt */
+        createdAt?: (number|Long|null);
+
+        /** Feedback updatedAt */
+        updatedAt?: (number|Long|null);
     }
 
     /** Represents a Feedback. */
@@ -57,11 +60,14 @@ export namespace feedlightpb {
         /** Feedback sharePublicly. */
         public sharePublicly: boolean;
 
-        /** Feedback created. */
-        public created: (number|Long);
-
         /** Feedback id. */
         public id: (number|Long);
+
+        /** Feedback createdAt. */
+        public createdAt: (number|Long);
+
+        /** Feedback updatedAt. */
+        public updatedAt: (number|Long);
 
         /**
          * Creates a new Feedback instance using the specified properties.

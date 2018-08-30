@@ -82,7 +82,9 @@ func (s *server) SubmitFeedback(ctx context.Context, req *feedlightpb.SubmitFeed
 		return nil, err
 	}
 
-	req.Feedback.Created = time.Now().Unix()
+	now := time.Now().Unix()
+	req.Feedback.CreatedAt = now
+	req.Feedback.UpdatedAt = now
 
 	tx := db.Begin()
 	feedback := Feedback{

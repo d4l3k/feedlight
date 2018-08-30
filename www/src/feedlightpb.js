@@ -28,8 +28,9 @@ export const feedlightpb = $root.feedlightpb = (() => {
          * @property {boolean|null} [dissimilar] Feedback dissimilar
          * @property {string|null} [response] Feedback response
          * @property {boolean|null} [sharePublicly] Feedback sharePublicly
-         * @property {number|Long|null} [created] Feedback created
          * @property {number|Long|null} [id] Feedback id
+         * @property {number|Long|null} [createdAt] Feedback createdAt
+         * @property {number|Long|null} [updatedAt] Feedback updatedAt
          */
 
         /**
@@ -96,20 +97,28 @@ export const feedlightpb = $root.feedlightpb = (() => {
         Feedback.prototype.sharePublicly = false;
 
         /**
-         * Feedback created.
-         * @member {number|Long} created
-         * @memberof feedlightpb.Feedback
-         * @instance
-         */
-        Feedback.prototype.created = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-        /**
          * Feedback id.
          * @member {number|Long} id
          * @memberof feedlightpb.Feedback
          * @instance
          */
         Feedback.prototype.id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Feedback createdAt.
+         * @member {number|Long} createdAt
+         * @memberof feedlightpb.Feedback
+         * @instance
+         */
+        Feedback.prototype.createdAt = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Feedback updatedAt.
+         * @member {number|Long} updatedAt
+         * @memberof feedlightpb.Feedback
+         * @instance
+         */
+        Feedback.prototype.updatedAt = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new Feedback instance using the specified properties.
@@ -147,10 +156,12 @@ export const feedlightpb = $root.feedlightpb = (() => {
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.response);
             if (message.sharePublicly != null && message.hasOwnProperty("sharePublicly"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.sharePublicly);
-            if (message.created != null && message.hasOwnProperty("created"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.created);
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.createdAt);
             if (message.id != null && message.hasOwnProperty("id"))
                 writer.uint32(/* id 8, wireType 0 =*/64).int64(message.id);
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.updatedAt);
             return writer;
         };
 
@@ -203,11 +214,14 @@ export const feedlightpb = $root.feedlightpb = (() => {
                 case 6:
                     message.sharePublicly = reader.bool();
                     break;
-                case 7:
-                    message.created = reader.int64();
-                    break;
                 case 8:
                     message.id = reader.int64();
+                    break;
+                case 7:
+                    message.createdAt = reader.int64();
+                    break;
+                case 9:
+                    message.updatedAt = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -262,12 +276,15 @@ export const feedlightpb = $root.feedlightpb = (() => {
             if (message.sharePublicly != null && message.hasOwnProperty("sharePublicly"))
                 if (typeof message.sharePublicly !== "boolean")
                     return "sharePublicly: boolean expected";
-            if (message.created != null && message.hasOwnProperty("created"))
-                if (!$util.isInteger(message.created) && !(message.created && $util.isInteger(message.created.low) && $util.isInteger(message.created.high)))
-                    return "created: integer|Long expected";
             if (message.id != null && message.hasOwnProperty("id"))
                 if (!$util.isInteger(message.id) && !(message.id && $util.isInteger(message.id.low) && $util.isInteger(message.id.high)))
                     return "id: integer|Long expected";
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                if (!$util.isInteger(message.createdAt) && !(message.createdAt && $util.isInteger(message.createdAt.low) && $util.isInteger(message.createdAt.high)))
+                    return "createdAt: integer|Long expected";
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                if (!$util.isInteger(message.updatedAt) && !(message.updatedAt && $util.isInteger(message.updatedAt.low) && $util.isInteger(message.updatedAt.high)))
+                    return "updatedAt: integer|Long expected";
             return null;
         };
 
@@ -295,15 +312,6 @@ export const feedlightpb = $root.feedlightpb = (() => {
                 message.response = String(object.response);
             if (object.sharePublicly != null)
                 message.sharePublicly = Boolean(object.sharePublicly);
-            if (object.created != null)
-                if ($util.Long)
-                    (message.created = $util.Long.fromValue(object.created)).unsigned = false;
-                else if (typeof object.created === "string")
-                    message.created = parseInt(object.created, 10);
-                else if (typeof object.created === "number")
-                    message.created = object.created;
-                else if (typeof object.created === "object")
-                    message.created = new $util.LongBits(object.created.low >>> 0, object.created.high >>> 0).toNumber();
             if (object.id != null)
                 if ($util.Long)
                     (message.id = $util.Long.fromValue(object.id)).unsigned = false;
@@ -313,6 +321,24 @@ export const feedlightpb = $root.feedlightpb = (() => {
                     message.id = object.id;
                 else if (typeof object.id === "object")
                     message.id = new $util.LongBits(object.id.low >>> 0, object.id.high >>> 0).toNumber();
+            if (object.createdAt != null)
+                if ($util.Long)
+                    (message.createdAt = $util.Long.fromValue(object.createdAt)).unsigned = false;
+                else if (typeof object.createdAt === "string")
+                    message.createdAt = parseInt(object.createdAt, 10);
+                else if (typeof object.createdAt === "number")
+                    message.createdAt = object.createdAt;
+                else if (typeof object.createdAt === "object")
+                    message.createdAt = new $util.LongBits(object.createdAt.low >>> 0, object.createdAt.high >>> 0).toNumber();
+            if (object.updatedAt != null)
+                if ($util.Long)
+                    (message.updatedAt = $util.Long.fromValue(object.updatedAt)).unsigned = false;
+                else if (typeof object.updatedAt === "string")
+                    message.updatedAt = parseInt(object.updatedAt, 10);
+                else if (typeof object.updatedAt === "number")
+                    message.updatedAt = object.updatedAt;
+                else if (typeof object.updatedAt === "object")
+                    message.updatedAt = new $util.LongBits(object.updatedAt.low >>> 0, object.updatedAt.high >>> 0).toNumber();
             return message;
         };
 
@@ -338,14 +364,19 @@ export const feedlightpb = $root.feedlightpb = (() => {
                 object.sharePublicly = false;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.created = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.createdAt = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.created = options.longs === String ? "0" : 0;
+                    object.createdAt = options.longs === String ? "0" : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
                     object.id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    let long = new $util.Long(0, 0, false);
+                    object.updatedAt = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.updatedAt = options.longs === String ? "0" : 0;
             }
             if (message.feedback != null && message.hasOwnProperty("feedback"))
                 object.feedback = message.feedback;
@@ -359,16 +390,21 @@ export const feedlightpb = $root.feedlightpb = (() => {
                 object.response = message.response;
             if (message.sharePublicly != null && message.hasOwnProperty("sharePublicly"))
                 object.sharePublicly = message.sharePublicly;
-            if (message.created != null && message.hasOwnProperty("created"))
-                if (typeof message.created === "number")
-                    object.created = options.longs === String ? String(message.created) : message.created;
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                if (typeof message.createdAt === "number")
+                    object.createdAt = options.longs === String ? String(message.createdAt) : message.createdAt;
                 else
-                    object.created = options.longs === String ? $util.Long.prototype.toString.call(message.created) : options.longs === Number ? new $util.LongBits(message.created.low >>> 0, message.created.high >>> 0).toNumber() : message.created;
+                    object.createdAt = options.longs === String ? $util.Long.prototype.toString.call(message.createdAt) : options.longs === Number ? new $util.LongBits(message.createdAt.low >>> 0, message.createdAt.high >>> 0).toNumber() : message.createdAt;
             if (message.id != null && message.hasOwnProperty("id"))
                 if (typeof message.id === "number")
                     object.id = options.longs === String ? String(message.id) : message.id;
                 else
                     object.id = options.longs === String ? $util.Long.prototype.toString.call(message.id) : options.longs === Number ? new $util.LongBits(message.id.low >>> 0, message.id.high >>> 0).toNumber() : message.id;
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                if (typeof message.updatedAt === "number")
+                    object.updatedAt = options.longs === String ? String(message.updatedAt) : message.updatedAt;
+                else
+                    object.updatedAt = options.longs === String ? $util.Long.prototype.toString.call(message.updatedAt) : options.longs === Number ? new $util.LongBits(message.updatedAt.low >>> 0, message.updatedAt.high >>> 0).toNumber() : message.updatedAt;
             return object;
         };
 

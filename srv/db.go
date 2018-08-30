@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"time"
 
 	"github.com/d4l3k/feedlight/srv/feedlightpb"
 	"github.com/jinzhu/gorm"
@@ -10,6 +11,14 @@ import (
 )
 
 var db *gorm.DB
+
+type Domain struct {
+	ID string `gorm:"primary_key"`
+
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt *time.Time
+}
 
 type Feedback struct {
 	feedlightpb.Feedback `gorm:"embedded"`
@@ -54,6 +63,7 @@ func setupDB() error {
 	models := []interface{}{
 		new(Feedback),
 		new(FeedbackLink),
+		new(Domain),
 	}
 	if err := db.AutoMigrate(models...).Error; err != nil {
 		return errors.Wrapf(err, "migrating %+v", models)

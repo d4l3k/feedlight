@@ -20,7 +20,7 @@ class FeedbackPage extends LitElement {
 
   static get properties () {
     return {
-      route: {type: Object},
+      route: {type: Object}
     }
   }
 
@@ -40,7 +40,7 @@ class FeedbackPage extends LitElement {
     const fb = this.data.feedback
 
     return html`
-      <p>Submitted ${moment(Long.fromValue(fb.created!).toNumber()).fromNow()}</p>
+      <p>Submitted ${moment(Long.fromValue(fb.createdAt!).toNumber()).fromNow()}</p>
       <feedlight-blockquote>${fb.feedback}</feedlight-blockquote>
       ${this.renderResponse(fb.response)}
       ${this.renderSimilar(this.data.similar)}
@@ -59,6 +59,15 @@ class FeedbackPage extends LitElement {
   }
 
   renderSimilar (similar: feedlightpb.IFeedback[]) {
+    if (!similar) {
+      return
+    }
+
+    return similar.map(a => {
+      return html`
+        <p>${a.feedback}</p>
+      `
+    })
   }
 
   get route (): Route | undefined {
