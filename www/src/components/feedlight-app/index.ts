@@ -44,7 +44,7 @@ export class FeedlightApp extends PolymerElement {
       this.element = 'index-page'
     } else if (page === 'feedback') {
       imp = import(/* webpackChunkName: "indexPage" */ '../feedback-page')
-      this.element = 'index-page'
+      this.element = 'feedback-page'
     } else {
       imp = import(/* webpackChunkName: "notFoundPage" */ '../not-found-page')
       this.element = 'not-found-page'
