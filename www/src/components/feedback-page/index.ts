@@ -1,4 +1,4 @@
-import {LitElement, html} from '@polymer/lit-element'
+import {LitElement, html, property} from '@polymer/lit-element'
 import * as moment from 'moment'
 import * as Long from 'long'
 
@@ -7,23 +7,27 @@ import {feedlightpb} from '../../feedlightpb'
 import '../feedlight-error'
 import '../feedlight-blockquote'
 
+interface Route {
+  path: string
+}
+
 class FeedbackPage extends LitElement {
-  private route?: object
+  private _route?: Route
+  @property()
   private data?: feedlightpb.FeedbackResponse
+  @property()
   private error: any
 
   static get properties () {
     return {
       route: {type: Object},
-      data: {type: Object},
-      error: {type: Object}
     }
   }
 
-  _render () {
+  render () {
     return html`<style></style>
       <h1>View Feedback</h1>
-      <feedlight-error error=${this.error}></feedlight-error>
+      <feedlight-error .error=${this.error}></feedlight-error>
       ${this.renderFeedback()}
     `
   }
@@ -54,24 +58,30 @@ class FeedbackPage extends LitElement {
     `
   }
 
-  renderSimilar (similar: feedlightpb.Feedback[]) {
+  renderSimilar (similar: feedlightpb.IFeedback[]) {
   }
 
-  _propertiesChanged (props, changed, oldProps) {
-    const {route} = changed
-    if (route) {
-      const id = route.path.slice(1)
-      FeedbackService.feedback(
-        new feedlightpb.FeedbackRequest({
-          id: id
-        })
-      ).then((resp: feedlightpb.FeedbackResponse) => {
-        this.data = resp
-      }).catch((err) => {
-        this.error = err
-      })
+  get route (): Route | undefined {
+    return this._route
+  }
+
+  set route (route: Route | undefined) {
+    this._route = route
+
+    if (!route) {
+      return
     }
-    super._propertiesChanged(props, changed, oldProps)
+
+    const id = route.path.slice(1)
+    FeedbackService.feedback(
+      new feedlightpb.FeedbackRequest({
+        id: Long.fromString(id)
+      })
+    ).then((resp: feedlightpb.FeedbackResponse) => {
+      this.data = resp
+    }).catch((err) => {
+      this.error = err
+    })
   }
 }
 

@@ -7,10 +7,9 @@ import '@polymer/paper-progress/paper-progress.js'
 
 /* eslint-disable import/no-duplicates */
 import '@polymer/paper-dialog/paper-dialog.js'
-import {PaperDialog} from '@polymer/paper-dialog/paper-dialog.js'
 /* eslint-enable import/no-duplicates */
 
-import {debounce} from 'debounce'
+const debounce = require('lodash.debounce')
 
 import {FeedbackService} from '../../rpc'
 import {feedlightpb} from '../../feedlightpb'
@@ -91,8 +90,8 @@ export class FeedlightForm extends PolymerElement {
       })
     ).then((resp: feedlightpb.SubmitFeedbackResponse) => {
       this.submitResponse = resp
-      ;(this.$.dialog as PaperDialog).close()
-      ;(this.$.submitted as PaperDialog).open()
+      ;(this.$.dialog as any).close()
+      ;(this.$.submitted as any).open()
       this.loading -= 1
     }).catch((err) => {
       this.loading -= 1
@@ -108,7 +107,7 @@ export class FeedlightForm extends PolymerElement {
   }
 
   resize () {
-    ;(this.$.dialog as PaperDialog).notifyResize()
+    ;(this.$.dialog as any).notifyResize()
   }
 
   init () {
@@ -118,7 +117,7 @@ export class FeedlightForm extends PolymerElement {
 
   open () {
     this.init()
-    ;(this.$.dialog as PaperDialog).open()
+    ;(this.$.dialog as any).open()
   }
 
   similarityScore (f: feedlightpb.IFeedback): number {

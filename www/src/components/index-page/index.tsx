@@ -1,5 +1,5 @@
 import {PolymerElement} from '@polymer/polymer/polymer-element.js'
-import React from 'react'
+import * as React from 'react'
 
 import '../feedlight-button'
 import 'polymer-react'
@@ -8,17 +8,19 @@ import {html} from '../../html'
 import * as view from './template.html'
 
 import SyntaxHighlighter, { registerLanguage } from 'react-syntax-highlighter/light'
-import js from 'react-syntax-highlighter/languages/hljs/javascript'
-import xml from 'react-syntax-highlighter/languages/hljs/xml'
-import style from 'react-syntax-highlighter/styles/hljs/solarized-dark'
+const js: any = require('react-syntax-highlighter/languages/hljs/javascript')
+const xml: any = require('react-syntax-highlighter/languages/hljs/xml')
+const style: any = require('react-syntax-highlighter/styles/hljs/solarized-dark')
 
 registerLanguage('javascript', js)
 registerLanguage('xml', xml)
 
-// import './code-sample'
+interface CodeProps {
+  code: string
+}
 
 export class IndexPage extends PolymerElement {
-  private code = {
+  private code: CodeProps = {
     code: `<!-- Load webcomponents polyfills if necessary -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/custom-elements-es5-adapter.js"></script>
 <script
@@ -33,7 +35,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-
     return html(view)
   }
 
-  render (props) {
+  render (props: CodeProps) {
     return <SyntaxHighlighter language='html' style={style}>{props.code || ''}</SyntaxHighlighter>
   }
 }

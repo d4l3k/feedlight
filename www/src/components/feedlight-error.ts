@@ -1,16 +1,21 @@
-import {LitElement, html} from '@polymer/lit-element'
+import {LitElement, html, property} from '@polymer/lit-element'
 
 class FeedlightError extends LitElement {
-  private error: any
+  @property()
+  public error: any
 
-  static get properties () {
-    return {
-      error: {type: Object}
-    }
+  render () {
+    return html`<style> p { color: red } </style>
+      ${this.renderError()}
+    `
   }
 
-  _render () {
-    return html`<style> p { color: red } </style>
+  renderError () {
+    if (!this.error) {
+      return
+    }
+
+    return html`
       <p>${this.error}</p>
     `
   }

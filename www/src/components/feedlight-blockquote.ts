@@ -1,7 +1,7 @@
 import {LitElement, html} from '@polymer/lit-element'
 
 class FeedlightBlockquote extends LitElement {
-  _render () {
+  render () {
     return html`
       <style>
         blockquote {
