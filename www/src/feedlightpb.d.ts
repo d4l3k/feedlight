@@ -24,10 +24,10 @@ export namespace feedlightpb {
         sharePublicly?: (boolean|null);
 
         /** Feedback created */
-        created?: (Long|null);
+        created?: (number|Long|null);
 
         /** Feedback id */
-        id?: (Long|null);
+        id?: (number|Long|null);
     }
 
     /** Represents a Feedback. */
@@ -58,10 +58,10 @@ export namespace feedlightpb {
         public sharePublicly: boolean;
 
         /** Feedback created. */
-        public created: Long;
+        public created: (number|Long);
 
         /** Feedback id. */
-        public id: Long;
+        public id: (number|Long);
 
         /**
          * Creates a new Feedback instance using the specified properties.
@@ -432,7 +432,7 @@ export namespace feedlightpb {
     interface ISubmitFeedbackResponse {
 
         /** SubmitFeedbackResponse id */
-        id?: (Long|null);
+        id?: (number|Long|null);
     }
 
     /** Represents a SubmitFeedbackResponse. */
@@ -445,7 +445,7 @@ export namespace feedlightpb {
         constructor(properties?: feedlightpb.ISubmitFeedbackResponse);
 
         /** SubmitFeedbackResponse id. */
-        public id: Long;
+        public id: (number|Long);
 
         /**
          * Creates a new SubmitFeedbackResponse instance using the specified properties.
@@ -522,7 +522,7 @@ export namespace feedlightpb {
     interface IFeedbackRequest {
 
         /** FeedbackRequest id */
-        id?: (Long|null);
+        id?: (number|Long|null);
     }
 
     /** Represents a FeedbackRequest. */
@@ -535,7 +535,7 @@ export namespace feedlightpb {
         constructor(properties?: feedlightpb.IFeedbackRequest);
 
         /** FeedbackRequest id. */
-        public id: Long;
+        public id: (number|Long);
 
         /**
          * Creates a new FeedbackRequest instance using the specified properties.
@@ -3707,10 +3707,10 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (Long|null);
+            positiveIntValue?: (number|Long|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (Long|null);
+            negativeIntValue?: (number|Long|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
@@ -3738,10 +3738,10 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: Long;
+            public positiveIntValue: (number|Long);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: Long;
+            public negativeIntValue: (number|Long);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;

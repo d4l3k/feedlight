@@ -20,11 +20,6 @@
   li {
     margin: 12px 24px;
   }
-  blockquote {
-    padding: 5px 12px;
-    border-left: 2px solid var(--primary-color);
-    margin: 0;
-  }
   label {
     display: block;
     font-weight: bold;
@@ -87,7 +82,7 @@
             [[item.feedback]]
             <template is="dom-if" if="[[item.response]]">
                 <label>Company Response</label>
-                <blockquote> [[item.response]]</blockquote>
+                <feedlight-blockquote> [[item.response]]</feedlight-blockquote>
             </template>
           </div>
           <div class="buttons">
@@ -107,5 +102,19 @@
   <div class="buttons">
     <paper-button dialog-dismiss>Cancel</paper-button>
     <paper-button on-tap="submit">Submit</paper-button>
+  </div>
+</paper-dialog>
+
+<paper-dialog id="submitted" modal>
+  <h2>Thank you!</h2>
+  <div>
+    <p>Thank you for your feedback! You can follow up and see other feedback
+    here:</p>
+    <a href="/feedback/[[submitResponse.id]]">
+      <paper-button>View Feedback</paper-button>
+    </a>
+  </div>
+  <div class="buttons">
+    <paper-button dialog-dismiss>Close</paper-button>
   </div>
 </paper-dialog>

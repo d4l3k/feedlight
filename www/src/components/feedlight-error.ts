@@ -10,7 +10,7 @@ class FeedlightError extends LitElement {
   }
 
   _render () {
-    return html`<style></style>
+    return html`<style> p { color: red } </style>
       <p>${this.error}</p>
     `
   }

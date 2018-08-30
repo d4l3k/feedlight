@@ -28,8 +28,8 @@ export const feedlightpb = $root.feedlightpb = (() => {
          * @property {boolean|null} [dissimilar] Feedback dissimilar
          * @property {string|null} [response] Feedback response
          * @property {boolean|null} [sharePublicly] Feedback sharePublicly
-         * @property {Long|null} [created] Feedback created
-         * @property {Long|null} [id] Feedback id
+         * @property {number|Long|null} [created] Feedback created
+         * @property {number|Long|null} [id] Feedback id
          */
 
         /**
@@ -97,7 +97,7 @@ export const feedlightpb = $root.feedlightpb = (() => {
 
         /**
          * Feedback created.
-         * @member {Long} created
+         * @member {number|Long} created
          * @memberof feedlightpb.Feedback
          * @instance
          */
@@ -105,7 +105,7 @@ export const feedlightpb = $root.feedlightpb = (() => {
 
         /**
          * Feedback id.
-         * @member {Long} id
+         * @member {number|Long} id
          * @memberof feedlightpb.Feedback
          * @instance
          */
@@ -1096,7 +1096,7 @@ export const feedlightpb = $root.feedlightpb = (() => {
          * Properties of a SubmitFeedbackResponse.
          * @memberof feedlightpb
          * @interface ISubmitFeedbackResponse
-         * @property {Long|null} [id] SubmitFeedbackResponse id
+         * @property {number|Long|null} [id] SubmitFeedbackResponse id
          */
 
         /**
@@ -1116,7 +1116,7 @@ export const feedlightpb = $root.feedlightpb = (() => {
 
         /**
          * SubmitFeedbackResponse id.
-         * @member {Long} id
+         * @member {number|Long} id
          * @memberof feedlightpb.SubmitFeedbackResponse
          * @instance
          */
@@ -1297,7 +1297,7 @@ export const feedlightpb = $root.feedlightpb = (() => {
          * Properties of a FeedbackRequest.
          * @memberof feedlightpb
          * @interface IFeedbackRequest
-         * @property {Long|null} [id] FeedbackRequest id
+         * @property {number|Long|null} [id] FeedbackRequest id
          */
 
         /**
@@ -1317,7 +1317,7 @@ export const feedlightpb = $root.feedlightpb = (() => {
 
         /**
          * FeedbackRequest id.
-         * @member {Long} id
+         * @member {number|Long} id
          * @memberof feedlightpb.FeedbackRequest
          * @instance
          */
@@ -9758,8 +9758,8 @@ export const google = $root.google = (() => {
              * @interface IUninterpretedOption
              * @property {Array.<google.protobuf.UninterpretedOption.INamePart>|null} [name] UninterpretedOption name
              * @property {string|null} [identifierValue] UninterpretedOption identifierValue
-             * @property {Long|null} [positiveIntValue] UninterpretedOption positiveIntValue
-             * @property {Long|null} [negativeIntValue] UninterpretedOption negativeIntValue
+             * @property {number|Long|null} [positiveIntValue] UninterpretedOption positiveIntValue
+             * @property {number|Long|null} [negativeIntValue] UninterpretedOption negativeIntValue
              * @property {number|null} [doubleValue] UninterpretedOption doubleValue
              * @property {Uint8Array|null} [stringValue] UninterpretedOption stringValue
              * @property {string|null} [aggregateValue] UninterpretedOption aggregateValue
@@ -9799,7 +9799,7 @@ export const google = $root.google = (() => {
 
             /**
              * UninterpretedOption positiveIntValue.
-             * @member {Long} positiveIntValue
+             * @member {number|Long} positiveIntValue
              * @memberof google.protobuf.UninterpretedOption
              * @instance
              */
@@ -9807,7 +9807,7 @@ export const google = $root.google = (() => {
 
             /**
              * UninterpretedOption negativeIntValue.
-             * @member {Long} negativeIntValue
+             * @member {number|Long} negativeIntValue
              * @memberof google.protobuf.UninterpretedOption
              * @instance
              */

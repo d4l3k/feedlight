@@ -23,6 +23,7 @@
     "debounce": "^1.2.0",
     "highlight.js": "^9.12.0",
     "long": "^4.0.0",
+    "moment": "^2.22.2",
     "polymer-react": "^1.0.1",
     "protobufjs": "^6.8.8",
     "react": "^16.4.2",
@@ -34,7 +35,7 @@
     "test": "yarn lint && yarn build",
     "start": "webpack-dev-server --open --config ./webpack.dev.conf.js",
     "build": "yarn protobuf && webpack --config ./webpack.prod.conf.js",
-    "protobuf": "pbjs --force-long -t static-module -w es6 -o src/feedlightpb.js -p /usr/include/ ../srv/feedlightpb/feedlight.proto google/protobuf/any.proto google/api/annotations.proto && pbts -o src/feedlightpb.d.ts src/feedlightpb.js"
+    "protobuf": "pbjs -t static-module -w es6 -o src/feedlightpb.js -p /usr/include/ ../srv/feedlightpb/feedlight.proto google/protobuf/any.proto google/api/annotations.proto && pbts -o src/feedlightpb.d.ts src/feedlightpb.js"
   },
   "standardx": {
     "parser": "typescript-eslint-parser",

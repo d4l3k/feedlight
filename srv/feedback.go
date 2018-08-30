@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"math"
 	"sort"
+	"time"
 
 	"github.com/d4l3k/feedlight/srv/embeddings"
 	"github.com/d4l3k/feedlight/srv/feedlightpb"
@@ -80,6 +81,8 @@ func (s *server) SubmitFeedback(ctx context.Context, req *feedlightpb.SubmitFeed
 	if err != nil {
 		return nil, err
 	}
+
+	req.Feedback.Created = time.Now().Unix()
 
 	tx := db.Begin()
 	feedback := Feedback{

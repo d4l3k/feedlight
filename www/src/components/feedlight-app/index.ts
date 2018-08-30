@@ -7,6 +7,7 @@ import '@polymer/app-layout/app-toolbar/app-toolbar.js'
 import '@polymer/paper-progress/paper-progress.js'
 
 import {html} from '../../html'
+import {incr, decr, setCallback} from '../../loading'
 
 import * as view from './template.html'
 
@@ -19,22 +20,22 @@ export class FeedlightApp extends PolymerElement {
     return html(view)
   }
 
+  connectedCallback () {
+    super.connectedCallback()
+
+    setCallback((loading) => {
+      this.loading = loading
+    })
+  }
+
   static get observers () {
     return [
       'updatePage(data.page)'
     ]
   }
 
-  incrLoading () {
-    this.loading += 1
-  }
-
-  decrLoading () {
-    this.loading -= 1
-  }
-
   updatePage (page: string) {
-    this.incrLoading()
+    incr()
 
     console.log('Page:', page)
 
@@ -51,14 +52,14 @@ export class FeedlightApp extends PolymerElement {
     }
 
     imp.then(() => {
-      this.decrLoading()
+      decr()
     }).catch(err => {
       console.error(err)
-      this.decrLoading()
+      decr()
     })
   }
 
-  eq (a, b) {
+  eq (a: any, b: any): boolean {
     return a === b
   }
 }

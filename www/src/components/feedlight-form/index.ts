@@ -16,11 +16,13 @@ import {FeedbackService} from '../../rpc'
 import {feedlightpb} from '../../feedlightpb'
 import {html} from '../../html'
 import '../toggle-button'
+import '../feedlight-blockquote'
 
 import * as view from './template.html'
 
 export class FeedlightForm extends PolymerElement {
   similarFeedback?: feedlightpb.IFeedback[]
+  submitResponse?: feedlightpb.SubmitFeedbackResponse
   sharePublicly?: boolean
   feedback?: string
   email?: string
@@ -88,7 +90,9 @@ export class FeedlightForm extends PolymerElement {
         similar: this.similarFeedback
       })
     ).then((resp: feedlightpb.SubmitFeedbackResponse) => {
+      this.submitResponse = resp
       ;(this.$.dialog as PaperDialog).close()
+      ;(this.$.submitted as PaperDialog).open()
       this.loading -= 1
     }).catch((err) => {
       this.loading -= 1
@@ -125,11 +129,11 @@ export class FeedlightForm extends PolymerElement {
     return score
   }
 
-  updateSimilar (e) {
+  updateSimilar (e: any) {
     e.model.set('item.dissimilar', false)
   }
 
-  updateDissimilar (e) {
+  updateDissimilar (e: any) {
     e.model.set('item.similar', false)
   }
 }
