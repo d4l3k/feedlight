@@ -161,8 +161,44 @@ func (s *server) Feedback(ctx context.Context, req *feedlightpb.FeedbackRequest)
 		return nil, err
 	}
 
+	var links []FeedbackLink
+	if err := db.Where("from_id = ? OR to_id = ?", req.Id, req.Id).Find(&links).Error; err != nil {
+		return nil, err
+	}
+
+	scores := map[int64]int{}
+	for _, link := range links {
+		id := link.FromID
+		if id == req.Id {
+			id = link.ToID
+		}
+		if link.Similar {
+			scores[id] += 1
+		} else {
+			scores[id] -= 1
+		}
+	}
+
+	var ids []int64
+	for id, score := range scores {
+		if score > 0 {
+			ids = append(ids, id)
+		}
+	}
+
+	var similar []Feedback
+	if err := db.Where("share_publicly = true AND id in (?)", ids).Find(&similar).Error; err != nil {
+		return nil, err
+	}
+
+	var similarProto []feedlightpb.Feedback
+	for _, s := range similar {
+		similarProto = append(similarProto, s.Feedback)
+	}
+
 	return &feedlightpb.FeedbackResponse{
 		Domain:   f.Domain,
 		Feedback: f.Feedback,
+		Similar:  similarProto,
 	}, nil
 }

@@ -47,8 +47,8 @@ func (f *Feedback) GetEmbedding() ([]float32, error) {
 
 type FeedbackLink struct {
 	ID           int64
-	FromID, ToID int64  `gorm:"not null"`
-	Email        string `gorm:"not null"`
+	FromID, ToID int64  `gorm:"not null,unique_index:idx_feedback_link"`
+	Email        string `gorm:"not null,unique_index:idx_feedback_link"`
 	Similar      bool   `gorm:"not null"`
 }
 

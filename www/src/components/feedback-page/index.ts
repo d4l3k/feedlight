@@ -63,11 +63,15 @@ class FeedbackPage extends LitElement {
       return
     }
 
-    return similar.map(a => {
-      return html`
-        <p>${a.feedback}</p>
-      `
-    })
+    return html`
+      <h2>Similar</h2>
+      ${similar.map(a => {
+          return html`
+            <p>${a.feedback}</p>
+          `
+        })
+      }
+    `
   }
 
   get route (): Route | undefined {
