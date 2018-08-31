@@ -1,6 +1,8 @@
 import {LitElement, html, property} from '@polymer/lit-element'
 
 import '@polymer/iron-icons/iron-icons.js'
+import * as moment from 'moment'
+import * as Long from 'long'
 
 import {feedlightpb} from '../feedlightpb'
 import './feedlight-blockquote'
@@ -36,6 +38,10 @@ class FeedlightFeedback extends LitElement {
       justify-content: flex-end;
       align-items: center;
     }
+    small {
+      color: #4f5b62;
+      display: block;
+    }
     </style>
 
     ${this.renderFeedback()}
@@ -50,6 +56,7 @@ class FeedlightFeedback extends LitElement {
     return html`
     <div class="feedback">
       <div class="feedback-body">
+        <small>${moment.unix(Long.fromValue(this.feedback.createdAt!).toNumber()).fromNow()}</small>
         ${this.feedback.feedback}
         ${this.renderResponse(this.feedback)}
       </div>

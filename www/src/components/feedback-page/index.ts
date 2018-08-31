@@ -41,7 +41,7 @@ class FeedbackPage extends LitElement {
     const fb = this.data.feedback
 
     return html`
-      <p>Submitted ${moment(Long.fromValue(fb.createdAt!).toNumber()).fromNow()}</p>
+      <p>Submitted ${moment.unix(Long.fromValue(fb.createdAt!).toNumber()).fromNow()}</p>
       <feedlight-blockquote>${fb.feedback}</feedlight-blockquote>
       ${this.renderResponse(fb.response)}
       ${this.renderSimilar(this.data.similar)}
@@ -60,7 +60,7 @@ class FeedbackPage extends LitElement {
   }
 
   renderSimilar (similar: feedlightpb.IFeedback[]) {
-    if (!similar) {
+    if (!similar || similar.length === 0) {
       return
     }
 
