@@ -8,9 +8,9 @@ import {html} from '../../html'
 import * as view from './template.html'
 
 import SyntaxHighlighter, { registerLanguage } from 'react-syntax-highlighter/light'
-const js: any = require('react-syntax-highlighter/languages/hljs/javascript')
-const xml: any = require('react-syntax-highlighter/languages/hljs/xml')
-const style: any = require('react-syntax-highlighter/styles/hljs/solarized-dark')
+const js: any = require('react-syntax-highlighter/languages/hljs/javascript').default
+const xml: any = require('react-syntax-highlighter/languages/hljs/xml').default
+const style: any = require('react-syntax-highlighter/styles/hljs/solarized-dark').default
 
 registerLanguage('javascript', js)
 registerLanguage('xml', xml)

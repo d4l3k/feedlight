@@ -2,18 +2,14 @@ import {PolymerElement} from '@polymer/polymer/polymer-element.js'
 import '@polymer/paper-button/paper-button.js'
 import '@polymer/paper-input/paper-textarea.js'
 import '@polymer/paper-checkbox/paper-checkbox.js'
-import '@polymer/iron-icons/iron-icons.js'
 import '@polymer/paper-progress/paper-progress.js'
-
-/* eslint-disable import/no-duplicates */
 import '@polymer/paper-dialog/paper-dialog.js'
-/* eslint-enable import/no-duplicates */
+
+import '../feedlight-feedback'
 
 import {FeedbackService} from '../../rpc'
 import {feedlightpb} from '../../feedlightpb'
 import {html} from '../../html'
-import '../toggle-button'
-import '../feedlight-blockquote'
 
 import * as view from './template.html'
 
@@ -120,20 +116,21 @@ export class FeedlightForm extends PolymerElement {
     ;(this.$.dialog as any).open()
   }
 
-  similarityScore (f: feedlightpb.IFeedback): number {
-    let score = f.score || 0
-    if (f.similar) {
-      score += 1
-    }
-    return score
-  }
 
   updateSimilar (e: any) {
-    e.model.set('item.dissimilar', false)
+    const item = e.model.item
+    item.similar = true
+    item.dissimilar = false
+    e.model.item = null
+    e.model.item = item
   }
 
   updateDissimilar (e: any) {
-    e.model.set('item.similar', false)
+    const item = e.model.item
+    item.similar = false
+    item.dissimilar = true
+    e.model.item = null
+    e.model.item = item
   }
 }
 
