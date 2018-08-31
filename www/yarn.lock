@@ -174,11 +174,11 @@
     "@polymer/iron-meta" "^3.0.0-pre.24"
     "@polymer/polymer" "^3.0.0"
 
-"@polymer/lit-element@^0.6.0-dev.5":
-  version "0.6.0-dev.5"
-  resolved "https://registry.yarnpkg.com/@polymer/lit-element/-/lit-element-0.6.0-dev.5.tgz#2b0d1f91af04e198dd0a806edf0ba9a7b824fd23"
+"@polymer/lit-element@^0.6.0-dev.6":
+  version "0.6.0-dev.6"
+  resolved "https://registry.yarnpkg.com/@polymer/lit-element/-/lit-element-0.6.0-dev.6.tgz#d60d01061300c8059d9dde3a9c14e03777b6a35d"
   dependencies:
-    lit-html ">=0.11.0-dev.3 <2.0.0"
+    lit-html "^0.11.0"
 
 "@polymer/neon-animation@^3.0.0-pre.24":
   version "3.0.0-pre.25"
@@ -900,7 +900,7 @@ buffer-xor@^1.0.3:
 
 buffer@^4.3.0:
   version "4.9.1"
-  resolved "https://registry.yarnpkg.com/buffer/-/buffer-4.9.1.tgz#6d1bb601b07a4efced97094132093027c95bc298"
+  resolved "http://registry.npmjs.org/buffer/-/buffer-4.9.1.tgz#6d1bb601b07a4efced97094132093027c95bc298"
   dependencies:
     base64-js "^1.0.2"
     ieee754 "^1.1.4"
@@ -2901,7 +2901,7 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-"lit-html@>=0.11.0-dev.3 <2.0.0", lit-html@^0.11.0:
+lit-html@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-0.11.0.tgz#32fc610dfaf8915bea557f28fd245d205eac3a67"
 
