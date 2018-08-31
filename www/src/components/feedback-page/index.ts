@@ -6,6 +6,7 @@ import {FeedbackService} from '../../rpc'
 import {feedlightpb} from '../../feedlightpb'
 import '../feedlight-error'
 import '../feedlight-blockquote'
+import '../feedlight-feedback'
 
 interface Route {
   path: string
@@ -66,11 +67,11 @@ class FeedbackPage extends LitElement {
     return html`
       <h2>Similar</h2>
       ${similar.map(a => {
-          return html`
-            <p>${a.feedback}</p>
+    return html`
+            <feedlight-feedback .feedback=${a}></feedlight-feedback>
           `
-        })
-      }
+  })
+}
     `
   }
 

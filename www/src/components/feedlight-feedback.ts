@@ -11,7 +11,7 @@ class FeedlightFeedback extends LitElement {
   public feedback?: feedlightpb.IFeedback
 
   render () {
-  return html`<style>
+    return html`<style>
     .feedback {
       display: flex;
       justify-content: stretch;
@@ -56,13 +56,13 @@ class FeedlightFeedback extends LitElement {
       <div class="buttons">
         ${this.similarityScore(this.feedback)}
         <toggle-button class="check" .value=${this.feedback.similar} @tap=${() => {
-          this.dispatchEvent(new CustomEvent('similar'))
-        }}>
+  this.dispatchEvent(new CustomEvent('similar'))
+}}>
           <iron-icon icon="check"></iron-icon>
         </toggle-button>
         <toggle-button class="clear" .value=${this.feedback.dissimilar} @tap=${() => {
-          this.dispatchEvent(new CustomEvent('dissimilar'))
-        }}>
+  this.dispatchEvent(new CustomEvent('dissimilar'))
+}}>
           <iron-icon icon="clear"></iron-icon>
         </toggle-button>
       </div>
@@ -72,7 +72,7 @@ class FeedlightFeedback extends LitElement {
 
   renderResponse (f: feedlightpb.IFeedback) {
     if (!f.response) {
-    return
+      return
     }
 
     return html`

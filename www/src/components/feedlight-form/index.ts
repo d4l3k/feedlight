@@ -116,7 +116,6 @@ export class FeedlightForm extends PolymerElement {
     ;(this.$.dialog as any).open()
   }
 
-
   updateSimilar (e: any) {
     const item = e.model.item
     item.similar = true
