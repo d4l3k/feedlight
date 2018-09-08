@@ -2,6 +2,7 @@
 :host {
     --primary-color: #0288d1;
     --paper-progress-active-color: #0288d1;
+    --primary-background-color: white;
 }
 app-toolbar > div {
     max-width: 900px;
@@ -39,7 +40,7 @@ paper-progress {
   </app-toolbar>
 </app-header>
 
-<app-location route="{{route}}" use-hash-as-path></app-location>
+<app-location route="{{route}}"></app-location>
 <app-route
     route="{{route}}"
     pattern="/:page"
@@ -50,6 +51,9 @@ paper-progress {
 <div id="container">
     <template is="dom-if" if="[[eq(element, 'index-page')]]" restamp>
         <index-page route="{{subroute}}"></index-page>
+    </template>
+    <template is="dom-if" if="[[eq(element, 'feedback-page')]]" restamp>
+        <feedback-page route="{{subroute}}"></feedback-page>
     </template>
     <template is="dom-if" if="[[eq(element, 'not-found-page')]]" restamp>
         <not-found-page route="{{subroute}}"></index-page>

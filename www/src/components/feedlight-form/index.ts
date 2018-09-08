@@ -2,25 +2,22 @@ import {PolymerElement} from '@polymer/polymer/polymer-element.js'
 import '@polymer/paper-button/paper-button.js'
 import '@polymer/paper-input/paper-textarea.js'
 import '@polymer/paper-checkbox/paper-checkbox.js'
-import '@polymer/iron-icons/iron-icons.js'
 import '@polymer/paper-progress/paper-progress.js'
-
-/* eslint-disable import/no-duplicates */
 import '@polymer/paper-dialog/paper-dialog.js'
-import {PaperDialog} from '@polymer/paper-dialog/paper-dialog.js'
-/* eslint-enable import/no-duplicates */
 
-import {debounce} from 'debounce'
+import '../feedlight-feedback'
 
 import {FeedbackService} from '../../rpc'
 import {feedlightpb} from '../../feedlightpb'
 import {html} from '../../html'
-import '../toggle-button'
 
 import * as view from './template.html'
 
+const debounce = require('lodash.debounce')
+
 export class FeedlightForm extends PolymerElement {
   similarFeedback?: feedlightpb.IFeedback[]
+  submitResponse?: feedlightpb.SubmitFeedbackResponse
   sharePublicly?: boolean
   feedback?: string
   email?: string
@@ -88,7 +85,9 @@ export class FeedlightForm extends PolymerElement {
         similar: this.similarFeedback
       })
     ).then((resp: feedlightpb.SubmitFeedbackResponse) => {
-      ;(this.$.dialog as PaperDialog).close()
+      this.submitResponse = resp
+      ;(this.$.dialog as any).close()
+      ;(this.$.submitted as any).open()
       this.loading -= 1
     }).catch((err) => {
       this.loading -= 1
@@ -104,7 +103,7 @@ export class FeedlightForm extends PolymerElement {
   }
 
   resize () {
-    ;(this.$.dialog as PaperDialog).notifyResize()
+    ;(this.$.dialog as any).notifyResize()
   }
 
   init () {
@@ -114,23 +113,23 @@ export class FeedlightForm extends PolymerElement {
 
   open () {
     this.init()
-    ;(this.$.dialog as PaperDialog).open()
+    ;(this.$.dialog as any).open()
   }
 
-  similarityScore (f: feedlightpb.IFeedback): number {
-    let score = f.score || 0
-    if (f.similar) {
-      score += 1
-    }
-    return score
+  updateSimilar (e: any) {
+    const item = e.model.item
+    item.similar = true
+    item.dissimilar = false
+    e.model.item = null
+    e.model.item = item
   }
 
-  updateSimilar (e) {
-    e.model.set('item.dissimilar', false)
-  }
-
-  updateDissimilar (e) {
-    e.model.set('item.similar', false)
+  updateDissimilar (e: any) {
+    const item = e.model.item
+    item.similar = false
+    item.dissimilar = true
+    e.model.item = null
+    e.model.item = item
   }
 }
 

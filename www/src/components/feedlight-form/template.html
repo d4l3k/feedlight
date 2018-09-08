@@ -20,11 +20,6 @@
   li {
     margin: 12px 24px;
   }
-  blockquote {
-    padding: 5px 12px;
-    border-left: 2px solid var(--primary-color);
-    margin: 0;
-  }
   label {
     display: block;
     font-weight: bold;
@@ -32,30 +27,6 @@
     margin-bottom: 0.5em;
   }
 
-  .check {
-    --primary-color: green;
-  }
-  .clear {
-    --primary-color: red;
-  }
-  .feedback {
-    display: flex;
-    justify-content: stretch;
-    align-items: center;
-
-    padding: 12px;
-    margin: 12px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-  .feedback-body {
-    flex-grow: 1;
-  }
-  .buttons {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
   paper-progress {
     margin: 0 !important;
     padding: 0 !important;
@@ -82,24 +53,10 @@
     <template is="dom-if" if="[[similarFeedback.length]]">
       <h3>We've found similar feedback. Are these about the same issue?</h3>
       <template is="dom-repeat" items="[[similarFeedback]]">
-        <div class="feedback">
-          <div class="feedback-body">
-            [[item.feedback]]
-            <template is="dom-if" if="[[item.response]]">
-                <label>Company Response</label>
-                <blockquote> [[item.response]]</blockquote>
-            </template>
-          </div>
-          <div class="buttons">
-            [[similarityScore(item, item.similar, item.score)]]
-            <toggle-button class="check" value="{{item.similar}}" on-tap="updateSimilar">
-              <iron-icon icon="check"></iron-icon>
-            </toggle-button>
-            <toggle-button class="clear" value="{{item.dissimilar}}" on-tap="updateDissimilar">
-              <iron-icon icon="clear"></iron-icon>
-            </toggle-button>
-          </div>
-        </div>
+        <feedlight-feedback feedback="[[item]]"
+                            on-similar="updateSimilar"
+                            on-dissimilar="updateDissimilar">
+        </feedlight-feedback>
       </template>
     </template>
     <p hidden$="[[!err]]">[[err]]</p>
@@ -107,5 +64,19 @@
   <div class="buttons">
     <paper-button dialog-dismiss>Cancel</paper-button>
     <paper-button on-tap="submit">Submit</paper-button>
+  </div>
+</paper-dialog>
+
+<paper-dialog id="submitted" modal>
+  <h2>Thank you!</h2>
+  <div>
+    <p>Thank you for your feedback! You can follow up and see other feedback
+    here:</p>
+    <a href="/feedback/[[submitResponse.id]]">
+      <paper-button>View Feedback</paper-button>
+    </a>
+  </div>
+  <div class="buttons">
+    <paper-button dialog-dismiss>Close</paper-button>
   </div>
 </paper-dialog>

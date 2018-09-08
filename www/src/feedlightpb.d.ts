@@ -23,11 +23,14 @@ export namespace feedlightpb {
         /** Feedback sharePublicly */
         sharePublicly?: (boolean|null);
 
-        /** Feedback created */
-        created?: (Long|null);
-
         /** Feedback id */
-        id?: (Long|null);
+        id?: (number|Long|null);
+
+        /** Feedback createdAt */
+        createdAt?: (number|Long|null);
+
+        /** Feedback updatedAt */
+        updatedAt?: (number|Long|null);
     }
 
     /** Represents a Feedback. */
@@ -57,11 +60,14 @@ export namespace feedlightpb {
         /** Feedback sharePublicly. */
         public sharePublicly: boolean;
 
-        /** Feedback created. */
-        public created: Long;
-
         /** Feedback id. */
-        public id: Long;
+        public id: (number|Long);
+
+        /** Feedback createdAt. */
+        public createdAt: (number|Long);
+
+        /** Feedback updatedAt. */
+        public updatedAt: (number|Long);
 
         /**
          * Creates a new Feedback instance using the specified properties.
@@ -432,7 +438,7 @@ export namespace feedlightpb {
     interface ISubmitFeedbackResponse {
 
         /** SubmitFeedbackResponse id */
-        id?: (Long|null);
+        id?: (number|Long|null);
     }
 
     /** Represents a SubmitFeedbackResponse. */
@@ -445,7 +451,7 @@ export namespace feedlightpb {
         constructor(properties?: feedlightpb.ISubmitFeedbackResponse);
 
         /** SubmitFeedbackResponse id. */
-        public id: Long;
+        public id: (number|Long);
 
         /**
          * Creates a new SubmitFeedbackResponse instance using the specified properties.
@@ -518,6 +524,198 @@ export namespace feedlightpb {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a FeedbackRequest. */
+    interface IFeedbackRequest {
+
+        /** FeedbackRequest id */
+        id?: (number|Long|null);
+    }
+
+    /** Represents a FeedbackRequest. */
+    class FeedbackRequest implements IFeedbackRequest {
+
+        /**
+         * Constructs a new FeedbackRequest.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: feedlightpb.IFeedbackRequest);
+
+        /** FeedbackRequest id. */
+        public id: (number|Long);
+
+        /**
+         * Creates a new FeedbackRequest instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns FeedbackRequest instance
+         */
+        public static create(properties?: feedlightpb.IFeedbackRequest): feedlightpb.FeedbackRequest;
+
+        /**
+         * Encodes the specified FeedbackRequest message. Does not implicitly {@link feedlightpb.FeedbackRequest.verify|verify} messages.
+         * @param message FeedbackRequest message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: feedlightpb.IFeedbackRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified FeedbackRequest message, length delimited. Does not implicitly {@link feedlightpb.FeedbackRequest.verify|verify} messages.
+         * @param message FeedbackRequest message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: feedlightpb.IFeedbackRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a FeedbackRequest message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns FeedbackRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): feedlightpb.FeedbackRequest;
+
+        /**
+         * Decodes a FeedbackRequest message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns FeedbackRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): feedlightpb.FeedbackRequest;
+
+        /**
+         * Verifies a FeedbackRequest message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a FeedbackRequest message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns FeedbackRequest
+         */
+        public static fromObject(object: { [k: string]: any }): feedlightpb.FeedbackRequest;
+
+        /**
+         * Creates a plain object from a FeedbackRequest message. Also converts values to other types if specified.
+         * @param message FeedbackRequest
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: feedlightpb.FeedbackRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this FeedbackRequest to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a FeedbackResponse. */
+    interface IFeedbackResponse {
+
+        /** FeedbackResponse feedback */
+        feedback?: (feedlightpb.IFeedback|null);
+
+        /** FeedbackResponse domain */
+        domain?: (string|null);
+
+        /** FeedbackResponse similar */
+        similar?: (feedlightpb.IFeedback[]|null);
+    }
+
+    /** Represents a FeedbackResponse. */
+    class FeedbackResponse implements IFeedbackResponse {
+
+        /**
+         * Constructs a new FeedbackResponse.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: feedlightpb.IFeedbackResponse);
+
+        /** FeedbackResponse feedback. */
+        public feedback?: (feedlightpb.IFeedback|null);
+
+        /** FeedbackResponse domain. */
+        public domain: string;
+
+        /** FeedbackResponse similar. */
+        public similar: feedlightpb.IFeedback[];
+
+        /**
+         * Creates a new FeedbackResponse instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns FeedbackResponse instance
+         */
+        public static create(properties?: feedlightpb.IFeedbackResponse): feedlightpb.FeedbackResponse;
+
+        /**
+         * Encodes the specified FeedbackResponse message. Does not implicitly {@link feedlightpb.FeedbackResponse.verify|verify} messages.
+         * @param message FeedbackResponse message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: feedlightpb.IFeedbackResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified FeedbackResponse message, length delimited. Does not implicitly {@link feedlightpb.FeedbackResponse.verify|verify} messages.
+         * @param message FeedbackResponse message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: feedlightpb.IFeedbackResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a FeedbackResponse message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns FeedbackResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): feedlightpb.FeedbackResponse;
+
+        /**
+         * Decodes a FeedbackResponse message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns FeedbackResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): feedlightpb.FeedbackResponse;
+
+        /**
+         * Verifies a FeedbackResponse message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a FeedbackResponse message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns FeedbackResponse
+         */
+        public static fromObject(object: { [k: string]: any }): feedlightpb.FeedbackResponse;
+
+        /**
+         * Creates a plain object from a FeedbackResponse message. Also converts values to other types if specified.
+         * @param message FeedbackResponse
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: feedlightpb.FeedbackResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this FeedbackResponse to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Represents a FeedbackService */
     class FeedbackService extends $protobuf.rpc.Service {
 
@@ -565,6 +763,20 @@ export namespace feedlightpb {
          * @returns Promise
          */
         public submitFeedback(request: feedlightpb.ISubmitFeedbackRequest): Promise<feedlightpb.SubmitFeedbackResponse>;
+
+        /**
+         * Calls Feedback.
+         * @param request FeedbackRequest message or plain object
+         * @param callback Node-style callback called with the error, if any, and FeedbackResponse
+         */
+        public feedback(request: feedlightpb.IFeedbackRequest, callback: feedlightpb.FeedbackService.FeedbackCallback): void;
+
+        /**
+         * Calls Feedback.
+         * @param request FeedbackRequest message or plain object
+         * @returns Promise
+         */
+        public feedback(request: feedlightpb.IFeedbackRequest): Promise<feedlightpb.FeedbackResponse>;
     }
 
     namespace FeedbackService {
@@ -582,6 +794,13 @@ export namespace feedlightpb {
          * @param [response] SubmitFeedbackResponse
          */
         type SubmitFeedbackCallback = (error: (Error|null), response?: feedlightpb.SubmitFeedbackResponse) => void;
+
+        /**
+         * Callback as used by {@link feedlightpb.FeedbackService#feedback}.
+         * @param error Error, if any
+         * @param [response] FeedbackResponse
+         */
+        type FeedbackCallback = (error: (Error|null), response?: feedlightpb.FeedbackResponse) => void;
     }
 
     /** Properties of a Status. */
@@ -3494,10 +3713,10 @@ export namespace google {
             identifierValue?: (string|null);
 
             /** UninterpretedOption positiveIntValue */
-            positiveIntValue?: (Long|null);
+            positiveIntValue?: (number|Long|null);
 
             /** UninterpretedOption negativeIntValue */
-            negativeIntValue?: (Long|null);
+            negativeIntValue?: (number|Long|null);
 
             /** UninterpretedOption doubleValue */
             doubleValue?: (number|null);
@@ -3525,10 +3744,10 @@ export namespace google {
             public identifierValue: string;
 
             /** UninterpretedOption positiveIntValue. */
-            public positiveIntValue: Long;
+            public positiveIntValue: (number|Long);
 
             /** UninterpretedOption negativeIntValue. */
-            public negativeIntValue: Long;
+            public negativeIntValue: (number|Long);
 
             /** UninterpretedOption doubleValue. */
             public doubleValue: number;

@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"time"
 
 	"github.com/d4l3k/feedlight/srv/feedlightpb"
 	"github.com/jinzhu/gorm"
@@ -10,6 +11,14 @@ import (
 )
 
 var db *gorm.DB
+
+type Domain struct {
+	ID string `gorm:"primary_key"`
+
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt *time.Time
+}
 
 type Feedback struct {
 	feedlightpb.Feedback `gorm:"embedded"`
@@ -38,14 +47,14 @@ func (f *Feedback) GetEmbedding() ([]float32, error) {
 
 type FeedbackLink struct {
 	ID           int64
-	FromID, ToID int64  `gorm:"not null"`
-	Email        string `gorm:"not null"`
+	FromID, ToID int64  `gorm:"not null,unique_index:idx_feedback_link"`
+	Email        string `gorm:"not null,unique_index:idx_feedback_link"`
 	Similar      bool   `gorm:"not null"`
 }
 
 func setupDB() error {
 	var err error
-	db, err = gorm.Open("postgres", "postgres://root@localhost:26257/feedlight?sslmode=disable")
+	db, err = gorm.Open("postgres", *dbAddr)
 	if err != nil {
 		return err
 	}
@@ -54,6 +63,7 @@ func setupDB() error {
 	models := []interface{}{
 		new(Feedback),
 		new(FeedbackLink),
+		new(Domain),
 	}
 	if err := db.AutoMigrate(models...).Error; err != nil {
 		return errors.Wrapf(err, "migrating %+v", models)

@@ -28,8 +28,9 @@ export const feedlightpb = $root.feedlightpb = (() => {
          * @property {boolean|null} [dissimilar] Feedback dissimilar
          * @property {string|null} [response] Feedback response
          * @property {boolean|null} [sharePublicly] Feedback sharePublicly
-         * @property {Long|null} [created] Feedback created
-         * @property {Long|null} [id] Feedback id
+         * @property {number|Long|null} [id] Feedback id
+         * @property {number|Long|null} [createdAt] Feedback createdAt
+         * @property {number|Long|null} [updatedAt] Feedback updatedAt
          */
 
         /**
@@ -96,20 +97,28 @@ export const feedlightpb = $root.feedlightpb = (() => {
         Feedback.prototype.sharePublicly = false;
 
         /**
-         * Feedback created.
-         * @member {Long} created
-         * @memberof feedlightpb.Feedback
-         * @instance
-         */
-        Feedback.prototype.created = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-        /**
          * Feedback id.
-         * @member {Long} id
+         * @member {number|Long} id
          * @memberof feedlightpb.Feedback
          * @instance
          */
         Feedback.prototype.id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Feedback createdAt.
+         * @member {number|Long} createdAt
+         * @memberof feedlightpb.Feedback
+         * @instance
+         */
+        Feedback.prototype.createdAt = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Feedback updatedAt.
+         * @member {number|Long} updatedAt
+         * @memberof feedlightpb.Feedback
+         * @instance
+         */
+        Feedback.prototype.updatedAt = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new Feedback instance using the specified properties.
@@ -147,10 +156,12 @@ export const feedlightpb = $root.feedlightpb = (() => {
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.response);
             if (message.sharePublicly != null && message.hasOwnProperty("sharePublicly"))
                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.sharePublicly);
-            if (message.created != null && message.hasOwnProperty("created"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.created);
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.createdAt);
             if (message.id != null && message.hasOwnProperty("id"))
                 writer.uint32(/* id 8, wireType 0 =*/64).int64(message.id);
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.updatedAt);
             return writer;
         };
 
@@ -203,11 +214,14 @@ export const feedlightpb = $root.feedlightpb = (() => {
                 case 6:
                     message.sharePublicly = reader.bool();
                     break;
-                case 7:
-                    message.created = reader.int64();
-                    break;
                 case 8:
                     message.id = reader.int64();
+                    break;
+                case 7:
+                    message.createdAt = reader.int64();
+                    break;
+                case 9:
+                    message.updatedAt = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -262,12 +276,15 @@ export const feedlightpb = $root.feedlightpb = (() => {
             if (message.sharePublicly != null && message.hasOwnProperty("sharePublicly"))
                 if (typeof message.sharePublicly !== "boolean")
                     return "sharePublicly: boolean expected";
-            if (message.created != null && message.hasOwnProperty("created"))
-                if (!$util.isInteger(message.created) && !(message.created && $util.isInteger(message.created.low) && $util.isInteger(message.created.high)))
-                    return "created: integer|Long expected";
             if (message.id != null && message.hasOwnProperty("id"))
                 if (!$util.isInteger(message.id) && !(message.id && $util.isInteger(message.id.low) && $util.isInteger(message.id.high)))
                     return "id: integer|Long expected";
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                if (!$util.isInteger(message.createdAt) && !(message.createdAt && $util.isInteger(message.createdAt.low) && $util.isInteger(message.createdAt.high)))
+                    return "createdAt: integer|Long expected";
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                if (!$util.isInteger(message.updatedAt) && !(message.updatedAt && $util.isInteger(message.updatedAt.low) && $util.isInteger(message.updatedAt.high)))
+                    return "updatedAt: integer|Long expected";
             return null;
         };
 
@@ -295,15 +312,6 @@ export const feedlightpb = $root.feedlightpb = (() => {
                 message.response = String(object.response);
             if (object.sharePublicly != null)
                 message.sharePublicly = Boolean(object.sharePublicly);
-            if (object.created != null)
-                if ($util.Long)
-                    (message.created = $util.Long.fromValue(object.created)).unsigned = false;
-                else if (typeof object.created === "string")
-                    message.created = parseInt(object.created, 10);
-                else if (typeof object.created === "number")
-                    message.created = object.created;
-                else if (typeof object.created === "object")
-                    message.created = new $util.LongBits(object.created.low >>> 0, object.created.high >>> 0).toNumber();
             if (object.id != null)
                 if ($util.Long)
                     (message.id = $util.Long.fromValue(object.id)).unsigned = false;
@@ -313,6 +321,24 @@ export const feedlightpb = $root.feedlightpb = (() => {
                     message.id = object.id;
                 else if (typeof object.id === "object")
                     message.id = new $util.LongBits(object.id.low >>> 0, object.id.high >>> 0).toNumber();
+            if (object.createdAt != null)
+                if ($util.Long)
+                    (message.createdAt = $util.Long.fromValue(object.createdAt)).unsigned = false;
+                else if (typeof object.createdAt === "string")
+                    message.createdAt = parseInt(object.createdAt, 10);
+                else if (typeof object.createdAt === "number")
+                    message.createdAt = object.createdAt;
+                else if (typeof object.createdAt === "object")
+                    message.createdAt = new $util.LongBits(object.createdAt.low >>> 0, object.createdAt.high >>> 0).toNumber();
+            if (object.updatedAt != null)
+                if ($util.Long)
+                    (message.updatedAt = $util.Long.fromValue(object.updatedAt)).unsigned = false;
+                else if (typeof object.updatedAt === "string")
+                    message.updatedAt = parseInt(object.updatedAt, 10);
+                else if (typeof object.updatedAt === "number")
+                    message.updatedAt = object.updatedAt;
+                else if (typeof object.updatedAt === "object")
+                    message.updatedAt = new $util.LongBits(object.updatedAt.low >>> 0, object.updatedAt.high >>> 0).toNumber();
             return message;
         };
 
@@ -338,14 +364,19 @@ export const feedlightpb = $root.feedlightpb = (() => {
                 object.sharePublicly = false;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
-                    object.created = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.createdAt = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.created = options.longs === String ? "0" : 0;
+                    object.createdAt = options.longs === String ? "0" : 0;
                 if ($util.Long) {
                     let long = new $util.Long(0, 0, false);
                     object.id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.id = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    let long = new $util.Long(0, 0, false);
+                    object.updatedAt = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.updatedAt = options.longs === String ? "0" : 0;
             }
             if (message.feedback != null && message.hasOwnProperty("feedback"))
                 object.feedback = message.feedback;
@@ -359,16 +390,21 @@ export const feedlightpb = $root.feedlightpb = (() => {
                 object.response = message.response;
             if (message.sharePublicly != null && message.hasOwnProperty("sharePublicly"))
                 object.sharePublicly = message.sharePublicly;
-            if (message.created != null && message.hasOwnProperty("created"))
-                if (typeof message.created === "number")
-                    object.created = options.longs === String ? String(message.created) : message.created;
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                if (typeof message.createdAt === "number")
+                    object.createdAt = options.longs === String ? String(message.createdAt) : message.createdAt;
                 else
-                    object.created = options.longs === String ? $util.Long.prototype.toString.call(message.created) : options.longs === Number ? new $util.LongBits(message.created.low >>> 0, message.created.high >>> 0).toNumber() : message.created;
+                    object.createdAt = options.longs === String ? $util.Long.prototype.toString.call(message.createdAt) : options.longs === Number ? new $util.LongBits(message.createdAt.low >>> 0, message.createdAt.high >>> 0).toNumber() : message.createdAt;
             if (message.id != null && message.hasOwnProperty("id"))
                 if (typeof message.id === "number")
                     object.id = options.longs === String ? String(message.id) : message.id;
                 else
                     object.id = options.longs === String ? $util.Long.prototype.toString.call(message.id) : options.longs === Number ? new $util.LongBits(message.id.low >>> 0, message.id.high >>> 0).toNumber() : message.id;
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                if (typeof message.updatedAt === "number")
+                    object.updatedAt = options.longs === String ? String(message.updatedAt) : message.updatedAt;
+                else
+                    object.updatedAt = options.longs === String ? $util.Long.prototype.toString.call(message.updatedAt) : options.longs === Number ? new $util.LongBits(message.updatedAt.low >>> 0, message.updatedAt.high >>> 0).toNumber() : message.updatedAt;
             return object;
         };
 
@@ -1096,7 +1132,7 @@ export const feedlightpb = $root.feedlightpb = (() => {
          * Properties of a SubmitFeedbackResponse.
          * @memberof feedlightpb
          * @interface ISubmitFeedbackResponse
-         * @property {Long|null} [id] SubmitFeedbackResponse id
+         * @property {number|Long|null} [id] SubmitFeedbackResponse id
          */
 
         /**
@@ -1116,7 +1152,7 @@ export const feedlightpb = $root.feedlightpb = (() => {
 
         /**
          * SubmitFeedbackResponse id.
-         * @member {Long} id
+         * @member {number|Long} id
          * @memberof feedlightpb.SubmitFeedbackResponse
          * @instance
          */
@@ -1291,6 +1327,466 @@ export const feedlightpb = $root.feedlightpb = (() => {
         return SubmitFeedbackResponse;
     })();
 
+    feedlightpb.FeedbackRequest = (function() {
+
+        /**
+         * Properties of a FeedbackRequest.
+         * @memberof feedlightpb
+         * @interface IFeedbackRequest
+         * @property {number|Long|null} [id] FeedbackRequest id
+         */
+
+        /**
+         * Constructs a new FeedbackRequest.
+         * @memberof feedlightpb
+         * @classdesc Represents a FeedbackRequest.
+         * @implements IFeedbackRequest
+         * @constructor
+         * @param {feedlightpb.IFeedbackRequest=} [properties] Properties to set
+         */
+        function FeedbackRequest(properties) {
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * FeedbackRequest id.
+         * @member {number|Long} id
+         * @memberof feedlightpb.FeedbackRequest
+         * @instance
+         */
+        FeedbackRequest.prototype.id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Creates a new FeedbackRequest instance using the specified properties.
+         * @function create
+         * @memberof feedlightpb.FeedbackRequest
+         * @static
+         * @param {feedlightpb.IFeedbackRequest=} [properties] Properties to set
+         * @returns {feedlightpb.FeedbackRequest} FeedbackRequest instance
+         */
+        FeedbackRequest.create = function create(properties) {
+            return new FeedbackRequest(properties);
+        };
+
+        /**
+         * Encodes the specified FeedbackRequest message. Does not implicitly {@link feedlightpb.FeedbackRequest.verify|verify} messages.
+         * @function encode
+         * @memberof feedlightpb.FeedbackRequest
+         * @static
+         * @param {feedlightpb.IFeedbackRequest} message FeedbackRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        FeedbackRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && message.hasOwnProperty("id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.id);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified FeedbackRequest message, length delimited. Does not implicitly {@link feedlightpb.FeedbackRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof feedlightpb.FeedbackRequest
+         * @static
+         * @param {feedlightpb.IFeedbackRequest} message FeedbackRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        FeedbackRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a FeedbackRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof feedlightpb.FeedbackRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {feedlightpb.FeedbackRequest} FeedbackRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        FeedbackRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.feedlightpb.FeedbackRequest();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.id = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a FeedbackRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof feedlightpb.FeedbackRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {feedlightpb.FeedbackRequest} FeedbackRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        FeedbackRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a FeedbackRequest message.
+         * @function verify
+         * @memberof feedlightpb.FeedbackRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        FeedbackRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id) && !(message.id && $util.isInteger(message.id.low) && $util.isInteger(message.id.high)))
+                    return "id: integer|Long expected";
+            return null;
+        };
+
+        /**
+         * Creates a FeedbackRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof feedlightpb.FeedbackRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {feedlightpb.FeedbackRequest} FeedbackRequest
+         */
+        FeedbackRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.feedlightpb.FeedbackRequest)
+                return object;
+            let message = new $root.feedlightpb.FeedbackRequest();
+            if (object.id != null)
+                if ($util.Long)
+                    (message.id = $util.Long.fromValue(object.id)).unsigned = false;
+                else if (typeof object.id === "string")
+                    message.id = parseInt(object.id, 10);
+                else if (typeof object.id === "number")
+                    message.id = object.id;
+                else if (typeof object.id === "object")
+                    message.id = new $util.LongBits(object.id.low >>> 0, object.id.high >>> 0).toNumber();
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a FeedbackRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof feedlightpb.FeedbackRequest
+         * @static
+         * @param {feedlightpb.FeedbackRequest} message FeedbackRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        FeedbackRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    let long = new $util.Long(0, 0, false);
+                    object.id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.id = options.longs === String ? "0" : 0;
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (typeof message.id === "number")
+                    object.id = options.longs === String ? String(message.id) : message.id;
+                else
+                    object.id = options.longs === String ? $util.Long.prototype.toString.call(message.id) : options.longs === Number ? new $util.LongBits(message.id.low >>> 0, message.id.high >>> 0).toNumber() : message.id;
+            return object;
+        };
+
+        /**
+         * Converts this FeedbackRequest to JSON.
+         * @function toJSON
+         * @memberof feedlightpb.FeedbackRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        FeedbackRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return FeedbackRequest;
+    })();
+
+    feedlightpb.FeedbackResponse = (function() {
+
+        /**
+         * Properties of a FeedbackResponse.
+         * @memberof feedlightpb
+         * @interface IFeedbackResponse
+         * @property {feedlightpb.IFeedback|null} [feedback] FeedbackResponse feedback
+         * @property {string|null} [domain] FeedbackResponse domain
+         * @property {Array.<feedlightpb.IFeedback>|null} [similar] FeedbackResponse similar
+         */
+
+        /**
+         * Constructs a new FeedbackResponse.
+         * @memberof feedlightpb
+         * @classdesc Represents a FeedbackResponse.
+         * @implements IFeedbackResponse
+         * @constructor
+         * @param {feedlightpb.IFeedbackResponse=} [properties] Properties to set
+         */
+        function FeedbackResponse(properties) {
+            this.similar = [];
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * FeedbackResponse feedback.
+         * @member {feedlightpb.IFeedback|null|undefined} feedback
+         * @memberof feedlightpb.FeedbackResponse
+         * @instance
+         */
+        FeedbackResponse.prototype.feedback = null;
+
+        /**
+         * FeedbackResponse domain.
+         * @member {string} domain
+         * @memberof feedlightpb.FeedbackResponse
+         * @instance
+         */
+        FeedbackResponse.prototype.domain = "";
+
+        /**
+         * FeedbackResponse similar.
+         * @member {Array.<feedlightpb.IFeedback>} similar
+         * @memberof feedlightpb.FeedbackResponse
+         * @instance
+         */
+        FeedbackResponse.prototype.similar = $util.emptyArray;
+
+        /**
+         * Creates a new FeedbackResponse instance using the specified properties.
+         * @function create
+         * @memberof feedlightpb.FeedbackResponse
+         * @static
+         * @param {feedlightpb.IFeedbackResponse=} [properties] Properties to set
+         * @returns {feedlightpb.FeedbackResponse} FeedbackResponse instance
+         */
+        FeedbackResponse.create = function create(properties) {
+            return new FeedbackResponse(properties);
+        };
+
+        /**
+         * Encodes the specified FeedbackResponse message. Does not implicitly {@link feedlightpb.FeedbackResponse.verify|verify} messages.
+         * @function encode
+         * @memberof feedlightpb.FeedbackResponse
+         * @static
+         * @param {feedlightpb.IFeedbackResponse} message FeedbackResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        FeedbackResponse.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.feedback != null && message.hasOwnProperty("feedback"))
+                $root.feedlightpb.Feedback.encode(message.feedback, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.domain != null && message.hasOwnProperty("domain"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.domain);
+            if (message.similar != null && message.similar.length)
+                for (let i = 0; i < message.similar.length; ++i)
+                    $root.feedlightpb.Feedback.encode(message.similar[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified FeedbackResponse message, length delimited. Does not implicitly {@link feedlightpb.FeedbackResponse.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof feedlightpb.FeedbackResponse
+         * @static
+         * @param {feedlightpb.IFeedbackResponse} message FeedbackResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        FeedbackResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a FeedbackResponse message from the specified reader or buffer.
+         * @function decode
+         * @memberof feedlightpb.FeedbackResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {feedlightpb.FeedbackResponse} FeedbackResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        FeedbackResponse.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.feedlightpb.FeedbackResponse();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.feedback = $root.feedlightpb.Feedback.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.domain = reader.string();
+                    break;
+                case 3:
+                    if (!(message.similar && message.similar.length))
+                        message.similar = [];
+                    message.similar.push($root.feedlightpb.Feedback.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a FeedbackResponse message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof feedlightpb.FeedbackResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {feedlightpb.FeedbackResponse} FeedbackResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        FeedbackResponse.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a FeedbackResponse message.
+         * @function verify
+         * @memberof feedlightpb.FeedbackResponse
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        FeedbackResponse.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.feedback != null && message.hasOwnProperty("feedback")) {
+                let error = $root.feedlightpb.Feedback.verify(message.feedback);
+                if (error)
+                    return "feedback." + error;
+            }
+            if (message.domain != null && message.hasOwnProperty("domain"))
+                if (!$util.isString(message.domain))
+                    return "domain: string expected";
+            if (message.similar != null && message.hasOwnProperty("similar")) {
+                if (!Array.isArray(message.similar))
+                    return "similar: array expected";
+                for (let i = 0; i < message.similar.length; ++i) {
+                    let error = $root.feedlightpb.Feedback.verify(message.similar[i]);
+                    if (error)
+                        return "similar." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a FeedbackResponse message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof feedlightpb.FeedbackResponse
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {feedlightpb.FeedbackResponse} FeedbackResponse
+         */
+        FeedbackResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.feedlightpb.FeedbackResponse)
+                return object;
+            let message = new $root.feedlightpb.FeedbackResponse();
+            if (object.feedback != null) {
+                if (typeof object.feedback !== "object")
+                    throw TypeError(".feedlightpb.FeedbackResponse.feedback: object expected");
+                message.feedback = $root.feedlightpb.Feedback.fromObject(object.feedback);
+            }
+            if (object.domain != null)
+                message.domain = String(object.domain);
+            if (object.similar) {
+                if (!Array.isArray(object.similar))
+                    throw TypeError(".feedlightpb.FeedbackResponse.similar: array expected");
+                message.similar = [];
+                for (let i = 0; i < object.similar.length; ++i) {
+                    if (typeof object.similar[i] !== "object")
+                        throw TypeError(".feedlightpb.FeedbackResponse.similar: object expected");
+                    message.similar[i] = $root.feedlightpb.Feedback.fromObject(object.similar[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a FeedbackResponse message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof feedlightpb.FeedbackResponse
+         * @static
+         * @param {feedlightpb.FeedbackResponse} message FeedbackResponse
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        FeedbackResponse.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.arrays || options.defaults)
+                object.similar = [];
+            if (options.defaults) {
+                object.feedback = null;
+                object.domain = "";
+            }
+            if (message.feedback != null && message.hasOwnProperty("feedback"))
+                object.feedback = $root.feedlightpb.Feedback.toObject(message.feedback, options);
+            if (message.domain != null && message.hasOwnProperty("domain"))
+                object.domain = message.domain;
+            if (message.similar && message.similar.length) {
+                object.similar = [];
+                for (let j = 0; j < message.similar.length; ++j)
+                    object.similar[j] = $root.feedlightpb.Feedback.toObject(message.similar[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this FeedbackResponse to JSON.
+         * @function toJSON
+         * @memberof feedlightpb.FeedbackResponse
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        FeedbackResponse.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return FeedbackResponse;
+    })();
+
     feedlightpb.FeedbackService = (function() {
 
         /**
@@ -1386,6 +1882,39 @@ export const feedlightpb = $root.feedlightpb = (() => {
          * @instance
          * @param {feedlightpb.ISubmitFeedbackRequest} request SubmitFeedbackRequest message or plain object
          * @returns {Promise<feedlightpb.SubmitFeedbackResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link feedlightpb.FeedbackService#feedback}.
+         * @memberof feedlightpb.FeedbackService
+         * @typedef FeedbackCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {feedlightpb.FeedbackResponse} [response] FeedbackResponse
+         */
+
+        /**
+         * Calls Feedback.
+         * @function feedback
+         * @memberof feedlightpb.FeedbackService
+         * @instance
+         * @param {feedlightpb.IFeedbackRequest} request FeedbackRequest message or plain object
+         * @param {feedlightpb.FeedbackService.FeedbackCallback} callback Node-style callback called with the error, if any, and FeedbackResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(FeedbackService.prototype.feedback = function feedback(request, callback) {
+            return this.rpcCall(feedback, $root.feedlightpb.FeedbackRequest, $root.feedlightpb.FeedbackResponse, request, callback);
+        }, "name", { value: "Feedback" });
+
+        /**
+         * Calls Feedback.
+         * @function feedback
+         * @memberof feedlightpb.FeedbackService
+         * @instance
+         * @param {feedlightpb.IFeedbackRequest} request FeedbackRequest message or plain object
+         * @returns {Promise<feedlightpb.FeedbackResponse>} Promise
          * @variation 2
          */
 
@@ -9265,8 +9794,8 @@ export const google = $root.google = (() => {
              * @interface IUninterpretedOption
              * @property {Array.<google.protobuf.UninterpretedOption.INamePart>|null} [name] UninterpretedOption name
              * @property {string|null} [identifierValue] UninterpretedOption identifierValue
-             * @property {Long|null} [positiveIntValue] UninterpretedOption positiveIntValue
-             * @property {Long|null} [negativeIntValue] UninterpretedOption negativeIntValue
+             * @property {number|Long|null} [positiveIntValue] UninterpretedOption positiveIntValue
+             * @property {number|Long|null} [negativeIntValue] UninterpretedOption negativeIntValue
              * @property {number|null} [doubleValue] UninterpretedOption doubleValue
              * @property {Uint8Array|null} [stringValue] UninterpretedOption stringValue
              * @property {string|null} [aggregateValue] UninterpretedOption aggregateValue
@@ -9306,7 +9835,7 @@ export const google = $root.google = (() => {
 
             /**
              * UninterpretedOption positiveIntValue.
-             * @member {Long} positiveIntValue
+             * @member {number|Long} positiveIntValue
              * @memberof google.protobuf.UninterpretedOption
              * @instance
              */
@@ -9314,7 +9843,7 @@ export const google = $root.google = (() => {
 
             /**
              * UninterpretedOption negativeIntValue.
-             * @member {Long} negativeIntValue
+             * @member {number|Long} negativeIntValue
              * @memberof google.protobuf.UninterpretedOption
              * @instance
              */
