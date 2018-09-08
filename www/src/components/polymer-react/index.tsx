@@ -49,7 +49,6 @@ export class PolymerReact extends PolymerElement {
   render (any): any { }
 
   update () {
-    console.log('updating', this.props, this._react)
     if (!this._react) {
       return
     }
